@@ -193,6 +193,9 @@ export default function Home() {
               {l}
             </a>
           ))}
+          <a href="/interview" style={{ fontSize: 13, color: "#f59e0b", textDecoration: "none", padding: "4px 10px", border: "1px solid rgba(245,158,11,0.3)", borderRadius: 8, fontWeight: 600 }}>
+            ⚔️ Battle
+          </a>
           <a href="#pricing" style={{ background: "#6366f1", color: "#fff", padding: "7px 16px", borderRadius: 8, fontSize: 13, fontWeight: 700, textDecoration: "none" }}>
             Join now
           </a>
