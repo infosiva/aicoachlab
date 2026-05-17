@@ -19,38 +19,34 @@ const TRACKS = [
   { id: "agents", label: "Agents", icon: "🤖", color: "#22c55e" },
 ];
 
-const TESTIMONIALS = [
-  { name: "Arjun P.", role: "Senior ML Engineer @ Stripe", text: "Went from 'I've heard of RAG' to shipping a production RAG pipeline in 2 weeks. The project-based approach is the only way to actually learn this stuff.", stars: 5, avatar: "AP", tag: "RAG graduate" },
-  { name: "Sarah K.", role: "Full-stack dev → AI Engineer", text: "LangGraph clicked after the 3rd lesson. The human-in-the-loop project is exactly what my company needed. Got a raise after showing this.", stars: 5, avatar: "SK", tag: "LangGraph graduate" },
-  { name: "Raj M.", role: "Founding Engineer @ AI startup", text: "Built our entire agent infrastructure using the patterns from Week 7-8. The observability section alone saved us $2k/month in API costs.", stars: 5, avatar: "RM", tag: "Agents graduate" },
-];
+const TESTIMONIALS: { name: string; role: string; text: string; stars: number; avatar: string; tag: string }[] = [];
 
 const PLANS = [
   {
     name: "Monthly",
-    price: "$97",
+    price: "$29",
     period: "/month",
     desc: "Full access, cancel anytime",
-    features: ["All 8 weeks of content", "4 real project builds", "Code review via Loom", "Private Discord community", "Certificate of completion"],
+    features: ["All 8 weeks of content", "4 real project builds", "GitHub code access", "Community Discord"],
     cta: "Start learning →",
     highlight: false,
   },
   {
     name: "Lifetime",
-    price: "$297",
+    price: "$79",
     period: "one-time",
     desc: "Pay once, own forever",
-    features: ["Everything in Monthly", "All future curriculum updates", "Priority code review (24hr)", "1-on-1 kickoff call (30 min)", "LinkedIn endorsement", "Job referral network"],
+    features: ["Everything in Monthly", "All future curriculum updates", "Priority issue support", "Early access to new tracks"],
     cta: "Get lifetime access →",
     highlight: true,
-    badge: "Most popular",
+    badge: "Best value",
   },
   {
     name: "Team (5 seats)",
-    price: "$397",
+    price: "$149",
     period: "/month",
     desc: "Upskill your whole team",
-    features: ["5 member seats", "Team progress dashboard", "Monthly group Q&A call", "Custom Slack channel", "Invoice & bulk billing", "Priority support"],
+    features: ["5 member seats", "Team progress tracking", "Monthly group Q&A call", "Invoice & bulk billing"],
     cta: "Contact for teams →",
     highlight: false,
   },
@@ -60,7 +56,7 @@ const FAQS = [
   { q: "Do I need prior AI/ML experience?", a: "Comfortable with Python and basic API calls is enough. You don't need ML theory — we focus on engineering patterns, not math." },
   { q: "How much time per week?", a: "4-6 hours/week. Each module has ~3 hours of content + a project that takes 2-3 hours. Lifetime members can go at any pace." },
   { q: "What stack does this use?", a: "Python (primary) + TypeScript where relevant. LangChain/LangGraph, Claude/OpenAI APIs, various vector DBs. All code is in GitHub." },
-  { q: "Is there live instruction?", a: "Content is async (video + code). Team plan includes monthly live Q&A. Lifetime includes a 1-on-1 kickoff call." },
+  { q: "Is there live instruction?", a: "Content is async (video + code). Team plan includes a monthly group Q&A call. All content is self-paced." },
   { q: "What's the refund policy?", a: "Full refund within 14 days, no questions asked. We're confident you'll get value — if not, we pay back immediately." },
   { q: "Will this stay updated?", a: "Yes — RAG/MCP/LangGraph move fast. Lifetime members get all updates free. Monthly members get updates while subscribed." },
 ];
@@ -133,12 +129,12 @@ export default function Home() {
 
       {/* ── Nav ── */}
       <nav style={{ position: "sticky", top: 0, zIndex: 50, background: "rgba(4,7,15,0.95)", backdropFilter: "blur(16px)", borderBottom: "1px solid rgba(99,102,241,0.1)", padding: "0 20px", height: 56, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        <a href="/" style={{ display: "flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
           <Code2 size={18} style={{ color: "#6366f1" }} />
           <span style={{ fontWeight: 700, fontSize: 16, color: "#f0f4ff", letterSpacing: "-0.02em", fontFamily: "var(--font-display)" }}>
             AI<span style={{ color: "#6366f1" }}>Coach</span>Lab
           </span>
-        </div>
+        </a>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           {["Curriculum", "Pricing", "FAQ"].map(l => (
             <a key={l} href={`#${l.toLowerCase()}`} style={{ fontSize: 13, color: "rgba(165,180,252,0.6)", textDecoration: "none", padding: "4px 8px" }}
@@ -162,11 +158,6 @@ export default function Home() {
         <div style={{ position: "absolute", left: "50%", transform: "translateX(-50%)", width: 600, height: 400, background: "radial-gradient(ellipse, rgba(99,102,241,0.12) 0%, transparent 70%)", pointerEvents: "none", top: 56 }} />
 
         <div className="fade-up">
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.2)", borderRadius: 99, padding: "4px 14px", fontSize: 11, color: "#22c55e", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 24 }}>
-            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#22c55e", display: "inline-block" }} />
-            New cohort open · Limited spots
-          </div>
-
           <h1 style={{ fontSize: "clamp(32px,5vw,56px)", fontWeight: 900, color: "#f0f4ff", letterSpacing: "-0.04em", lineHeight: 1.08, margin: "0 0 20px", fontFamily: "var(--font-display)" }}>
             Learn RAG, MCP, LangGraph<br />
             &amp; AI Agents by{" "}
@@ -181,7 +172,7 @@ export default function Home() {
 
           <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", marginBottom: 40 }}>
             <a href="#pricing" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#6366f1", color: "#fff", padding: "14px 28px", borderRadius: 12, fontSize: 16, fontWeight: 700, textDecoration: "none", boxShadow: "0 4px 24px rgba(99,102,241,0.4)" }} className="glow">
-              Start learning — $97/mo <ArrowRight size={16} />
+              Start learning — $29/mo <ArrowRight size={16} />
             </a>
             <a href="#curriculum" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "transparent", color: "#f0f4ff", border: "1px solid rgba(99,102,241,0.3)", padding: "14px 28px", borderRadius: 12, fontSize: 16, fontWeight: 700, textDecoration: "none" }}>
               <Play size={15} /> See curriculum
@@ -191,8 +182,8 @@ export default function Home() {
           {/* Trust */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: 20, justifyContent: "center" }}>
             {[
-              { icon: <Star size={14} />, text: "5-star rated by graduates" },
-              { icon: <Users size={14} />, text: "Project-based learning" },
+              { icon: <Star size={14} />, text: "Project-based learning" },
+              { icon: <Users size={14} />, text: "Community Discord included" },
               { icon: <Zap size={14} />, text: "14-day money-back guarantee" },
               { icon: <Code2 size={14} />, text: "Real projects, real code" },
             ].map(({ icon, text }) => (
@@ -263,32 +254,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Testimonials ── */}
-      <section style={{ background: "rgba(10,15,30,0.5)", borderTop: "1px solid rgba(99,102,241,0.1)", padding: "64px 20px" }}>
-        <div style={{ maxWidth: 900, margin: "0 auto" }}>
-          <h2 style={{ fontSize: 26, fontWeight: 800, color: "#f0f4ff", letterSpacing: "-0.03em", marginBottom: 32, textAlign: "center", fontFamily: "var(--font-display)" }}>
-            What graduates say
-          </h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: 16 }}>
-            {TESTIMONIALS.map(t => (
-              <div key={t.name} className="card" style={{ padding: "22px" }}>
-                <div style={{ display: "flex", gap: 2, marginBottom: 4 }}>
-                  {Array.from({ length: t.stars }).map((_, i) => <Star key={i} size={13} fill="#f59e0b" color="#f59e0b" />)}
-                </div>
-                <TagBadge text={t.tag} color="#6366f1" />
-                <p style={{ color: "rgba(240,244,255,0.8)", fontSize: 14, lineHeight: 1.6, margin: "12px 0 16px" }}>&ldquo;{t.text}&rdquo;</p>
-                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <div style={{ width: 36, height: 36, borderRadius: "50%", background: "linear-gradient(135deg,#6366f1,#4f46e5)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, color: "#fff", flexShrink: 0 }}>{t.avatar}</div>
-                  <div>
-                    <div style={{ fontWeight: 600, fontSize: 13, color: "#f0f4ff" }}>{t.name}</div>
-                    <div style={{ fontSize: 11, color: "rgba(165,180,252,0.45)" }}>{t.role}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ── Pricing ── */}
       <section id="pricing" style={{ maxWidth: 960, margin: "0 auto", padding: "64px 20px" }}>
@@ -378,10 +343,10 @@ export default function Home() {
       {/* ── Footer ── */}
       <footer style={{ borderTop: "1px solid rgba(99,102,241,0.1)", padding: "24px 20px", background: "rgba(10,15,30,0.5)" }}>
         <div style={{ maxWidth: 900, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+          <a href="/" style={{ display: "flex", alignItems: "center", gap: 6, textDecoration: "none" }}>
             <Code2 size={15} style={{ color: "#6366f1" }} />
             <span style={{ fontWeight: 700, color: "#f0f4ff", fontFamily: "var(--font-display)" }}>AICoachLab</span>
-          </div>
+          </a>
           <div style={{ display: "flex", gap: 20 }}>
             {["Privacy", "Terms", "Contact"].map(l => (
               <a key={l} href={`/${l.toLowerCase()}`} style={{ color: "rgba(165,180,252,0.35)", textDecoration: "none", fontSize: 12 }}>{l}</a>
