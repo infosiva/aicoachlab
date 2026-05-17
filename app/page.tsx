@@ -1,70 +1,16 @@
 "use client";
-import { useState } from "react";
-import { CheckCircle, Code2, Brain, Layers, GitBranch, Star, Users, Zap, ArrowRight, Play, Lock, ChevronDown, ChevronUp } from "lucide-react";
+import { useState, useEffect } from "react";
+import { CheckCircle, Code2, Layers, Star, Users, Zap, ArrowRight, Play, Lock, ChevronDown, ChevronUp } from "lucide-react";
 
-// ── Curriculum ────────────────────────────────────────────────────────────────
-const MODULES = [
-  {
-    week: "Week 1–2",
-    title: "RAG Foundations",
-    tag: "RAG",
-    color: "#6366f1",
-    icon: "🔍",
-    lessons: [
-      "Vector databases: Pinecone, Chroma, pgvector",
-      "Chunking strategies that actually work",
-      "Embedding models compared (OpenAI, Cohere, local)",
-      "Build: Document Q&A system from scratch",
-      "Advanced: Hybrid search + reranking",
-    ],
-    project: "Build a RAG pipeline over your own documents with source citations",
-  },
-  {
-    week: "Week 3–4",
-    title: "MCP Servers",
-    tag: "MCP",
-    color: "#8b5cf6",
-    icon: "🔌",
-    lessons: [
-      "Model Context Protocol — architecture deep dive",
-      "Build your first MCP server in Python/TypeScript",
-      "Expose tools, resources, prompts via MCP",
-      "Connect Claude Desktop to custom MCP server",
-      "Deploy MCP server to production",
-    ],
-    project: "Ship an MCP server that gives Claude access to your own data",
-  },
-  {
-    week: "Week 5–6",
-    title: "LangGraph Workflows",
-    tag: "LangGraph",
-    color: "#06b6d4",
-    icon: "🕸️",
-    lessons: [
-      "State machines vs chains — when to use which",
-      "Building cyclic graphs with conditional edges",
-      "Human-in-the-loop patterns",
-      "Parallel execution and fan-out/fan-in",
-      "Persistence and checkpointing",
-    ],
-    project: "Build a multi-step research agent with approval gates",
-  },
-  {
-    week: "Week 7–8",
-    title: "Production AI Agents",
-    tag: "Agents",
-    color: "#22c55e",
-    icon: "🤖",
-    lessons: [
-      "ReAct, Plan-and-Execute, and Reflection patterns",
-      "Tool calling: design, reliability, error handling",
-      "Multi-agent orchestration with LangGraph",
-      "Observability: tracing with LangSmith / AgentTrace",
-      "Cost control, rate limits, graceful degradation",
-    ],
-    project: "Ship a production-ready AI agent with monitoring and cost controls",
-  },
-];
+type Module = {
+  week: string;
+  title: string;
+  tag: string;
+  color: string;
+  icon: string;
+  lessons: string[];
+  project: string;
+};
 
 const TRACKS = [
   { id: "rag", label: "RAG", icon: "🔍", color: "#6366f1" },
@@ -128,7 +74,7 @@ function TagBadge({ text, color }: { text: string; color: string }) {
   );
 }
 
-function ModuleCard({ m, open, onToggle }: { m: typeof MODULES[0]; open: boolean; onToggle: () => void }) {
+function ModuleCard({ m, open, onToggle }: { m: Module; open: boolean; onToggle: () => void }) {
   return (
     <div className="card" style={{ marginBottom: 12, cursor: "pointer" }} onClick={onToggle}>
       <div style={{ display: "flex", alignItems: "center", gap: 14, padding: "18px 20px" }}>
@@ -173,6 +119,14 @@ export default function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [email, setEmail] = useState("");
   const [joined, setJoined] = useState(false);
+  const [modules, setModules] = useState<Module[]>([]);
+
+  useEffect(() => {
+    fetch("/api/modules")
+      .then(r => r.json())
+      .then(setModules)
+      .catch(() => {});
+  }, []);
 
   return (
     <div style={{ minHeight: "100vh", background: "#04070f" }}>
@@ -210,7 +164,7 @@ export default function Home() {
         <div className="fade-up">
           <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.2)", borderRadius: 99, padding: "4px 14px", fontSize: 11, color: "#22c55e", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 24 }}>
             <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#22c55e", display: "inline-block" }} />
-            500+ developers enrolled · new cohort open
+            New cohort open · Limited spots
           </div>
 
           <h1 style={{ fontSize: "clamp(32px,5vw,56px)", fontWeight: 900, color: "#f0f4ff", letterSpacing: "-0.04em", lineHeight: 1.08, margin: "0 0 20px", fontFamily: "var(--font-display)" }}>
@@ -237,8 +191,8 @@ export default function Home() {
           {/* Trust */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: 20, justifyContent: "center" }}>
             {[
-              { icon: <Star size={14} />, text: "4.9/5 from 200+ reviews" },
-              { icon: <Users size={14} />, text: "500+ developers trained" },
+              { icon: <Star size={14} />, text: "5-star rated by graduates" },
+              { icon: <Users size={14} />, text: "Project-based learning" },
               { icon: <Zap size={14} />, text: "14-day money-back guarantee" },
               { icon: <Code2 size={14} />, text: "Real projects, real code" },
             ].map(({ icon, text }) => (
@@ -294,7 +248,10 @@ export default function Home() {
       <section id="curriculum" style={{ maxWidth: 720, margin: "0 auto", padding: "64px 20px" }}>
         <h2 style={{ fontSize: 26, fontWeight: 800, color: "#f0f4ff", letterSpacing: "-0.03em", marginBottom: 8, fontFamily: "var(--font-display)" }}>8-week curriculum</h2>
         <p style={{ color: "rgba(165,180,252,0.6)", fontSize: 15, marginBottom: 32 }}>Click any module to see what&apos;s inside</p>
-        {MODULES.map((m, i) => (
+        {modules.length === 0 && (
+          <div style={{ color: "rgba(165,180,252,0.4)", fontSize: 14, textAlign: "center", padding: "32px 0" }}>Loading curriculum…</div>
+        )}
+        {modules.map((m, i) => (
           <ModuleCard key={i} m={m} open={openModule === i} onToggle={() => setOpenModule(openModule === i ? null : i)} />
         ))}
         <div className="card" style={{ padding: "18px 20px", display: "flex", alignItems: "center", gap: 12, marginTop: 12 }}>
@@ -399,7 +356,7 @@ export default function Home() {
             Start building this week
           </h2>
           <p style={{ color: "rgba(165,180,252,0.65)", fontSize: 15, marginBottom: 28 }}>
-            Join 500+ developers learning RAG, MCP, LangGraph &amp; AI Agents — by building, not watching.
+            Learn RAG, MCP, LangGraph &amp; AI Agents — by building real projects, not watching videos.
           </p>
           {joined ? (
             <div style={{ background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.25)", borderRadius: 12, padding: "16px", color: "#22c55e", fontWeight: 600 }}>
