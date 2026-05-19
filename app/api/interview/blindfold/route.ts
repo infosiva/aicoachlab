@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Groq from 'groq-sdk'
 
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY! })
+let _g: Groq | null = null
+function groq() { if (!_g) _g = new Groq({ apiKey: process.env.GROQ_API_KEY! }); return _g }
 
 export async function POST(req: NextRequest) {
   const { action, role, personaPrompt, answer, question, conversationHistory } = await req.json()
 
   if (action === 'question') {
-    const res = await groq.chat.completions.create({
+    const res = await groq().chat.completions.create({
       model: 'llama-3.3-70b-versatile',
       messages: [
         { role: 'system', content: `${personaPrompt}\n\nYou are interviewing for a ${role} role. Ask ONE opening interview question. Keep it under 40 words. No preamble — just the question.` },
@@ -25,7 +26,7 @@ export async function POST(req: NextRequest) {
       ...(conversationHistory || []),
       { role: 'user' as const, content: answer },
     ]
-    const res = await groq.chat.completions.create({
+    const res = await groq().chat.completions.create({
       model: 'llama-3.3-70b-versatile',
       messages,
       max_tokens: 150,
@@ -35,7 +36,7 @@ export async function POST(req: NextRequest) {
   }
 
   if (action === 'grade') {
-    const res = await groq.chat.completions.create({
+    const res = await groq().chat.completions.create({
       model: 'llama-3.3-70b-versatile',
       messages: [
         { role: 'system', content: 'You are an expert interview coach. Evaluate the candidate\'s performance in JSON format.' },

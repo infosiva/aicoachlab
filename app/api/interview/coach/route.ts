@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Groq from 'groq-sdk'
 
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY! })
+let _g: Groq | null = null
+function groq() { if (!_g) _g = new Groq({ apiKey: process.env.GROQ_API_KEY! }); return _g }
 
 export async function POST(req: NextRequest) {
   const { action, transcript, role, questionIndex, conversationHistory } = await req.json()
 
   if (action === 'interrupt') {
-    const res = await groq.chat.completions.create({
+    const res = await groq().chat.completions.create({
       model: 'llama-3.3-70b-versatile',
       messages: [
         {
@@ -59,7 +60,7 @@ Examples:
   }
 
   if (action === 'fullgrade') {
-    const res = await groq.chat.completions.create({
+    const res = await groq().chat.completions.create({
       model: 'llama-3.3-70b-versatile',
       messages: [
         { role: 'system', content: 'You are an expert interview coach. Grade this interview session in JSON.' },
