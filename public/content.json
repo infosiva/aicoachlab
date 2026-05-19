@@ -1,0 +1,113 @@
+{
+  "hero": {
+    "eyebrow": "AI for everyone · tech & non-tech",
+    "headline": ["Use AI smarter,", "pay less, do more"],
+    "subheadline": "From prompting to building — the complete guide to getting real value from AI, whatever your goal."
+  },
+  "tracks": [
+    {
+      "icon": "MessageSquare",
+      "label": "Prompting Mastery",
+      "sub": "Get 10× better answers · any model",
+      "color": "#10b981",
+      "bg": "rgba(16,185,129,0.08)",
+      "border": "rgba(16,185,129,0.2)",
+      "audience": "Everyone"
+    },
+    {
+      "icon": "DollarSign",
+      "label": "Pay Less",
+      "sub": "Free tiers · model switching · cost hacks",
+      "color": "#06b6d4",
+      "bg": "rgba(6,182,212,0.08)",
+      "border": "rgba(6,182,212,0.2)",
+      "audience": "Everyone"
+    },
+    {
+      "icon": "Cpu",
+      "label": "MCP & Agents",
+      "sub": "Build AI that works autonomously",
+      "color": "#f59e0b",
+      "bg": "rgba(245,158,11,0.08)",
+      "border": "rgba(245,158,11,0.2)",
+      "audience": "Builders"
+    },
+    {
+      "icon": "Network",
+      "label": "RAG Systems",
+      "sub": "Vector DBs · retrieval · production",
+      "color": "#8b5cf6",
+      "bg": "rgba(139,92,246,0.08)",
+      "border": "rgba(139,92,246,0.2)",
+      "audience": "Engineers"
+    }
+  ],
+  "trendingTopics": [
+    "Claude 4 vs GPT-4o — which is cheaper?",
+    "Run AI locally for free with Ollama",
+    "Top 5 free AI tools in 2026",
+    "How to prompt engineer like a pro",
+    "MCP servers explained simply",
+    "Gemini 2.5 free tier limits & tricks",
+    "Build a RAG app in 30 minutes",
+    "AI agents for non-coders"
+  ],
+  "curriculum": [
+    { "week": "W1–2", "title": "Prompt Engineering", "tag": "Prompting", "color": "#10b981", "desc": "Master any model with structured prompts" },
+    { "week": "W3–4", "title": "Cost Optimisation", "tag": "Free Tier", "color": "#06b6d4", "desc": "Free APIs, model routing, budget hacks" },
+    { "week": "W5–6", "title": "MCP & Agents", "tag": "Builders", "color": "#f59e0b", "desc": "Autonomous AI tools, tool-use, memory" },
+    { "week": "W7–8", "title": "Production RAG", "tag": "Engineers", "color": "#8b5cf6", "desc": "Retrieval systems, embeddings, deployment" }
+  ],
+  "stats": [
+    { "label": "Weeks", "value": 8, "suffix": "", "icon": "Clock", "color": "#10b981" },
+    { "label": "Projects", "value": 4, "suffix": "", "icon": "Terminal", "color": "#06b6d4" },
+    { "label": "Refund SLA", "value": 30, "suffix": "d", "icon": "ShieldCheck", "color": "#f59e0b" },
+    { "label": "Free to start", "value": "∞", "suffix": "", "icon": "Zap", "color": "#8b5cf6", "raw": true }
+  ],
+  "plans": [
+    {
+      "name": "Monthly",
+      "price": "$29",
+      "period": "/mo",
+      "features": ["All 8 weeks · every track", "4 project builds", "Community Discord", "Cancel any time"],
+      "highlight": false
+    },
+    {
+      "name": "Lifetime",
+      "price": "$79",
+      "period": "once",
+      "features": ["Everything in Monthly", "All future updates", "Priority support", "Early content access"],
+      "highlight": true,
+      "badge": "Best value"
+    },
+    {
+      "name": "Team · 5",
+      "price": "$149",
+      "period": "/mo",
+      "features": ["5 member seats", "Progress tracking", "Monthly group Q&A", "Invoice billing"],
+      "highlight": false
+    }
+  ],
+  "faqs": [
+    { "q": "Do I need to be technical?", "a": "No. We cover AI for all levels — non-tech (prompting/cost) through to engineering (RAG/MCP). Pick your path." },
+    { "q": "Which AI models are covered?", "a": "ChatGPT, Claude, Gemini, Groq, Mistral, local models (Ollama). We show you how to use each and when." },
+    { "q": "How do I pay less for AI?", "a": "Week 3–4 covers exactly this: free tiers, model switching, prompt compression, and API cost hacks." },
+    { "q": "How long per week?", "a": "4–6 hrs/wk. Videos + guided project time. Work at your own pace." }
+  ],
+  "trust": [
+    { "icon": "🔒", "text": "30-day refund" },
+    { "icon": "⚡", "text": "Free-tier APIs only" },
+    { "icon": "🛠️", "text": "4 real projects built" }
+  ],
+  "chatbot": {
+    "systemPrompt": "You are AICoachLab assistant. Help users understand: 1) how to use AI effectively, 2) how to pay less for AI (free tiers, model switching), 3) prompting techniques, 4) whether to learn RAG/MCP/Agents. Be concise, practical, and recommend the right course track. If asked about cost, always mention free tiers first.",
+    "welcomeMessage": "Hi! Ask me anything about AI — how to use it, which model to pick, or how to cut your AI bill to zero. 🎙️ Or tap the mic to speak.",
+    "voiceEnabled": true,
+    "suggestedQuestions": [
+      "Which AI model is free and best?",
+      "How do I pay less for ChatGPT?",
+      "Do I need to code to use AI?",
+      "What's the difference between RAG and agents?"
+    ]
+  }
+}
