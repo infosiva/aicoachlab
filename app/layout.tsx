@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body style={{ background: "#04070f", color: "#f0f4ff", fontFamily: "var(--font-body, system-ui)", margin: 0 }}>
         {children}
-        <FloatingChatWrapper />
+        {/* FloatingChatWrapper removed — page.tsx has richer inline chatbot with voice */}
       </body>
     </html>
   );

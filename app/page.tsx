@@ -136,7 +136,7 @@ function Chatbot({ config }: { config: ChatbotConfig }) {
         onClick={() => setOpen(o => !o)}
         whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}
         className="acl-chatbot"
-        style={{ position: "fixed", bottom: 28, right: 28, zIndex: 200, width: 54, height: 54, borderRadius: "50%", background: "linear-gradient(135deg,#10b981,#059669)", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 24px rgba(16,185,129,0.5)" }}>
+        style={{ position: "fixed", bottom: 28, left: 28, zIndex: 200, width: 54, height: 54, borderRadius: "50%", background: "linear-gradient(135deg,#10b981,#059669)", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 24px rgba(16,185,129,0.5)" }}>
         <AnimatePresence mode="wait">
           {open
             ? <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}><X size={22} color="#fff" /></motion.span>
@@ -151,7 +151,7 @@ function Chatbot({ config }: { config: ChatbotConfig }) {
             initial={{ opacity: 0, scale: 0.92, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.92, y: 20 }}
             transition={{ duration: 0.25, ease }}
             className="acl-chatbot-panel"
-            style={{ position: "fixed", bottom: 92, right: 28, zIndex: 200, width: 340, maxHeight: 520, display: "flex", flexDirection: "column", borderRadius: 18, background: "rgba(3,10,6,0.95)", border: "1px solid rgba(16,185,129,0.25)", backdropFilter: "blur(20px)", overflow: "hidden", boxShadow: "0 8px 48px rgba(0,0,0,0.6)" }}>
+            style={{ position: "fixed", bottom: 92, left: 28, zIndex: 200, width: 340, maxHeight: 520, display: "flex", flexDirection: "column", borderRadius: 18, background: "rgba(3,10,6,0.95)", border: "1px solid rgba(16,185,129,0.25)", backdropFilter: "blur(20px)", overflow: "hidden", boxShadow: "0 8px 48px rgba(0,0,0,0.6)" }}>
 
             {/* header */}
             <div style={{ padding: "14px 16px", borderBottom: "1px solid rgba(16,185,129,0.1)", display: "flex", alignItems: "center", gap: 10 }}>
@@ -296,8 +296,8 @@ export default function Home() {
           .acl-section { padding: 80px 16px 40px !important; }
           .acl-pricing-section { padding: 40px 16px !important; }
           .acl-nav { padding: 12px 16px !important; }
-          .acl-chatbot { right: 12px !important; bottom: 12px !important; width: 46px !important; height: 46px !important; }
-          .acl-chatbot-panel { right: 12px !important; bottom: 68px !important; width: calc(100vw - 24px) !important; max-width: 400px !important; }
+          .acl-chatbot { left: 12px !important; right: auto !important; bottom: 12px !important; width: 46px !important; height: 46px !important; }
+          .acl-chatbot-panel { left: 12px !important; right: auto !important; bottom: 68px !important; width: calc(100vw - 24px) !important; max-width: 380px !important; }
         }
       `}</style>
 
@@ -333,7 +333,7 @@ export default function Home() {
       {/* ══════════════════════════════════════
           SECTION 1 — Full-screen hero (100vh)
       ═══════════════════════════════════════ */}
-      <section className="acl-section" style={{ position: "relative", zIndex: 1, minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "100px 32px 60px", maxWidth: 1100, margin: "0 auto" }}>
+      <section className="acl-section" style={{ position: "relative", zIndex: 1, padding: "100px 40px 64px", maxWidth: 1240, margin: "0 auto", width: "100%", boxSizing: "border-box" }}>
         <div className="acl-hero-grid">
 
           {/* ── left ── */}
