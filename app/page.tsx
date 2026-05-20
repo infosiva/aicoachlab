@@ -323,6 +323,10 @@ export default function Home() {
         <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
           <a href="#curriculum" style={{ fontSize: 13, color: "rgba(167,243,208,0.7)", textDecoration: "none" }}>Curriculum</a>
           <a href="#pricing" style={{ fontSize: 13, color: "rgba(167,243,208,0.7)", textDecoration: "none" }}>Pricing</a>
+          <motion.a href="/interview" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
+            style={{ padding: "7px 16px", borderRadius: 8, background: "transparent", border: "1px solid rgba(16,185,129,0.35)", color: "#10b981", fontSize: 12, fontWeight: 600, textDecoration: "none", cursor: "pointer" }}>
+            Try free
+          </motion.a>
           <motion.a href="#pricing" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
             style={{ padding: "7px 18px", borderRadius: 8, background: "linear-gradient(135deg,#10b981,#059669)", color: "#fff", fontSize: 13, fontWeight: 600, textDecoration: "none", cursor: "pointer" }}>
             Enroll
@@ -388,12 +392,15 @@ export default function Home() {
 
             {/* CTA */}
             <motion.div variants={fadeUp} custom={5} style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
-              <motion.a href="#pricing" whileHover={{ scale: 1.04, boxShadow: "0 0 32px rgba(16,185,129,0.45)" }} whileTap={{ scale: 0.96 }}
+              <motion.a href="/interview" whileHover={{ scale: 1.04, boxShadow: "0 0 32px rgba(16,185,129,0.45)" }} whileTap={{ scale: 0.96 }}
                 style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "12px 28px", borderRadius: 10, background: "linear-gradient(135deg,#10b981,#059669)", color: "#fff", fontWeight: 700, fontSize: 15, textDecoration: "none", letterSpacing: "-0.2px", cursor: "pointer" }}>
-                Start learning <ArrowRight size={16} />
+                Start free — no signup <ArrowRight size={16} />
               </motion.a>
               <a href="#curriculum" style={{ fontSize: 13, color: "rgba(167,243,208,0.55)", textDecoration: "none" }}>See curriculum ↓</a>
             </motion.div>
+            <div style={{ fontSize: 11, color: "rgba(167,243,208,0.35)", marginTop: 4 }}>
+              ✓ No account needed · Try interview mode free · Upgrade anytime
+            </div>
 
             {/* trust */}
             <motion.div variants={fadeUp} custom={6} style={{ display: "flex", gap: 20, alignItems: "center", flexWrap: "wrap" }}>
@@ -480,12 +487,22 @@ export default function Home() {
                       </div>
                     ))}
                   </div>
-                  <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}
-                    style={{ width: "100%", padding: "10px", borderRadius: 10, border: "none", cursor: "pointer", fontWeight: 600, fontSize: 13,
-                      background: p.highlight ? "linear-gradient(135deg,#10b981,#059669)" : "rgba(167,243,208,0.07)",
-                      color: p.highlight ? "#fff" : "rgba(167,243,208,0.8)" }}>
-                    Enroll now
-                  </motion.button>
+                  {p.price === "$0" ? (
+                    <motion.a href="/interview" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}
+                      style={{ display: "block", width: "100%", padding: "10px", borderRadius: 10, cursor: "pointer", fontWeight: 700, fontSize: 13,
+                        background: "rgba(16,185,129,0.1)", color: "#10b981", textAlign: "center", textDecoration: "none",
+                        border: "1px solid rgba(16,185,129,0.25)", boxSizing: "border-box" }}>
+                      Start free — no signup →
+                    </motion.a>
+                  ) : (
+                    <motion.a href="/api/checkout" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}
+                      style={{ display: "block", width: "100%", padding: "10px", borderRadius: 10, border: "none", cursor: "pointer", fontWeight: 600, fontSize: 13,
+                        background: p.highlight ? "linear-gradient(135deg,#10b981,#059669)" : "rgba(167,243,208,0.07)",
+                        color: p.highlight ? "#fff" : "rgba(167,243,208,0.8)", textAlign: "center", textDecoration: "none",
+                        boxSizing: "border-box" }}>
+                      Enroll now
+                    </motion.a>
+                  )}
                 </motion.div>
               ))}
             </div>
