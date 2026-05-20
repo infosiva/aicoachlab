@@ -135,6 +135,7 @@ function Chatbot({ config }: { config: ChatbotConfig }) {
       <motion.button
         onClick={() => setOpen(o => !o)}
         whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}
+        className="acl-chatbot"
         style={{ position: "fixed", bottom: 28, right: 28, zIndex: 200, width: 54, height: 54, borderRadius: "50%", background: "linear-gradient(135deg,#10b981,#059669)", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 24px rgba(16,185,129,0.5)" }}>
         <AnimatePresence mode="wait">
           {open
@@ -149,6 +150,7 @@ function Chatbot({ config }: { config: ChatbotConfig }) {
           <motion.div
             initial={{ opacity: 0, scale: 0.92, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.92, y: 20 }}
             transition={{ duration: 0.25, ease }}
+            className="acl-chatbot-panel"
             style={{ position: "fixed", bottom: 92, right: 28, zIndex: 200, width: 340, maxHeight: 520, display: "flex", flexDirection: "column", borderRadius: 18, background: "rgba(3,10,6,0.95)", border: "1px solid rgba(16,185,129,0.25)", backdropFilter: "blur(20px)", overflow: "hidden", boxShadow: "0 8px 48px rgba(0,0,0,0.6)" }}>
 
             {/* header */}
@@ -282,6 +284,22 @@ export default function Home() {
 
   return (
     <div style={{ background: "#030a06", minHeight: "100vh", fontFamily: "'Inter', sans-serif", color: "#f0fdf4", overflowX: "hidden" }}>
+      <style>{`
+        html, body { overflow-x: hidden; max-width: 100%; }
+        .acl-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+        .acl-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .acl-pricing-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 48px; align-items: start; }
+        @media (max-width: 768px) {
+          .acl-hero-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+          .acl-stats-grid { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+          .acl-pricing-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+          .acl-section { padding: 80px 16px 40px !important; }
+          .acl-pricing-section { padding: 40px 16px !important; }
+          .acl-nav { padding: 12px 16px !important; }
+          .acl-chatbot { right: 12px !important; bottom: 12px !important; width: 46px !important; height: 46px !important; }
+          .acl-chatbot-panel { right: 12px !important; bottom: 68px !important; width: calc(100vw - 24px) !important; max-width: 400px !important; }
+        }
+      `}</style>
 
       {/* ── ambient gradient mesh ── */}
       <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0, overflow: "hidden" }}>
@@ -295,7 +313,7 @@ export default function Home() {
       </div>
 
       {/* ── nav ── */}
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 32px", background: "rgba(3,10,6,0.7)", backdropFilter: "blur(16px)", borderBottom: "1px solid rgba(16,185,129,0.1)" }}>
+      <nav className="acl-nav" style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 32px", background: "rgba(3,10,6,0.7)", backdropFilter: "blur(16px)", borderBottom: "1px solid rgba(16,185,129,0.1)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{ width: 30, height: 30, borderRadius: 8, background: "linear-gradient(135deg,#10b981,#059669)", display: "grid", placeItems: "center" }}>
             <Bot size={16} color="#fff" />
@@ -315,8 +333,8 @@ export default function Home() {
       {/* ══════════════════════════════════════
           SECTION 1 — Full-screen hero (100vh)
       ═══════════════════════════════════════ */}
-      <section style={{ position: "relative", zIndex: 1, minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "100px 32px 60px", maxWidth: 1100, margin: "0 auto" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "center" }}>
+      <section className="acl-section" style={{ position: "relative", zIndex: 1, minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "100px 32px 60px", maxWidth: 1100, margin: "0 auto" }}>
+        <div className="acl-hero-grid">
 
           {/* ── left ── */}
           <motion.div variants={staggerContainer} initial="hidden" animate="visible" style={{ display: "flex", flexDirection: "column", gap: 20 }}>
@@ -387,7 +405,7 @@ export default function Home() {
 
           {/* ── right: stats + curriculum (config-driven) ── */}
           <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2, ease }}
-            style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            className="acl-stats-grid">
 
             {content.stats.map((s, i) => {
               const SIcon = ICONS[s.icon] || Zap;
@@ -426,8 +444,8 @@ export default function Home() {
       {/* ══════════════════════════════════════
           SECTION 2 — Pricing + FAQ
       ═══════════════════════════════════════ */}
-      <section id="pricing" style={{ position: "relative", zIndex: 1, padding: "60px 32px", maxWidth: 1100, margin: "0 auto" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1.6fr 1fr", gap: 48, alignItems: "start" }}>
+      <section id="pricing" className="acl-pricing-section" style={{ position: "relative", zIndex: 1, padding: "60px 32px", maxWidth: 1100, margin: "0 auto" }}>
+        <div className="acl-pricing-grid">
 
           {/* pricing */}
           <div>
