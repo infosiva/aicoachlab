@@ -323,6 +323,7 @@ export default function AICoachLabPage({ showPricing = false }: { showPricing?: 
         <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
           <a href="#tracks" style={{ fontSize: 13, color: "rgba(180,190,220,0.7)", textDecoration: "none" }}>Tracks</a>
           <a href="/tracks" style={{ fontSize: 13, color: "rgba(167,139,250,0.85)", textDecoration: "none", fontWeight: 500 }}>Practice</a>
+          <a href="/ai-modeling" style={{ fontSize: 13, color: "rgba(167,139,250,0.85)", textDecoration: "none", fontWeight: 500 }}>AI Modeling</a>
           <a href="#pricing" style={{ fontSize: 13, color: "rgba(180,190,220,0.7)", textDecoration: "none" }}>Pricing</a>
           <motion.a href="/interview" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
             style={{ padding: "7px 16px", borderRadius: 8, background: "transparent", border: "1px solid rgba(124,58,237,0.4)", color: "#a78bfa", fontSize: 12, fontWeight: 600, textDecoration: "none", cursor: "pointer" }}>

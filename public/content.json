@@ -1,103 +1,151 @@
 {
   "hero": {
-    "eyebrow": "AI for everyone \u00b7 tech & non-tech",
+    "eyebrow": "AI-powered interview coaching · 6 roles",
     "headline": [
-      "Use AI smarter,",
-      "pay less, do more"
+      "Land your dream job",
+      "with AI mock interviews"
     ],
-    "subheadline": "From prompting to building \u2014 the complete guide to getting real value from AI, whatever your goal."
+    "subheadline": "Practice real interview questions for SWE, PM, Data, System Design & more. Get instant AI feedback, score every answer, and build confidence before the real thing."
   },
   "tracks": [
     {
-      "icon": "MessageSquare",
-      "label": "Prompting Mastery",
-      "sub": "Get 10\u00d7 better answers \u00b7 any model",
-      "color": "#10b981",
-      "bg": "rgba(16,185,129,0.08)",
-      "border": "rgba(16,185,129,0.2)",
-      "audience": "Everyone"
-    },
-    {
-      "icon": "DollarSign",
-      "label": "Pay Less",
-      "sub": "Free tiers \u00b7 model switching \u00b7 cost hacks",
-      "color": "#06b6d4",
-      "bg": "rgba(6,182,212,0.08)",
-      "border": "rgba(6,182,212,0.2)",
-      "audience": "Everyone"
+      "icon": "Terminal",
+      "label": "Software Engineer",
+      "sub": "DSA · system design · code reviews",
+      "color": "#7c3aed",
+      "bg": "rgba(124,58,237,0.08)",
+      "border": "rgba(124,58,237,0.2)",
+      "audience": "SWE",
+      "slug": "swe"
     },
     {
       "icon": "Cpu",
-      "label": "MCP & Agents",
-      "sub": "Build AI that works autonomously",
+      "label": "System Design",
+      "sub": "Scalability · distributed systems · HLD",
       "color": "#f59e0b",
       "bg": "rgba(245,158,11,0.08)",
       "border": "rgba(245,158,11,0.2)",
-      "audience": "Builders"
+      "audience": "Senior",
+      "slug": "system"
     },
     {
       "icon": "Network",
-      "label": "RAG Systems",
-      "sub": "Vector DBs \u00b7 retrieval \u00b7 production",
-      "color": "#8b5cf6",
-      "bg": "rgba(139,92,246,0.08)",
-      "border": "rgba(139,92,246,0.2)",
-      "audience": "Engineers"
+      "label": "Product Manager",
+      "sub": "Product sense · metrics · roadmap",
+      "color": "#06b6d4",
+      "bg": "rgba(6,182,212,0.08)",
+      "border": "rgba(6,182,212,0.2)",
+      "audience": "PM",
+      "slug": "pm"
+    },
+    {
+      "icon": "MessageSquare",
+      "label": "Behavioural",
+      "sub": "STAR method · leadership · conflict",
+      "color": "#10b981",
+      "bg": "rgba(16,185,129,0.08)",
+      "border": "rgba(16,185,129,0.2)",
+      "audience": "All roles",
+      "slug": "behavioural"
+    },
+    {
+      "icon": "TrendingUp",
+      "label": "Data Science",
+      "sub": "Stats · ML · SQL · case studies",
+      "color": "#ec4899",
+      "bg": "rgba(236,72,153,0.08)",
+      "border": "rgba(236,72,153,0.2)",
+      "audience": "DS/ML",
+      "slug": "data"
+    },
+    {
+      "icon": "Zap",
+      "label": "Frontend Engineer",
+      "sub": "React · performance · CSS · HTML",
+      "color": "#f97316",
+      "bg": "rgba(249,115,22,0.08)",
+      "border": "rgba(249,115,22,0.2)",
+      "audience": "Frontend",
+      "slug": "frontend"
+    },
+    {
+      "icon": "BrainCircuit",
+      "label": "AI Modeling",
+      "sub": "Zero to Hero",
+      "color": "#a78bfa",
+      "bg": "rgba(167,139,250,0.08)",
+      "border": "rgba(167,139,250,0.2)",
+      "audience": "Beginners → practitioners",
+      "slug": "ai-modeling"
     }
   ],
   "trendingTopics": [
-    "Claude 4 vs GPT-4o \u2014 which is cheaper?",
-    "Run AI locally for free with Ollama",
-    "Top 5 free AI tools in 2026",
-    "How to prompt engineer like a pro",
-    "MCP servers explained simply",
-    "Gemini 2.5 free tier limits & tricks",
-    "Build a RAG app in 30 minutes",
-    "AI agents for non-coders"
+    "System design: design Twitter's feed at 10M users",
+    "Behavioural: tell me about a time you disagreed with your manager",
+    "React: what happens during reconciliation?",
+    "Product: how would you improve Google Maps?",
+    "SQL: find users who made purchases on consecutive days",
+    "DSA: sliding window problems in 10 minutes",
+    "FAANG: what to expect in loop interviews 2026",
+    "Mock interview: blindfold mode now live"
   ],
   "curriculum": [
     {
-      "week": "W1\u20132",
-      "title": "Prompt Engineering",
-      "tag": "Prompting",
-      "color": "#10b981",
-      "desc": "Master any model with structured prompts"
+      "week": "Role 1",
+      "title": "Software Engineer",
+      "tag": "SWE",
+      "color": "#7c3aed",
+      "desc": "DSA, code review, OOP, system architecture"
     },
     {
-      "week": "W3\u20134",
-      "title": "Cost Optimisation",
-      "tag": "Free Tier",
-      "color": "#06b6d4",
-      "desc": "Free APIs, model routing, budget hacks"
-    },
-    {
-      "week": "W5\u20136",
-      "title": "MCP & Agents",
-      "tag": "Builders",
+      "week": "Role 2",
+      "title": "System Design",
+      "tag": "Senior",
       "color": "#f59e0b",
-      "desc": "Autonomous AI tools, tool-use, memory"
+      "desc": "HLD, LLD, trade-offs, scalability patterns"
     },
     {
-      "week": "W7\u20138",
-      "title": "Production RAG",
-      "tag": "Engineers",
-      "color": "#8b5cf6",
-      "desc": "Retrieval systems, embeddings, deployment"
+      "week": "Role 3",
+      "title": "Product Manager",
+      "tag": "PM",
+      "color": "#06b6d4",
+      "desc": "Product sense, metrics, go-to-market, prioritisation"
+    },
+    {
+      "week": "Role 4",
+      "title": "Behavioural",
+      "tag": "All roles",
+      "color": "#10b981",
+      "desc": "STAR stories, leadership, conflict resolution"
+    },
+    {
+      "week": "Role 5",
+      "title": "Data Science",
+      "tag": "DS/ML",
+      "color": "#ec4899",
+      "desc": "Stats, A/B tests, SQL case studies, ML fundamentals"
+    },
+    {
+      "week": "Role 6",
+      "title": "Frontend Engineer",
+      "tag": "Frontend",
+      "color": "#f97316",
+      "desc": "React, performance, accessibility, DOM APIs"
     }
   ],
   "stats": [
     {
-      "label": "Weeks",
-      "value": 8,
+      "label": "Interview Roles",
+      "value": 6,
       "suffix": "",
-      "icon": "Clock",
-      "color": "#10b981"
+      "icon": "Users",
+      "color": "#7c3aed"
     },
     {
-      "label": "Projects",
-      "value": 4,
-      "suffix": "",
-      "icon": "Terminal",
+      "label": "Questions / Role",
+      "value": 50,
+      "suffix": "+",
+      "icon": "MessageSquare",
       "color": "#06b6d4"
     },
     {
@@ -109,10 +157,10 @@
     },
     {
       "label": "Free to start",
-      "value": "\u221e",
+      "value": "∞",
       "suffix": "",
       "icon": "Zap",
-      "color": "#8b5cf6",
+      "color": "#10b981",
       "raw": true
     }
   ],
@@ -124,46 +172,46 @@
       "badge": "Start here",
       "highlight": false,
       "features": [
-        "3 Interview Mode sessions/day",
-        "Concept Cinema \u2014 5 topics/day",
-        "Live Coach \u2014 1 session/day",
-        "Access to Week 1 curriculum",
-        "Community access"
+        "3 mock interview sessions/day",
+        "All 6 role tracks",
+        "AI scoring + instant feedback",
+        "Blindfold mode (1 session/day)",
+        "No account needed"
       ]
     },
     {
-      "name": "Monthly",
-      "price": "$29",
+      "name": "Pro",
+      "price": "$19",
       "period": "/mo",
       "features": [
-        "All 8 weeks \u00b7 every track",
-        "4 project builds",
-        "Community Discord",
+        "Unlimited mock sessions",
+        "Voice-first interview mode",
+        "Full answer history + analytics",
         "Cancel any time"
       ],
       "highlight": false
     },
     {
       "name": "Lifetime",
-      "price": "$79",
+      "price": "$59",
       "period": "once",
       "features": [
-        "Everything in Monthly",
-        "All future updates",
-        "Priority support",
-        "Early content access"
+        "Everything in Pro",
+        "Company-specific question packs",
+        "Priority AI feedback queue",
+        "Early access to new roles"
       ],
       "highlight": true,
       "badge": "Best value"
     },
     {
-      "name": "Team \u00b7 5",
-      "price": "$149",
+      "name": "Team · 5",
+      "price": "$99",
       "period": "/mo",
       "features": [
         "5 member seats",
-        "Progress tracking",
-        "Monthly group Q&A",
+        "Team progress dashboard",
+        "Monthly group debrief",
         "Invoice billing"
       ],
       "highlight": false
@@ -171,45 +219,56 @@
   ],
   "faqs": [
     {
-      "q": "Do I need to be technical?",
-      "a": "No. We cover AI for all levels \u2014 non-tech (prompting/cost) through to engineering (RAG/MCP). Pick your path."
+      "q": "What roles can I practice for?",
+      "a": "Six tracks: Software Engineer, System Design, Product Manager, Behavioural, Data Science, and Frontend Engineer. Each has 50+ curated questions with AI-graded scoring."
     },
     {
-      "q": "Which AI models are covered?",
-      "a": "ChatGPT, Claude, Gemini, Groq, Mistral, local models (Ollama). We show you how to use each and when."
+      "q": "How is AI feedback different from typical flashcards?",
+      "a": "AICoachLab evaluates your actual answer — not just whether you clicked the right option. The AI scores clarity, technical depth, and structure, then gives targeted coaching on what to improve."
     },
     {
-      "q": "How do I pay less for AI?",
-      "a": "Week 3\u20134 covers exactly this: free tiers, model switching, prompt compression, and API cost hacks."
+      "q": "Do I need to speak out loud?",
+      "a": "Voice mode is available but optional. You can type answers in Classic mode, or use mic input in Live Coach mode for a more realistic feel."
     },
     {
-      "q": "How long per week?",
-      "a": "4\u20136 hrs/wk. Videos + guided project time. Work at your own pace."
+      "q": "How many free sessions do I get?",
+      "a": "3 full mock interview sessions per day, free forever — no account needed. Each session is 5 questions with scoring and feedback. Upgrade to Pro for unlimited."
     }
   ],
   "trust": [
     {
-      "icon": "\ud83d\udd12",
+      "icon": "🎯",
+      "text": "Role-specific questions"
+    },
+    {
+      "icon": "⚡",
+      "text": "Instant AI scoring"
+    },
+    {
+      "icon": "🛡️",
       "text": "30-day refund"
-    },
-    {
-      "icon": "\u26a1",
-      "text": "Free-tier APIs only"
-    },
-    {
-      "icon": "\ud83d\udee0\ufe0f",
-      "text": "4 real projects built"
     }
   ],
+  "aiModelingCurriculum": [
+    { "week": "Week 1", "title": "AI/ML Mental Models", "tag": "Foundations", "color": "#818cf8", "desc": "What AI actually is, how models learn, key vocabulary. No code needed.", "colab": "" },
+    { "week": "Week 2", "title": "Data — Collect, Clean, Label", "tag": "Data", "color": "#34d399", "desc": "Pandas basics, dataset quality, labeling strategies. First Colab notebook.", "colab": "https://colab.research.google.com/github/google/eng-edu/raw/main/ml/cc/exercises/pandas_dataframe_ultraquick_tutorial.ipynb" },
+    { "week": "Week 3", "title": "Your First Model", "tag": "scikit-learn", "color": "#60a5fa", "desc": "Train a classifier in 20 lines. Understand accuracy, precision, recall.", "colab": "https://colab.research.google.com/github/google/eng-edu/raw/main/ml/cc/exercises/intro_to_ml_fairness.ipynb" },
+    { "week": "Week 4", "title": "Neural Networks from Scratch", "tag": "PyTorch", "color": "#f472b6", "desc": "Build a neural net, understand backprop, train on MNIST.", "colab": "" },
+    { "week": "Week 5", "title": "Fine-tuning LLMs", "tag": "HuggingFace + LoRA", "color": "#fb923c", "desc": "Fine-tune Llama/Mistral on custom data with LoRA/QLoRA on free GPU.", "colab": "" },
+    { "week": "Week 6", "title": "Deploy a Model", "tag": "Replicate + Modal", "color": "#4ade80", "desc": "Serve your model via API. Cost-effective inference strategies.", "colab": "" },
+    { "week": "Week 7", "title": "Agents & Tool Use", "tag": "Claude API", "color": "#a78bfa", "desc": "Build an AI agent with tools, memory, and structured output.", "colab": "" },
+    { "week": "Week 8", "title": "Ship a Real Product", "tag": "Full Stack", "color": "#f59e0b", "desc": "Combine everything into a deployable AI-powered app.", "colab": "" }
+  ],
   "chatbot": {
-    "systemPrompt": "You are AICoachLab assistant. Help users understand: 1) how to use AI effectively, 2) how to pay less for AI (free tiers, model switching), 3) prompting techniques, 4) whether to learn RAG/MCP/Agents. Be concise, practical, and recommend the right course track. If asked about cost, always mention free tiers first.",
-    "welcomeMessage": "Hi! Ask me anything about AI \u2014 how to use it, which model to pick, or how to cut your AI bill to zero. \ud83c\udf99\ufe0f Or tap the mic to speak.",
+    "systemPrompt": "You are an AI learning coach specialising in ML/AI education. Help users understand machine learning concepts, recommend resources, explain model training, fine-tuning, and deployment. You cover the full Zero to Hero AI Modeling curriculum: data preparation, scikit-learn, PyTorch, LLMs, fine-tuning with LoRA, deployment with Replicate/Modal, and building AI agents. You also help with interview coaching for SWE, PM, System Design, Behavioural, Data Science, and Frontend roles. Be concise and encouraging.",
+    "welcomeMessage": "👋 I'm your AI learning coach. Ready to go from zero to hero in AI modeling? Ask me anything — from 'what is a neural network' to 'how do I fine-tune Llama'.",
     "voiceEnabled": true,
     "suggestedQuestions": [
-      "Which AI model is free and best?",
-      "How do I pay less for ChatGPT?",
-      "Do I need to code to use AI?",
-      "What's the difference between RAG and agents?"
+      "What's the difference between ML and deep learning?",
+      "How do I fine-tune an LLM with LoRA?",
+      "Best free GPU for training models?",
+      "Explain backpropagation simply",
+      "How do I deploy a model cheaply?"
     ]
   }
 }
