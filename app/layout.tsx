@@ -8,17 +8,17 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-body", display: "swa
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-display", display: "swap", weight: ["600", "700"] });
 
 export const metadata: Metadata = {
-  title: "AICoachLab — Learn RAG, MCP, LangGraph & AI Agents by Building Real Projects",
-  description: "Hands-on AI engineering coaching. Build real RAG pipelines, MCP servers, LangGraph workflows and AI agents. Project-based, not theory. Join 500+ developers.",
+  title: "AICoachLab — Build Real AI Projects, Not Just Theory",
+  description: "BetterUp costs $3k/year and never ships code. AICoachLab coaches you through RAG, MCP, and agents until you have working projects in your portfolio.",
   keywords: ["RAG tutorial", "MCP server", "LangGraph course", "AI agents course", "AI engineering", "learn AI", "AI coaching"],
   metadataBase: new URL("https://aicoachlab.app"),
   openGraph: {
-    title: "AICoachLab — Learn AI Engineering by Building",
-    description: "Hands-on coaching for RAG, MCP, LangGraph & AI Agents.",
+    title: "AICoachLab — Build Real AI Projects, Not Just Theory",
+    description: "Ship working RAG pipelines, MCP servers, and AI agents — not slides.",
     type: "website",
     siteName: "AICoachLab",
   },
-  twitter: { card: "summary_large_image", title: "AICoachLab", description: "Learn RAG, MCP, LangGraph & AI Agents by building real projects." },
+  twitter: { card: "summary_large_image", title: "AICoachLab", description: "Build real RAG pipelines, MCP servers, and AI agents. Project output guaranteed." },
   robots: { index: true, follow: true },
 };
 
