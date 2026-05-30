@@ -16,8 +16,15 @@ export const metadata: Metadata = {
     description: "Ship working RAG pipelines, MCP servers, and AI agents — not slides.",
     type: "website",
     siteName: "AICoachLab",
+    url: "https://aicoachlab.app",
+    images: [{ url: "https://aicoachlab.app/og.png", width: 1200, height: 630, alt: "AICoachLab — Build Real AI Projects" }],
   },
-  twitter: { card: "summary_large_image", title: "AICoachLab", description: "Build real RAG pipelines, MCP servers, and AI agents. Project output guaranteed." },
+  twitter: {
+    card: "summary_large_image",
+    title: "AICoachLab — Build Real AI Projects, Not Just Theory",
+    description: "Build real RAG pipelines, MCP servers, and AI agents. Project output guaranteed.",
+    images: ["https://aicoachlab.app/og.png"],
+  },
   robots: { index: true, follow: true },
 };
 
@@ -25,17 +32,29 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <head>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          "name": "AICoachLab",
-          "url": "https://aicoachlab.app",
-          "description": "Hands-on AI engineering coaching",
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://aicoachlab.app?q={search_term_string}"
+        <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify([
+          {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "AICoachLab",
+            "url": "https://aicoachlab.app",
+            "description": "Hands-on AI engineering coaching — build real RAG pipelines, MCP servers, and AI agents.",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://aicoachlab.app?q={search_term_string}"
+            }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "AICoachLab",
+            "url": "https://aicoachlab.app",
+            "description": "BetterUp costs $3k/year and never ships code. AICoachLab coaches you through RAG, MCP, and agents until you have working projects in your portfolio.",
+            "applicationCategory": "EducationApplication",
+            "operatingSystem": "Web",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
           }
-        })}} />
+        ])}} />
       </head>
       <body style={{ background: "#04070f", color: "#f0f4ff", fontFamily: "var(--font-body, system-ui)", margin: 0 }}>
         <div className="aurora aurora-primary" aria-hidden />
