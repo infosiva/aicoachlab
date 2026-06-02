@@ -1,7 +1,17 @@
 "use client";
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence, useInView, useMotionValue, useSpring } from "framer-motion";
 import { Terminal, Cpu, Network, Bot, ChevronDown, ArrowRight, Zap, Users, Clock, Star, CheckCircle, MessageSquare, DollarSign, ShieldCheck, Send, Mic, MicOff, X, TrendingUp, BrainCircuit } from "lucide-react";
+
+const CURRICULUM_ROLE_MAP: Record<string, string> = {
+  "Software Engineer": "swe",
+  "System Design": "system",
+  "Product Manager": "pm",
+  "Behavioural": "behavioural",
+  "Data Science": "data",
+  "Frontend Engineer": "frontend",
+};
 
 /* ── icon map (content.json uses string names) ── */
 const ICONS: Record<string, React.ComponentType<{ size?: number; color?: string }>> = {
@@ -253,6 +263,7 @@ function TrendingTicker({ topics }: { topics: string[] }) {
 }
 
 export default function AICoachLabPage({ showPricing = false }: { showPricing?: boolean }) {
+  const router = useRouter();
   const [content, setContent] = useState<Content | null>(null);
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
   const [activeTrack, setActiveTrack] = useState(0);
@@ -437,21 +448,47 @@ export default function AICoachLabPage({ showPricing = false }: { showPricing?: 
               );
             })}
 
-            {/* curriculum strip — spans full width, track-aware */}
-            <div style={{ gridColumn: "1 / -1", display: "flex", flexDirection: "column", gap: 8 }}>
-              {content.curriculum.map((c, i) => (
-                <motion.div key={i} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 + i * 0.07, duration: 0.4, ease }}
-                  whileHover={{ x: 4 }} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", borderRadius: 10, background: activeTrack === i ? `${c.color}10` : "rgba(255,255,255,0.02)", border: activeTrack === i ? `1px solid ${c.color}40` : "1px solid rgba(124,58,237,0.08)", cursor: "pointer", transition: "background 0.35s, border 0.35s" }}
-                  onClick={() => setActiveTrack(i)}>
-                  <CheckCircle size={13} color={c.color} />
-                  <span style={{ fontSize: 11, color: "rgba(180,190,220,0.4)", minWidth: 44 }}>{c.week}</span>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: 13, fontWeight: 500, color: "#f0f4ff" }}>{c.title}</div>
-                    <div style={{ fontSize: 11, color: "rgba(180,190,220,0.35)", marginTop: 1 }}>{c.desc}</div>
-                  </div>
-                  <span style={{ fontSize: 10, padding: "2px 8px", borderRadius: 999, background: `${c.color}18`, color: c.color, fontWeight: 600, whiteSpace: "nowrap" }}>{c.tag}</span>
-                </motion.div>
-              ))}
+            {/* curriculum strip — role cards, clickable → /interview */}
+            <div style={{ gridColumn: "1 / -1", display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 10 }}>
+              {content.curriculum.map((c, i) => {
+                const roleId = CURRICULUM_ROLE_MAP[c.title]
+                const active = activeTrack === i
+                return (
+                  <motion.button
+                    key={i}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 + i * 0.06, duration: 0.4, ease }}
+                    whileHover={{ y: -2, boxShadow: `0 8px 32px ${c.color}30` }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => {
+                      setActiveTrack(i)
+                      if (roleId) router.push(`/interview?role=${roleId}`)
+                    }}
+                    style={{
+                      display: "flex", alignItems: "center", gap: 14,
+                      padding: "16px 18px", borderRadius: 14, cursor: "pointer", textAlign: "left",
+                      background: active ? `${c.color}12` : "rgba(255,255,255,0.03)",
+                      border: `1.5px solid ${active ? c.color + "55" : "rgba(255,255,255,0.07)"}`,
+                      boxShadow: active ? `0 0 20px ${c.color}25` : "none",
+                      transition: "background 0.25s, border-color 0.25s, box-shadow 0.25s",
+                      position: "relative", overflow: "hidden",
+                    }}
+                  >
+                    {/* colored glow blob top-right */}
+                    <div style={{ position: "absolute", top: -20, right: -20, width: 80, height: 80, borderRadius: "50%", background: c.color, opacity: 0.07, filter: "blur(20px)", pointerEvents: "none" }} />
+                    {/* icon box */}
+                    <div style={{ width: 40, height: 40, borderRadius: 10, background: `${c.color}18`, border: `1px solid ${c.color}35`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0 }}>
+                      {c.title === "Software Engineer" ? "{ }" : c.title === "System Design" ? "⬡" : c.title === "Product Manager" ? "◈" : c.title === "Behavioural" ? "◎" : c.title === "Data Science" ? "∿" : "◻"}
+                    </div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontSize: 13, fontWeight: 700, color: "#f0f4ff", marginBottom: 2, letterSpacing: "-0.01em" }}>{c.title}</div>
+                      <div style={{ fontSize: 11, color: "rgba(180,190,220,0.45)", lineHeight: 1.4 }}>{c.desc}</div>
+                    </div>
+                    <span style={{ fontSize: 10, padding: "3px 9px", borderRadius: 999, background: `${c.color}18`, color: c.color, fontWeight: 700, whiteSpace: "nowrap", border: `1px solid ${c.color}30`, flexShrink: 0 }}>{c.tag}</span>
+                  </motion.button>
+                )
+              })}
             </div>
           </motion.div>
         </div>

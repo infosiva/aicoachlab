@@ -1,217 +1,345 @@
 'use client'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowLeft, ArrowRight, Mic, MessageSquare, Eye, Zap } from 'lucide-react'
+
+const ROLES = [
+  { id: 'swe',         label: 'Software Engineer',  icon: '{ }',   sub: 'DSA · Systems · Architecture',       color: '#7c3aed', glow: 'rgba(124,58,237,0.4)' },
+  { id: 'pm',          label: 'Product Manager',     icon: '◈',    sub: 'Strategy · Metrics · Roadmap',        color: '#0ea5e9', glow: 'rgba(14,165,233,0.4)' },
+  { id: 'system',      label: 'System Design',       icon: '⬡',    sub: 'Scale · Infra · Trade-offs',          color: '#f59e0b', glow: 'rgba(245,158,11,0.4)' },
+  { id: 'behavioural', label: 'Behavioural',         icon: '◎',    sub: 'Leadership · STAR · Conflict',        color: '#10b981', glow: 'rgba(16,185,129,0.4)' },
+  { id: 'data',        label: 'Data Science',        icon: '∿',    sub: 'ML · Stats · Product Analytics',      color: '#ec4899', glow: 'rgba(236,72,153,0.4)' },
+  { id: 'frontend',    label: 'Frontend Engineer',   icon: '◻',    sub: 'React · Performance · UX',            color: '#06b6d4', glow: 'rgba(6,182,212,0.4)' },
+]
 
 const MODES = [
   {
     id: 'blindfold',
-    title: 'Blindfold Mode',
-    emoji: '🎭',
-    tagline: 'Bot or human? You decide.',
-    desc: "Interview with a mystery interviewer. Only at the end do you find out if it was AI or human. Most people can't tell. Can you?",
-    color: '#8b5cf6',
-    glow: 'rgba(139,92,246,0.5)',
     href: '/interview/blindfold',
-    badge: '🔥 Most viral',
-    stats: ['4 rounds', 'Voice-first', 'Reveal at end'],
+    title: 'Blindfold',
+    tagline: 'Bot or human? You decide.',
+    desc: 'Interview with a mystery interviewer. Voice-first. Reveal at the end.',
+    badge: 'Most viral',
+    badgeColor: '#f59e0b',
+    Icon: Eye,
+    color: '#7c3aed',
+    glow: 'rgba(124,58,237,0.35)',
   },
   {
     id: 'live',
-    title: 'Live Coach',
-    emoji: '🎯',
-    tagline: 'Real-time mid-answer feedback.',
-    desc: "AI coach whispers tips as you speak. Filler word counter, STAR method tracker, pacing alerts — like having a coach in your ear.",
-    color: '#10b981',
-    glow: 'rgba(16,185,129,0.5)',
     href: '/interview/live',
-    badge: '⚡ Most useful',
-    stats: ['STAR tracker', 'Filler count', '8s interrupts'],
+    title: 'Live Coach',
+    tagline: 'Real-time mid-answer feedback.',
+    desc: 'AI coach whispers tips as you speak. STAR tracker, filler counter, pacing alerts.',
+    badge: 'Most useful',
+    badgeColor: '#10b981',
+    Icon: Zap,
+    color: '#10b981',
+    glow: 'rgba(16,185,129,0.35)',
   },
   {
-    id: 'learn',
-    title: 'Concept Cinema',
-    emoji: '🎬',
-    tagline: 'Watch concepts come alive.',
-    desc: "Say a topic. Watch it animate onto a canvas with voice narration — system design, algorithms, frameworks. No one teaches like this.",
-    color: '#f97316',
-    glow: 'rgba(249,115,22,0.5)',
-    href: '/interview/learn',
-    badge: '✨ Most unique',
-    stats: ['Animated canvas', 'Voice narrated', 'Any concept'],
+    id: 'classic',
+    href: '/interview/classic',
+    title: 'Mock Interview',
+    tagline: 'Face-to-face. Just you and AI.',
+    desc: 'Classic mock interview — choose your role, answer questions, get scored.',
+    badge: 'Best for practice',
+    badgeColor: '#0ea5e9',
+    Icon: MessageSquare,
+    color: '#0ea5e9',
+    glow: 'rgba(14,165,233,0.35)',
   },
 ]
 
-const stagger = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
-}
-
+const ease: [number, number, number, number] = [0.23, 1, 0.32, 1]
 const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.33, 1, 0.68, 1] as [number,number,number,number] } },
+  hidden: { opacity: 0, y: 22 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease } },
 }
+const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.09, delayChildren: 0.1 } } }
 
 export default function InterviewHub() {
   const router = useRouter()
+  const [selectedRole, setSelectedRole] = useState('swe')
+  const [selectedMode, setSelectedMode] = useState('classic')
+
+  function launch() {
+    const mode = MODES.find(m => m.id === selectedMode)
+    if (!mode) return
+    router.push(`${mode.href}?role=${selectedRole}`)
+  }
+
+  const activeMode = MODES.find(m => m.id === selectedMode)!
+  const activeRole = ROLES.find(r => r.id === selectedRole)!
 
   return (
-    <div style={{ minHeight: '100vh', background: '#040408', color: '#f0f4ff',
-      fontFamily: 'var(--font-body, system-ui)', overflow: 'hidden', position: 'relative' }}>
+    <div style={{ minHeight: '100dvh', background: 'var(--bg)', color: 'var(--text)',
+      fontFamily: 'Inter, system-ui, sans-serif', overflowX: 'hidden', position: 'relative' }}>
 
-      {/* ── Background atmosphere ── */}
-      <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
-        {/* Primary glow — top center */}
-        <div style={{ position: 'absolute', top: '-10%', left: '50%', transform: 'translateX(-50%)',
-          width: 800, height: 600, borderRadius: '50%',
-          background: 'radial-gradient(ellipse, rgba(139,92,246,0.22) 0%, transparent 70%)',
+      {/* ── Atmosphere ── */}
+      <div aria-hidden style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+        <div style={{ position: 'absolute', top: '-15%', left: '50%', transform: 'translateX(-50%)',
+          width: 900, height: 700, borderRadius: '50%',
+          background: `radial-gradient(ellipse, rgba(124,58,237,0.18) 0%, transparent 65%)`,
           filter: 'blur(60px)' }} />
-        {/* Secondary glow — bottom right */}
         <div style={{ position: 'absolute', bottom: '-10%', right: '-5%',
           width: 500, height: 500, borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(14,165,233,0.12) 0%, transparent 70%)',
           filter: 'blur(80px)' }} />
-        {/* Tertiary — bottom left */}
-        <div style={{ position: 'absolute', bottom: '20%', left: '-8%',
-          width: 400, height: 400, borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(249,115,22,0.12) 0%, transparent 70%)',
-          filter: 'blur(80px)' }} />
-        {/* Dot grid overlay */}
         <div style={{ position: 'absolute', inset: 0,
           backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)',
           backgroundSize: '32px 32px',
-          maskImage: 'radial-gradient(ellipse 80% 70% at 50% 30%, black 20%, transparent 80%)' }} />
-        {/* Horizontal lines — subtle depth */}
-        <div style={{ position: 'absolute', inset: 0,
-          backgroundImage: 'linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px)',
-          backgroundSize: '100% 80px',
-          maskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)' }} />
+          maskImage: 'radial-gradient(ellipse 80% 60% at 50% 20%, black 10%, transparent 80%)' }} />
       </div>
 
-      {/* ── Content ── */}
-      <div style={{ position: 'relative', zIndex: 10, maxWidth: 1160, margin: '0 auto', padding: '0 24px 80px' }}>
+      {/* ── Nav ── */}
+      <nav style={{ position: 'relative', zIndex: 20, padding: '14px 24px',
+        borderBottom: '1px solid var(--border)', backdropFilter: 'blur(16px)',
+        background: 'rgba(7,8,15,0.7)',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <motion.button onClick={() => router.push('/')}
+          whileHover={{ x: -3 }} whileTap={{ scale: 0.94 }}
+          style={{ background: 'none', border: 'none', cursor: 'pointer',
+            color: 'var(--text-2)', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13 }}>
+          <ArrowLeft size={14} /> Home
+        </motion.button>
+        <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: '-0.02em' }}>
+          AI<span style={{ color: 'var(--violet-2)' }}>Coach</span>Lab
+        </div>
+        <a href="/tracks" style={{ fontSize: 12, color: 'var(--violet-2)',
+          textDecoration: 'none', fontWeight: 600 }}>
+          Browse tracks →
+        </a>
+      </nav>
 
-        {/* Hero */}
+      {/* ── Content ── */}
+      <div style={{ position: 'relative', zIndex: 10, maxWidth: 1060, margin: '0 auto',
+        padding: '48px 24px 80px' }}>
+
+        {/* Header */}
         <motion.div variants={stagger} initial="hidden" animate="show"
-          style={{ textAlign: 'center', paddingTop: 88, paddingBottom: 64 }}>
+          style={{ textAlign: 'center', marginBottom: 48 }}>
           <motion.div variants={fadeUp} style={{ display: 'inline-flex', alignItems: 'center', gap: 8,
-            padding: '5px 16px', background: 'rgba(139,92,246,0.12)',
-            border: '1px solid rgba(139,92,246,0.3)', borderRadius: 99,
-            fontSize: 11, fontWeight: 700, color: '#a78bfa', letterSpacing: '0.1em',
-            textTransform: 'uppercase', marginBottom: 28 }}>
-            <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#a78bfa',
-              boxShadow: '0 0 8px #a78bfa', display: 'inline-block' }} />
-            Interview Platform v2 · aicoachlab.app
+            padding: '5px 16px', background: 'var(--violet-dim)',
+            border: '1px solid rgba(124,58,237,0.3)', borderRadius: 99,
+            fontSize: 11, fontWeight: 700, color: 'var(--violet-2)',
+            letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 20 }}>
+            <Mic size={11} /> Voice-first · No account needed
           </motion.div>
 
           <motion.h1 variants={fadeUp}
-            style={{ fontSize: 'clamp(2.4rem, 5.5vw, 4.2rem)', fontWeight: 900,
-              letterSpacing: '-0.04em', lineHeight: 1.06, margin: '0 0 20px' }}>
-            <span style={{ color: '#f0f4ff' }}>Train like a champion.</span>
+            style={{ fontSize: 'clamp(2.2rem, 5vw, 3.8rem)', fontWeight: 900,
+              letterSpacing: '-0.04em', lineHeight: 1.05, margin: '0 0 16px' }}>
+            Your interview room.
             <br />
-            <span style={{ background: 'linear-gradient(135deg, #a78bfa 0%, #38bdf8 60%, #10b981 100%)',
+            <span style={{ background: 'linear-gradient(135deg, #a78bfa 0%, #38bdf8 55%, #10b981 100%)',
               WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-              Interview like one.
+              Practice like it's real.
             </span>
           </motion.h1>
 
           <motion.p variants={fadeUp}
-            style={{ fontSize: 'clamp(1rem, 2vw, 1.18rem)', color: 'rgba(167,243,208,0.5)',
-              maxWidth: 540, margin: '0 auto 16px', lineHeight: 1.65 }}>
-            Three AI-powered modes no one has built together. Voice-first, real-time, animated. Built different.
+            style={{ fontSize: 16, color: 'var(--text-2)', maxWidth: 480, margin: '0 auto',
+              lineHeight: 1.65 }}>
+            Pick your role. Pick your mode. Start talking. AI interviewer is waiting.
           </motion.p>
-
-          {/* Social proof */}
-          <motion.div variants={fadeUp}
-            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center',
-              gap: 20, fontSize: 12, color: 'rgba(255,255,255,0.3)', marginTop: 24 }}>
-            <span>🎭 Blindfold reveal</span>
-            <span style={{ width: 1, height: 14, background: 'rgba(255,255,255,0.1)' }} />
-            <span>⚡ Live STAR tracking</span>
-            <span style={{ width: 1, height: 14, background: 'rgba(255,255,255,0.1)' }} />
-            <span>🎬 Animated concepts</span>
-          </motion.div>
         </motion.div>
 
-        {/* Mode cards */}
-        <motion.div variants={stagger} initial="hidden" animate="show"
-          style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(310px, 1fr))', gap: 20 }}>
-          {MODES.map((m) => (
-            <motion.div key={m.id}
-              variants={fadeUp}
-              whileHover={{ y: -8, scale: 1.015 }}
-              whileTap={{ scale: 0.975 }}
-              onClick={() => router.push(m.href)}
-              style={{ cursor: 'pointer', position: 'relative', overflow: 'hidden',
-                background: 'rgba(255,255,255,0.025)',
-                border: '1px solid rgba(255,255,255,0.07)',
-                borderRadius: 22, padding: '32px 28px 26px',
-                transition: 'border-color 0.3s' }}
-              onHoverStart={e => (e.currentTarget as HTMLElement).style.borderColor = m.color + '55'}
-              onHoverEnd={e => (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.07)'}>
+        {/* ── Two-column picker ── */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32,
+          alignItems: 'start' }}>
 
-              {/* Card glow on hover */}
-              <div style={{ position: 'absolute', inset: 0, opacity: 0, transition: 'opacity 0.4s',
-                background: `radial-gradient(ellipse at top left, ${m.glow.replace('0.5', '0.08')} 0%, transparent 60%)`,
-                pointerEvents: 'none' }}
-                className={`card-glow-${m.id}`} />
+          {/* LEFT — Role selector */}
+          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease }}>
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em',
+              textTransform: 'uppercase', color: 'var(--text-3)', marginBottom: 14 }}>
+              1 — Choose your role
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              {ROLES.map(r => {
+                const active = r.id === selectedRole
+                return (
+                  <motion.button key={r.id} onClick={() => setSelectedRole(r.id)}
+                    whileHover={{ x: 4 }} whileTap={{ scale: 0.97 }}
+                    style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '14px 16px',
+                      borderRadius: 14, textAlign: 'left', cursor: 'pointer',
+                      border: `1.5px solid ${active ? r.color + '60' : 'var(--border)'}`,
+                      background: active ? `${r.color}12` : 'var(--surface)',
+                      color: 'var(--text)',
+                      boxShadow: active ? `0 0 24px ${r.glow}40` : 'none',
+                      transition: `all 220ms var(--ease)` }}>
+                    <span style={{ fontSize: 20, color: active ? r.color : 'var(--text-3)',
+                      fontFamily: 'monospace', fontWeight: 700, minWidth: 28,
+                      textAlign: 'center', transition: 'color 200ms' }}>
+                      {r.icon}
+                    </span>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontSize: 14, fontWeight: 700, letterSpacing: '-0.01em',
+                        color: active ? 'var(--text)' : 'var(--text-2)' }}>
+                        {r.label}
+                      </div>
+                      <div style={{ fontSize: 11, color: 'var(--text-3)', marginTop: 2 }}>{r.sub}</div>
+                    </div>
+                    {active && (
+                      <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}
+                        style={{ width: 8, height: 8, borderRadius: '50%',
+                          background: r.color, flexShrink: 0 }} />
+                    )}
+                  </motion.button>
+                )
+              })}
+            </div>
+          </motion.div>
 
-              {/* Top glow orb */}
-              <div style={{ position: 'absolute', top: -50, right: -50, width: 180, height: 180,
-                borderRadius: '50%', background: `radial-gradient(circle, ${m.glow.replace('0.5', '0.2')} 0%, transparent 70%)`,
-                filter: 'blur(30px)', pointerEvents: 'none' }} />
+          {/* RIGHT — Mode selector + Launch */}
+          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.3, ease }}
+            style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
 
-              {/* Badge */}
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 10, fontWeight: 700,
-                padding: '4px 11px', borderRadius: 99, marginBottom: 22,
-                background: `${m.color}18`, color: m.color, border: `1px solid ${m.color}35` }}>
-                {m.badge}
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em',
+              textTransform: 'uppercase', color: 'var(--text-3)', marginBottom: 6 }}>
+              2 — Choose your mode
+            </div>
+
+            {MODES.map(m => {
+              const active = m.id === selectedMode
+              const MIcon = m.Icon
+              return (
+                <motion.button key={m.id} onClick={() => setSelectedMode(m.id)}
+                  whileHover={{ y: -3 }} whileTap={{ scale: 0.97 }}
+                  style={{ padding: '18px 20px', borderRadius: 16, textAlign: 'left',
+                    cursor: 'pointer', position: 'relative', overflow: 'hidden',
+                    border: `1.5px solid ${active ? m.color + '55' : 'var(--border)'}`,
+                    background: active ? `${m.color}0f` : 'var(--surface)',
+                    boxShadow: active ? `0 0 32px ${m.glow}` : 'none',
+                    transition: `all 250ms var(--ease)` }}>
+                  {active && (
+                    <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0,
+                      width: 3, background: m.color, borderRadius: '0 16px 16px 0' }} />
+                  )}
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+                    <div style={{ width: 36, height: 36, borderRadius: 10, flexShrink: 0,
+                      background: active ? `${m.color}22` : 'var(--surface-2)',
+                      border: `1px solid ${active ? m.color + '40' : 'var(--border)'}`,
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      transition: 'all 220ms' }}>
+                      <MIcon size={16} color={active ? m.color : 'var(--text-3)'} />
+                    </div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 3 }}>
+                        <span style={{ fontSize: 14, fontWeight: 800, letterSpacing: '-0.02em',
+                          color: active ? 'var(--text)' : 'var(--text-2)' }}>
+                          {m.title}
+                        </span>
+                        <span style={{ fontSize: 9, fontWeight: 700, padding: '2px 7px',
+                          borderRadius: 99, background: `${m.badgeColor}18`,
+                          color: m.badgeColor, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+                          {m.badge}
+                        </span>
+                      </div>
+                      <div style={{ fontSize: 11, color: active ? m.color : 'var(--text-3)',
+                        fontWeight: 600, marginBottom: 4 }}>{m.tagline}</div>
+                      <div style={{ fontSize: 12, color: 'var(--text-3)', lineHeight: 1.5 }}>{m.desc}</div>
+                    </div>
+                  </div>
+                </motion.button>
+              )
+            })}
+
+            {/* Launch button */}
+            <motion.button onClick={launch}
+              whileHover={{ scale: 1.02, boxShadow: `0 0 48px ${activeMode.glow}` }}
+              whileTap={{ scale: 0.97 }}
+              style={{ marginTop: 8, width: '100%', padding: '16px 28px', borderRadius: 14,
+                border: 'none', cursor: 'pointer', fontWeight: 800, fontSize: 16,
+                letterSpacing: '-0.02em', color: '#fff',
+                background: `linear-gradient(135deg, ${activeRole.color} 0%, ${activeMode.color} 100%)`,
+                boxShadow: `0 0 32px ${activeMode.glow}`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
+                transition: `all 300ms var(--ease)` }}>
+              <Mic size={18} />
+              Start {activeMode.title} — {activeRole.label}
+              <ArrowRight size={18} />
+            </motion.button>
+
+            <p style={{ textAlign: 'center', fontSize: 11, color: 'var(--text-3)',
+              letterSpacing: '0.06em', textTransform: 'uppercase', margin: 0 }}>
+              Voice-first · No signup · Groq-powered
+            </p>
+          </motion.div>
+        </div>
+
+        {/* ── Face-to-face preview strip ── */}
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.6, ease }}
+          style={{ marginTop: 56, padding: '28px 32px', borderRadius: 20,
+            background: 'var(--surface)', border: '1px solid var(--border)',
+            backdropFilter: 'blur(12px)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: 24,
+            alignItems: 'center' }}>
+
+            {/* Interviewer side */}
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ width: 72, height: 72, borderRadius: '50%', margin: '0 auto 12px',
+                background: 'linear-gradient(135deg, rgba(124,58,237,0.4), rgba(99,102,241,0.2))',
+                border: '2px solid rgba(124,58,237,0.45)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: 28, boxShadow: '0 0 40px rgba(124,58,237,0.3)' }}>
+                🤖
               </div>
-
-              <div style={{ fontSize: 52, marginBottom: 18, filter: 'drop-shadow(0 0 16px currentColor)' }}>
-                {m.emoji}
-              </div>
-
-              <h2 style={{ fontSize: 21, fontWeight: 850, margin: '0 0 5px', color: '#f0f4ff',
-                letterSpacing: '-0.03em' }}>{m.title}</h2>
-
-              <div style={{ fontSize: 12, fontWeight: 700, color: m.color, marginBottom: 14,
-                letterSpacing: '0.01em' }}>{m.tagline}</div>
-
-              <p style={{ fontSize: 13.5, color: 'rgba(167,243,208,0.5)', lineHeight: 1.7, margin: '0 0 24px' }}>
-                {m.desc}
-              </p>
-
-              {/* Stats chips */}
-              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 24 }}>
-                {m.stats.map(s => (
-                  <span key={s} style={{ fontSize: 11, padding: '3px 9px', borderRadius: 99,
-                    background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)',
-                    color: 'rgba(255,255,255,0.45)', fontWeight: 500 }}>
-                    {s}
-                  </span>
+              <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 3 }}>AI Interviewer</div>
+              <div style={{ fontSize: 11, color: 'var(--text-3)' }}>Ready to interview you</div>
+              <div style={{ display: 'flex', gap: 3, justifyContent: 'center', marginTop: 10 }}>
+                {[0,1,2,3,4].map(i => (
+                  <motion.div key={i}
+                    style={{ width: 3, borderRadius: 99, background: 'var(--violet-2)' }}
+                    animate={{ height: [4, 14+i*3, 4], opacity: [0.4, 0.9, 0.4] }}
+                    transition={{ duration: 0.7+i*0.1, repeat: Infinity, delay: i*0.12, ease: 'easeInOut' }} />
                 ))}
               </div>
+            </div>
 
-              {/* CTA */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13,
-                fontWeight: 700, color: m.color, letterSpacing: '-0.01em' }}>
-                Start now
-                <motion.span animate={{ x: [0, 4, 0] }} transition={{ duration: 1.6, repeat: Infinity }}>
-                  →
-                </motion.span>
+            {/* VS divider */}
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: 11, color: 'var(--text-3)', fontWeight: 700,
+                letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 6 }}>vs</div>
+              <div style={{ width: 1, height: 60, background: 'var(--border)', margin: '0 auto' }} />
+            </div>
+
+            {/* You side */}
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ width: 72, height: 72, borderRadius: '50%', margin: '0 auto 12px',
+                background: 'linear-gradient(135deg, rgba(14,165,233,0.3), rgba(16,185,129,0.15))',
+                border: '2px solid rgba(14,165,233,0.35)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: 28, boxShadow: '0 0 30px rgba(14,165,233,0.25)' }}>
+                🧑‍💻
               </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Bottom tagline */}
-        <motion.div
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}
-          style={{ textAlign: 'center', marginTop: 52, fontSize: 12,
-            color: 'rgba(255,255,255,0.2)', letterSpacing: '0.06em' }}>
-          Voice-powered · No account needed · Built on Groq + Web Speech API
+              <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 3 }}>You</div>
+              <div style={{ fontSize: 11, color: 'var(--text-3)' }}>
+                {ROLES.find(r=>r.id===selectedRole)?.label ?? 'Candidate'}
+              </div>
+              <div style={{ marginTop: 10, display: 'inline-flex', alignItems: 'center', gap: 5,
+                padding: '4px 10px', borderRadius: 99, fontSize: 10, fontWeight: 600,
+                background: 'rgba(16,185,129,0.1)', color: 'var(--green)',
+                border: '1px solid rgba(16,185,129,0.25)' }}>
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--green)',
+                  boxShadow: '0 0 6px var(--green)', display: 'inline-block' }} />
+                Ready
+              </div>
+            </div>
+          </div>
         </motion.div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .interview-grid { grid-template-columns: 1fr !important; }
+          .preview-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+        }
+      `}</style>
     </div>
   )
 }
