@@ -357,20 +357,33 @@ export default function AICoachLabPage({ showPricing = false }: { showPricing?: 
               <TrendingTicker topics={content.trendingTopics} />
             </motion.div>
 
-            {/* eyebrow */}
+            {/* eyebrow — liquid-glass AI Workflow style */}
             <motion.div variants={fadeUp} custom={1}>
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 12px", borderRadius: 999, border: "1px solid rgba(124,58,237,0.3)", background: "rgba(124,58,237,0.07)", fontSize: 12, color: "#a78bfa", fontWeight: 500, letterSpacing: "0.04em" }}>
-                <Zap size={11} /> {content.hero.eyebrow}
+              <span style={{
+                display: "inline-flex", alignItems: "center", gap: 6,
+                padding: "6px 16px", borderRadius: 9999,
+                background: "rgba(255,255,255,0.04)",
+                backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)",
+                border: "1px solid rgba(255,255,255,0.09)",
+                boxShadow: "inset 0 1px 0 rgba(255,255,255,0.07)",
+                fontSize: 11, color: "rgba(196,181,253,0.82)",
+                fontWeight: 700, letterSpacing: "0.11em", textTransform: "uppercase",
+              }}>
+                <Zap size={10} style={{ color: "#f97316" }} /> {content.hero.eyebrow}
               </span>
             </motion.div>
 
-            {/* headline */}
-            <motion.h1 variants={fadeUp} custom={2} style={{ fontSize: "clamp(2rem,4vw,3.2rem)", fontWeight: 800, lineHeight: 1.12, letterSpacing: "-0.03em", margin: 0, color: "#f0f4ff" }}>
+            {/* headline — larger, tighter */}
+            <motion.h1 variants={fadeUp} custom={2} style={{ fontSize: "clamp(2.25rem,4.5vw,3.75rem)", fontWeight: 900, lineHeight: 0.97, letterSpacing: "-0.04em", margin: 0, color: "#f0f4ff" }}>
               {content.hero.headline[0]}{" "}
-              <span style={{ background: "linear-gradient(120deg,#7c3aed,#a78bfa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{content.hero.headline[1]}</span>
+              <span style={{
+                background: "linear-gradient(135deg,#818cf8 0%,#a78bfa 40%,#f97316 100%)",
+                WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
+                filter: "drop-shadow(0 0 36px rgba(124,58,237,0.45))",
+              }}>{content.hero.headline[1]}</span>
             </motion.h1>
 
-            <motion.p variants={fadeUp} custom={3} style={{ fontSize: 16, color: "rgba(180,190,220,0.65)", lineHeight: 1.65, margin: 0, maxWidth: 440 }}>
+            <motion.p variants={fadeUp} custom={3} style={{ fontSize: 15, color: "rgba(180,190,220,0.55)", lineHeight: 1.7, margin: 0, maxWidth: 440 }}>
               {content.hero.subheadline}
             </motion.p>
 
