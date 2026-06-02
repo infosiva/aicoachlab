@@ -70,7 +70,20 @@ export default function LearnPage() {
         <div style={{ position: 'absolute', bottom: '-10%', right: '-5%', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, rgba(167,139,250,0.1) 0%, transparent 70%)', filter: 'blur(80px)' }} />
       </div>
 
-      <div style={{ position: 'relative', zIndex: 1, maxWidth: 800, margin: '0 auto', padding: '80px 24px 48px' }}>
+      {/* nav */}
+      <nav style={{ position: 'sticky', top: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 24px', background: 'rgba(7,8,15,0.85)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(124,58,237,0.1)' }}>
+        <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
+          <div style={{ width: 26, height: 26, borderRadius: 7, background: 'linear-gradient(135deg,#7c3aed,#6d28d9)', display: 'grid', placeItems: 'center', fontSize: 12, color: '#fff', fontWeight: 800 }}>A</div>
+          <span style={{ fontSize: 14, fontWeight: 700, color: '#f0f4ff', letterSpacing: '-0.2px' }}>AI<span style={{ color: '#a78bfa' }}>Coach</span>Lab</span>
+        </a>
+        <div style={{ display: 'flex', gap: 20, alignItems: 'center' }}>
+          <a href="/interview" style={{ fontSize: 13, color: 'rgba(180,190,220,0.6)', textDecoration: 'none' }}>Interview</a>
+          <a href="/tracks" style={{ fontSize: 13, color: 'rgba(180,190,220,0.6)', textDecoration: 'none' }}>Tracks</a>
+          <a href="/interview" style={{ fontSize: 12, fontWeight: 700, color: '#a78bfa', textDecoration: 'none', padding: '6px 14px', borderRadius: 8, border: '1px solid rgba(124,58,237,0.35)' }}>Mock interview →</a>
+        </div>
+      </nav>
+
+      <div style={{ position: 'relative', zIndex: 1, maxWidth: 800, margin: '0 auto', padding: '48px 24px 48px' }}>
         {/* Hero */}
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease }}
           style={{ textAlign: 'center', marginBottom: 48 }}>

@@ -94,23 +94,21 @@ export default function InterviewHub() {
       </div>
 
       {/* ── Nav ── */}
-      <nav style={{ position: 'relative', zIndex: 20, padding: '14px 24px',
+      <nav style={{ position: 'sticky', top: 0, zIndex: 50, padding: '12px 24px',
         borderBottom: '1px solid var(--border)', backdropFilter: 'blur(16px)',
-        background: 'rgba(7,8,15,0.7)',
+        background: 'rgba(7,8,15,0.85)',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <motion.button onClick={() => router.push('/')}
           whileHover={{ x: -3 }} whileTap={{ scale: 0.94 }}
           style={{ background: 'none', border: 'none', cursor: 'pointer',
-            color: 'var(--text-2)', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13 }}>
-          <ArrowLeft size={14} /> Home
+            display: 'flex', alignItems: 'center', gap: 8, padding: 0 }}>
+          <div style={{ width: 26, height: 26, borderRadius: 7, background: 'linear-gradient(135deg,#7c3aed,#6d28d9)', display: 'grid', placeItems: 'center', fontSize: 12, color: '#fff', fontWeight: 800 }}>A</div>
+          <span style={{ fontSize: 14, fontWeight: 700, color: '#f0f4ff', letterSpacing: '-0.2px' }}>AI<span style={{ color: 'var(--violet-2)' }}>Coach</span>Lab</span>
         </motion.button>
-        <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: '-0.02em' }}>
-          AI<span style={{ color: 'var(--violet-2)' }}>Coach</span>Lab
+        <div style={{ display: 'flex', gap: 20, alignItems: 'center' }}>
+          <a href="/tracks" style={{ fontSize: 13, color: 'var(--text-2)', textDecoration: 'none' }}>Practice tracks</a>
+          <a href="/learn" style={{ fontSize: 13, color: 'var(--text-2)', textDecoration: 'none' }}>Learn</a>
         </div>
-        <a href="/tracks" style={{ fontSize: 12, color: 'var(--violet-2)',
-          textDecoration: 'none', fontWeight: 600 }}>
-          Browse tracks →
-        </a>
       </nav>
 
       {/* ── Content ── */}
@@ -248,11 +246,30 @@ export default function InterviewHub() {
               )
             })}
 
+            {/* Summary strip */}
+            <div style={{ padding: '14px 16px', borderRadius: 12, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1 }}>
+                <span style={{ fontSize: 18 }}>{activeRole.icon}</span>
+                <div>
+                  <div style={{ fontSize: 11, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>Role</div>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: activeRole.color }}>{activeRole.label}</div>
+                </div>
+              </div>
+              <div style={{ width: 1, height: 36, background: 'rgba(255,255,255,0.08)' }} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1 }}>
+                <span style={{ fontSize: 18 }}>{activeMode.id === 'blindfold' ? '🕶️' : activeMode.id === 'live' ? '⚡' : '💬'}</span>
+                <div>
+                  <div style={{ fontSize: 11, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>Mode</div>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: activeMode.color }}>{activeMode.title}</div>
+                </div>
+              </div>
+            </div>
+
             {/* Launch button */}
             <motion.button onClick={launch}
               whileHover={{ scale: 1.02, boxShadow: `0 0 48px ${activeMode.glow}` }}
               whileTap={{ scale: 0.97 }}
-              style={{ marginTop: 8, width: '100%', padding: '16px 28px', borderRadius: 14,
+              style={{ width: '100%', padding: '16px 28px', borderRadius: 14,
                 border: 'none', cursor: 'pointer', fontWeight: 800, fontSize: 16,
                 letterSpacing: '-0.02em', color: '#fff',
                 background: `linear-gradient(135deg, ${activeRole.color} 0%, ${activeMode.color} 100%)`,
@@ -266,7 +283,7 @@ export default function InterviewHub() {
 
             <p style={{ textAlign: 'center', fontSize: 11, color: 'var(--text-3)',
               letterSpacing: '0.06em', textTransform: 'uppercase', margin: 0 }}>
-              Voice-first · No signup · Groq-powered
+              Voice-first · No signup · Free · Groq-powered
             </p>
           </motion.div>
         </div>

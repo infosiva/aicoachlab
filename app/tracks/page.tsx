@@ -146,16 +146,23 @@ export default function TracksPage() {
         }} />
       </div>
 
-      <div style={{ position: 'relative', zIndex: 1, maxWidth: 860, margin: '0 auto', padding: '0 24px' }}>
-        {/* nav */}
-        <div style={{ paddingTop: 28, paddingBottom: 8 }}>
-          <button
-            onClick={() => router.push('/')}
-            style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'none', border: 'none', color: '#8892a4', cursor: 'pointer', fontSize: 14, padding: 0 }}
-          >
-            <ArrowLeft size={16} /> Home
-          </button>
+      {/* top nav bar */}
+      <nav style={{ position: 'sticky', top: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 24px', background: 'rgba(4,4,8,0.85)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+        <button onClick={() => router.push('/')} style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+          <div style={{ width: 26, height: 26, borderRadius: 7, background: 'linear-gradient(135deg,#7c3aed,#6d28d9)', display: 'grid', placeItems: 'center' }}>
+            <span style={{ fontSize: 12, color: '#fff', fontWeight: 800 }}>A</span>
+          </div>
+          <span style={{ fontSize: 14, fontWeight: 700, color: '#f0f4ff', letterSpacing: '-0.2px' }}>AI<span style={{ color: '#a78bfa' }}>Coach</span>Lab</span>
+        </button>
+        <div style={{ display: 'flex', gap: 20, alignItems: 'center' }}>
+          <a href="/interview" style={{ fontSize: 13, color: 'rgba(180,190,220,0.6)', textDecoration: 'none' }}>Interview</a>
+          <a href="/learn" style={{ fontSize: 13, color: 'rgba(180,190,220,0.6)', textDecoration: 'none' }}>Learn</a>
+          <a href="/interview" style={{ fontSize: 12, fontWeight: 700, color: '#a78bfa', textDecoration: 'none', padding: '6px 14px', borderRadius: 8, border: '1px solid rgba(124,58,237,0.35)' }}>Mock interview →</a>
         </div>
+      </nav>
+
+      <div style={{ position: 'relative', zIndex: 1, maxWidth: 860, margin: '0 auto', padding: '0 24px' }}>
+        <div style={{ height: 8 }} />
 
         {/* header */}
         <motion.div

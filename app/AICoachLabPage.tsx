@@ -331,18 +331,14 @@ export default function AICoachLabPage({ showPricing = false }: { showPricing?: 
           </div>
           <span style={{ fontWeight: 700, fontSize: 15, letterSpacing: "-0.3px", color: "#f0f4ff" }}>AI<span style={{ color: "#a78bfa" }}>Coach</span>Lab</span>
         </div>
-        <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
-          <a href="#tracks" style={{ fontSize: 13, color: "rgba(180,190,220,0.7)", textDecoration: "none" }}>Tracks</a>
-          <a href="/tracks" style={{ fontSize: 13, color: "rgba(167,139,250,0.85)", textDecoration: "none", fontWeight: 500 }}>Practice</a>
-          <a href="/learn" style={{ fontSize: 13, color: "rgba(167,139,250,0.85)", textDecoration: "none", fontWeight: 600 }}>Learn</a>
-          <a href="/ai-modeling" style={{ fontSize: 13, color: "rgba(167,139,250,0.85)", textDecoration: "none", fontWeight: 500 }}>AI Modeling</a>
-          <motion.a href="/interview" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
-            style={{ padding: "7px 16px", borderRadius: 8, background: "transparent", border: "1px solid rgba(124,58,237,0.4)", color: "#a78bfa", fontSize: 12, fontWeight: 600, textDecoration: "none", cursor: "pointer" }}>
-            Try free
-          </motion.a>
-          <motion.a href="/tracks" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
-            style={{ padding: "7px 18px", borderRadius: 8, background: "linear-gradient(135deg,#7c3aed,#6d28d9)", color: "#fff", fontSize: 13, fontWeight: 600, textDecoration: "none", cursor: "pointer" }}>
-            Start practising
+        <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+          <a href="/interview" style={{ fontSize: 13, color: "rgba(180,190,220,0.65)", textDecoration: "none", padding: "6px 12px", borderRadius: 8 }}>Interview</a>
+          <a href="/tracks" style={{ fontSize: 13, color: "rgba(180,190,220,0.65)", textDecoration: "none", padding: "6px 12px", borderRadius: 8 }}>Tracks</a>
+          <a href="/learn" style={{ fontSize: 13, color: "rgba(180,190,220,0.65)", textDecoration: "none", padding: "6px 12px", borderRadius: 8 }}>Learn</a>
+          <a href="/ai-modeling" style={{ fontSize: 13, color: "rgba(180,190,220,0.65)", textDecoration: "none", padding: "6px 12px", borderRadius: 8 }}>AI Modeling</a>
+          <motion.a href="/interview" whileHover={{ scale: 1.04, boxShadow: "0 0 20px rgba(124,58,237,0.4)" }} whileTap={{ scale: 0.97 }}
+            style={{ marginLeft: 8, padding: "8px 20px", borderRadius: 9, background: "linear-gradient(135deg,#7c3aed,#6d28d9)", color: "#fff", fontSize: 13, fontWeight: 700, textDecoration: "none", cursor: "pointer" }}>
+            Start free →
           </motion.a>
         </div>
       </nav>
@@ -405,17 +401,13 @@ export default function AICoachLabPage({ showPricing = false }: { showPricing?: 
 
             {/* CTA */}
             <motion.div variants={fadeUp} custom={5} style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
-              <motion.a href="/interview" whileHover={{ scale: 1.04, boxShadow: "0 0 32px rgba(124,58,237,0.5)" }} whileTap={{ scale: 0.96 }}
-                style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "12px 28px", borderRadius: 10, background: "linear-gradient(135deg,#7c3aed,#6d28d9)", color: "#fff", fontWeight: 700, fontSize: 15, textDecoration: "none", letterSpacing: "-0.2px", cursor: "pointer" }}>
-                Start mock interview — free <ArrowRight size={16} />
+              <motion.a href="/interview" whileHover={{ scale: 1.03, boxShadow: "0 0 32px rgba(124,58,237,0.5)" }} whileTap={{ scale: 0.96 }}
+                style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 28px", borderRadius: 10, background: "linear-gradient(135deg,#7c3aed,#6d28d9)", color: "#fff", fontWeight: 700, fontSize: 15, textDecoration: "none", letterSpacing: "-0.2px", cursor: "pointer" }}>
+                Start mock interview <ArrowRight size={16} />
               </motion.a>
-              <motion.a href="/tracks" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}
-                style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "12px 20px", borderRadius: 10, background: "transparent", border: "1px solid rgba(124,58,237,0.4)", color: "#a78bfa", fontWeight: 600, fontSize: 14, textDecoration: "none", cursor: "pointer" }}>
-                Practice tracks
-              </motion.a>
-              <motion.a href="/learn" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}
-                style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "12px 20px", borderRadius: 10, background: "rgba(124,58,237,0.1)", border: "1px solid rgba(124,58,237,0.25)", color: "#a78bfa", fontWeight: 600, fontSize: 14, textDecoration: "none", cursor: "pointer" }}>
-                📚 Learn any topic
+              <motion.a href="/tracks" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.96 }}
+                style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "13px 20px", borderRadius: 10, background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(200,210,240,0.8)", fontWeight: 600, fontSize: 14, textDecoration: "none", cursor: "pointer" }}>
+                Browse practice tracks
               </motion.a>
             </motion.div>
             <div style={{ fontSize: 11, color: "rgba(180,190,220,0.35)", marginTop: 4 }}>
