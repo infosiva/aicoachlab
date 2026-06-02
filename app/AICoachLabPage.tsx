@@ -323,6 +323,7 @@ export default function AICoachLabPage({ showPricing = false }: { showPricing?: 
         <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
           <a href="#tracks" style={{ fontSize: 13, color: "rgba(180,190,220,0.7)", textDecoration: "none" }}>Tracks</a>
           <a href="/tracks" style={{ fontSize: 13, color: "rgba(167,139,250,0.85)", textDecoration: "none", fontWeight: 500 }}>Practice</a>
+          <a href="/learn" style={{ fontSize: 13, color: "rgba(167,139,250,0.85)", textDecoration: "none", fontWeight: 600 }}>Learn</a>
           <a href="/ai-modeling" style={{ fontSize: 13, color: "rgba(167,139,250,0.85)", textDecoration: "none", fontWeight: 500 }}>AI Modeling</a>
           <motion.a href="/interview" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
             style={{ padding: "7px 16px", borderRadius: 8, background: "transparent", border: "1px solid rgba(124,58,237,0.4)", color: "#a78bfa", fontSize: 12, fontWeight: 600, textDecoration: "none", cursor: "pointer" }}>
@@ -400,6 +401,10 @@ export default function AICoachLabPage({ showPricing = false }: { showPricing?: 
               <motion.a href="/tracks" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}
                 style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "12px 20px", borderRadius: 10, background: "transparent", border: "1px solid rgba(124,58,237,0.4)", color: "#a78bfa", fontWeight: 600, fontSize: 14, textDecoration: "none", cursor: "pointer" }}>
                 Practice tracks
+              </motion.a>
+              <motion.a href="/learn" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}
+                style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "12px 20px", borderRadius: 10, background: "rgba(124,58,237,0.1)", border: "1px solid rgba(124,58,237,0.25)", color: "#a78bfa", fontWeight: 600, fontSize: 14, textDecoration: "none", cursor: "pointer" }}>
+                📚 Learn any topic
               </motion.a>
             </motion.div>
             <div style={{ fontSize: 11, color: "rgba(180,190,220,0.35)", marginTop: 4 }}>
