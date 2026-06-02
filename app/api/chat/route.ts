@@ -2,9 +2,10 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export const runtime = 'nodejs'
 
-const GROQ_KEY = process.env.GROQ_API_KEY
+// Free chain: Groq → NVIDIA NIM → Gemini. No paid APIs.
+const GROQ_KEY   = process.env.GROQ_API_KEY
+const NVIDIA_KEY = process.env.NVIDIA_API_KEY
 const GEMINI_KEY = process.env.GEMINI_API_KEY
-const ANTHROPIC_KEY = process.env.ANTHROPIC_API_KEY
 
 interface ChatMessage { role: 'user' | 'assistant' | 'system'; content: string; }
 
@@ -15,6 +16,20 @@ async function tryGroq(messages: ChatMessage[]): Promise<string | null> {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${GROQ_KEY}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({ model: 'llama-3.1-8b-instant', messages, max_tokens: 300, temperature: 0.7 }),
+    })
+    if (!res.ok) return null
+    const data = await res.json()
+    return data.choices?.[0]?.message?.content ?? null
+  } catch { return null }
+}
+
+async function tryNvidia(messages: ChatMessage[]): Promise<string | null> {
+  if (!NVIDIA_KEY) return null
+  try {
+    const res = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${NVIDIA_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: 'meta/llama-3.1-8b-instruct', messages, max_tokens: 300, temperature: 0.7 }),
     })
     if (!res.ok) return null
     const data = await res.json()
@@ -43,22 +58,6 @@ async function tryGemini(messages: ChatMessage[]): Promise<string | null> {
   } catch { return null }
 }
 
-async function tryAnthropic(messages: ChatMessage[]): Promise<string | null> {
-  if (!ANTHROPIC_KEY) return null
-  try {
-    const systemMsg = messages.find(m => m.role === 'system')
-    const convo = messages.filter(m => m.role !== 'system')
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'x-api-key': ANTHROPIC_KEY, 'anthropic-version': '2023-06-01', 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'claude-haiku-4-5-20251001', max_tokens: 300, system: systemMsg?.content, messages: convo }),
-    })
-    if (!res.ok) return null
-    const data = await res.json()
-    return data.content?.[0]?.text ?? null
-  } catch { return null }
-}
-
 export async function POST(req: NextRequest) {
   try {
     const { messages, systemPrompt } = await req.json()
@@ -69,8 +68,8 @@ export async function POST(req: NextRequest) {
 
     const reply =
       await tryGroq(chatMessages) ||
+      await tryNvidia(chatMessages) ||
       await tryGemini(chatMessages) ||
-      await tryAnthropic(chatMessages) ||
       "I'm having trouble connecting right now. Please try again in a moment."
 
     return NextResponse.json({ message: reply })
