@@ -1,108 +1,34 @@
-import { createClient } from '@supabase/supabase-js'
+import { neon } from '@neondatabase/serverless'
 import type { Topic, Lesson } from './schema'
 
-function getClient() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  if (!url || !key) throw new Error('Supabase env vars missing')
-  return createClient(url, key)
+function sql() {
+  const url = process.env.DATABASE_URL
+  if (!url) throw new Error('DATABASE_URL missing')
+  return neon(url)
 }
 
-export async function getTopicBySlug(slug: string): Promise<Topic | null> {
-  const sb = getClient()
-  const { data, error } = await sb
-    .from('topics')
-    .select('*')
-    .eq('slug', slug)
-    .single()
-  if (error || !data) return null
-  return dbRowToTopic(data)
-}
-
-export async function createTopic(topic: Omit<Topic, 'id' | 'requestCount' | 'audioReady'>): Promise<Topic> {
-  const sb = getClient()
-  const { data, error } = await sb
-    .from('topics')
-    .insert({
-      slug: topic.slug,
-      title: topic.title,
-      description: topic.description,
-      tags: topic.tags,
-      estimated_mins: topic.estimatedMins,
-      prerequisites: topic.prerequisites,
-      lessons: topic.lessons,
-      request_count: 1,
-      audio_ready: false,
-    })
-    .select()
-    .single()
-  if (error || !data) throw new Error(`Failed to create topic: ${error?.message}`)
-  return dbRowToTopic(data)
-}
-
-export async function incrementRequestCount(slug: string): Promise<void> {
-  const sb = getClient()
-  await sb.rpc('increment_topic_request_count', { p_slug: slug })
-}
-
-export async function markAudioReady(slug: string, lessons: Lesson[]): Promise<void> {
-  const sb = getClient()
-  await sb.from('topics').update({ audio_ready: true, lessons }).eq('slug', slug)
-}
-
-export async function getTrendingTopics(limit = 8): Promise<Topic[]> {
-  const sb = getClient()
-  const { data } = await sb
-    .from('topics')
-    .select('*')
-    .order('request_count', { ascending: false })
-    .limit(limit)
-  return (data ?? []).map(dbRowToTopic)
-}
-
-export async function searchTopics(query: string): Promise<Topic[]> {
-  const sb = getClient()
-  const { data } = await sb
-    .from('topics')
-    .select('*')
-    .or(`title.ilike.%${query}%,slug.ilike.%${query}%`)
-    .limit(6)
-  return (data ?? []).map(dbRowToTopic)
-}
-
-export async function saveProgress(
-  userId: string,
-  topicSlug: string,
-  lessonIndex: number,
-  slideIndex: number,
-  completed = false,
-) {
-  const sb = getClient()
-  await sb.from('user_topic_progress').upsert({
-    user_id: userId,
-    topic_slug: topicSlug,
-    lesson_index: lessonIndex,
-    slide_index: slideIndex,
-    completed,
-    updated_at: new Date().toISOString(),
-  })
-}
-
-export async function getProgress(userId: string, topicSlug: string) {
-  const sb = getClient()
-  const { data } = await sb
-    .from('user_topic_progress')
-    .select('*')
-    .eq('user_id', userId)
-    .eq('topic_slug', topicSlug)
-    .single()
-  return data
+export async function ensureTable(): Promise<void> {
+  const db = sql()
+  await db`
+    create table if not exists acl_topics (
+      slug            text primary key,
+      title           text not null,
+      description     text not null default '',
+      tags            jsonb not null default '[]',
+      estimated_mins  int not null default 20,
+      prerequisites   jsonb not null default '[]',
+      request_count   int not null default 1,
+      lessons         jsonb not null default '[]',
+      audio_ready     boolean not null default false,
+      created_at      timestamptz not null default now()
+    )
+  `
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function dbRowToTopic(row: any): Topic {
+function rowToTopic(row: any): Topic {
   return {
-    id: row.id,
+    id: row.slug,
     slug: row.slug,
     title: row.title,
     description: row.description,
@@ -113,4 +39,103 @@ function dbRowToTopic(row: any): Topic {
     lessons: row.lessons ?? [],
     audioReady: row.audio_ready,
   }
+}
+
+export async function getTopicBySlug(slug: string): Promise<Topic | null> {
+  try {
+    const db = sql()
+    const rows = await db`select * from acl_topics where slug = ${slug} limit 1`
+    if (!rows.length) return null
+    return rowToTopic(rows[0])
+  } catch { return null }
+}
+
+export async function createTopic(topic: Omit<Topic, 'id' | 'requestCount' | 'audioReady'>): Promise<Topic> {
+  const db = sql()
+  await ensureTable()
+  const rows = await db`
+    insert into acl_topics (slug, title, description, tags, estimated_mins, prerequisites, lessons)
+    values (
+      ${topic.slug}, ${topic.title}, ${topic.description},
+      ${JSON.stringify(topic.tags)}, ${topic.estimatedMins},
+      ${JSON.stringify(topic.prerequisites)}, ${JSON.stringify(topic.lessons)}
+    )
+    on conflict (slug) do update set request_count = acl_topics.request_count + 1
+    returning *
+  `
+  return rowToTopic(rows[0])
+}
+
+export async function incrementRequestCount(slug: string): Promise<void> {
+  try {
+    const db = sql()
+    await db`update acl_topics set request_count = request_count + 1 where slug = ${slug}`
+  } catch { /* ignore */ }
+}
+
+export async function markAudioReady(slug: string, lessons: Lesson[]): Promise<void> {
+  const db = sql()
+  await db`update acl_topics set audio_ready = true, lessons = ${JSON.stringify(lessons)} where slug = ${slug}`
+}
+
+export async function getTrendingTopics(limit = 8): Promise<Topic[]> {
+  try {
+    const db = sql()
+    await ensureTable()
+    const rows = await db`select * from acl_topics order by request_count desc limit ${limit}`
+    return rows.map(rowToTopic)
+  } catch { return [] }
+}
+
+export async function searchTopics(query: string): Promise<Topic[]> {
+  try {
+    const db = sql()
+    const q = `%${query}%`
+    const rows = await db`
+      select * from acl_topics
+      where title ilike ${q} or slug ilike ${q}
+      limit 6
+    `
+    return rows.map(rowToTopic)
+  } catch { return [] }
+}
+
+export async function saveProgress(
+  userId: string,
+  topicSlug: string,
+  lessonIndex: number,
+  slideIndex: number,
+  completed = false,
+) {
+  try {
+    const db = sql()
+    await db`
+      create table if not exists acl_topic_progress (
+        user_id      text not null,
+        topic_slug   text not null,
+        lesson_index int not null default 0,
+        slide_index  int not null default 0,
+        completed    boolean not null default false,
+        updated_at   timestamptz not null default now(),
+        primary key (user_id, topic_slug)
+      )
+    `
+    await db`
+      insert into acl_topic_progress (user_id, topic_slug, lesson_index, slide_index, completed, updated_at)
+      values (${userId}, ${topicSlug}, ${lessonIndex}, ${slideIndex}, ${completed}, now())
+      on conflict (user_id, topic_slug) do update set
+        lesson_index = ${lessonIndex}, slide_index = ${slideIndex},
+        completed = ${completed}, updated_at = now()
+    `
+  } catch { /* ignore */ }
+}
+
+export async function getProgress(userId: string, topicSlug: string) {
+  try {
+    const db = sql()
+    const rows = await db`
+      select * from acl_topic_progress where user_id = ${userId} and topic_slug = ${topicSlug} limit 1
+    `
+    return rows[0] ?? null
+  } catch { return null }
 }

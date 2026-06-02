@@ -8,8 +8,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
     "@stripe/stripe-js": "^9.5.0",
-    "@supabase/supabase-js": "^2.106.2",
     "animejs": "^4.4.1",
     "framer-motion": "^12.38.0",
     "groq-sdk": "^1.2.0",
