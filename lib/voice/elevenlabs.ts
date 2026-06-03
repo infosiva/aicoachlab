@@ -1,13 +1,20 @@
-// Stub — wire ELEVENLABS_API_KEY + npm install elevenlabs when ready
+/**
+ * Voice shim for aicoachlab — delegates to shared voice chain.
+ * Chain: ElevenLabs → VibeVoice-Realtime-0.5B (HF) → Google TTS
+ * Env: ELEVENLABS_API_KEY, HF_TOKEN, GOOGLE_TTS_API_KEY
+ */
 import type { Lesson } from '@/lib/topics/schema'
+import { tts, ttsStream } from '@/lib/voice'
 
 export async function preGenerateSlideAudio(
   _topicSlug: string,
   _lessonIndex: number,
   _slideIndex: number,
-  _narrationText: string,
+  narrationText: string,
 ): Promise<string | null> {
-  return null
+  const result = await tts(narrationText)
+  if (!result) return null
+  return `data:audio/mpeg;base64,${result.audio.toString('base64')}`
 }
 
 export async function generateAllAudio(
@@ -17,6 +24,6 @@ export async function generateAllAudio(
   return lessons
 }
 
-export async function streamVoiceReply(_text: string): Promise<ReadableStream | null> {
-  return null
+export async function streamVoiceReply(text: string): Promise<ReadableStream | null> {
+  return ttsStream(text)
 }

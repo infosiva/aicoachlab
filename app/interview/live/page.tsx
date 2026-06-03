@@ -75,11 +75,30 @@ export default function LiveCoachPage() {
     setQuestion(q)
     setPhase('question')
     setLoading(false)
-    if (typeof window !== 'undefined') {
-      const utt = new SpeechSynthesisUtterance(q)
-      utt.rate = 0.95
-      window.speechSynthesis.speak(utt)
-    }
+    // Speak question via voice chain (ElevenLabs → VibeVoice → Google → browser fallback)
+    fetch('/api/voice/stream', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: q }),
+    }).then(async (r) => {
+      if (r.ok) {
+        const blob = await r.blob()
+        const url = URL.createObjectURL(blob)
+        const audio = new Audio(url)
+        audio.play().catch(() => {})
+        audio.onended = () => URL.revokeObjectURL(url)
+      } else if (typeof window !== 'undefined') {
+        const utt = new SpeechSynthesisUtterance(q)
+        utt.rate = 0.95
+        window.speechSynthesis.speak(utt)
+      }
+    }).catch(() => {
+      if (typeof window !== 'undefined') {
+        const utt = new SpeechSynthesisUtterance(q)
+        utt.rate = 0.95
+        window.speechSynthesis.speak(utt)
+      }
+    })
     startInterruptTimer()
   }
 
