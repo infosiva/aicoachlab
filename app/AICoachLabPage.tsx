@@ -416,7 +416,7 @@ export default function AICoachLabPage({ showPricing = false }: { showPricing?: 
             <motion.div variants={fadeUp} custom={5} style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
               <motion.a href="/interview" whileHover={{ scale: 1.03, boxShadow: "0 0 32px rgba(124,58,237,0.5)" }} whileTap={{ scale: 0.96 }}
                 style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 28px", borderRadius: 10, background: "linear-gradient(135deg,#7c3aed,#6d28d9)", color: "#fff", fontWeight: 700, fontSize: 15, textDecoration: "none", letterSpacing: "-0.2px", cursor: "pointer" }}>
-                Start mock interview <ArrowRight size={16} />
+                Try a free interview <ArrowRight size={16} />
               </motion.a>
               <motion.a href="/tracks" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.96 }}
                 style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "13px 20px", borderRadius: 10, background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(200,210,240,0.8)", fontWeight: 600, fontSize: 14, textDecoration: "none", cursor: "pointer" }}>

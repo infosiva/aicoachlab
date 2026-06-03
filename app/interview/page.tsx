@@ -180,11 +180,13 @@ export default function InterviewHub() {
                       </div>
                       <div style={{ fontSize: 11, color: 'var(--text-3)', marginTop: 2 }}>{r.sub}</div>
                     </div>
-                    {active && (
-                      <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}
-                        style={{ width: 8, height: 8, borderRadius: '50%',
-                          background: r.color, flexShrink: 0 }} />
-                    )}
+                    <motion.span
+                      animate={{ opacity: active ? 1 : 0, x: active ? 0 : 4 }}
+                      transition={{ duration: 0.18 }}
+                      style={{ fontSize: 11, fontWeight: 700, color: r.color,
+                        flexShrink: 0, letterSpacing: '-0.01em' }}>
+                      Start →
+                    </motion.span>
                   </motion.button>
                 )
               })}
