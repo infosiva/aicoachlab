@@ -145,7 +145,7 @@ export default function InterviewHub() {
         </motion.div>
 
         {/* ── Two-column picker ── */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32,
+        <div className="interview-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32,
           alignItems: 'start' }}>
 
           {/* LEFT — Role selector */}

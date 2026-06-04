@@ -315,18 +315,25 @@ export default function AICoachLabPage({ showPricing = true }: { showPricing?: b
   return (
     <div style={{ background: BG, minHeight: "100vh", fontFamily: "'Inter', sans-serif", color: "#f0f4ff", overflowX: "hidden" }}>
       <style>{`
-        html, body { overflow-x: hidden; max-width: 100%; }
+        html, body { overflow-x: hidden; max-width: 100vw; }
         .acl-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
         .acl-feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
         .acl-pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .acl-nav-links { display: flex; gap: 6px; align-items: center; }
+        .acl-cta-note { font-size: 12px; color: rgba(180,190,220,0.3); }
+        .acl-mockup-col { display: flex; justify-content: center; }
         @media (max-width: 768px) {
-          .acl-hero-grid { grid-template-columns: 1fr !important; gap: 28px !important; }
-          .acl-feature-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+          .acl-hero-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
+          .acl-feature-grid { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
           .acl-pricing-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+          .acl-mockup-col { display: none !important; }
+          .acl-cta-note { display: none !important; }
         }
         @media (max-width: 640px) {
-          .acl-role-strip { overflow-x: auto; flex-wrap: nowrap !important; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+          .acl-role-strip { overflow-x: auto; flex-wrap: nowrap !important; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 4px; }
           .acl-role-strip::-webkit-scrollbar { display: none; }
+          .acl-nav-links a { display: none; }
+          .acl-feature-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
 
@@ -338,26 +345,26 @@ export default function AICoachLabPage({ showPricing = true }: { showPricing?: b
       </div>
 
       {/* ── NAV ─────────────────────────────────────────────────── */}
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 32px", background: "rgba(8,8,16,0.8)", backdropFilter: "blur(16px)", borderBottom: "1px solid rgba(99,102,241,0.12)" }}>
+      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 20px", background: "rgba(8,8,16,0.8)", backdropFilter: "blur(16px)", borderBottom: "1px solid rgba(99,102,241,0.12)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <div style={{ width: 28, height: 28, borderRadius: 8, background: `linear-gradient(135deg,${ACCENT},${ACCENT2})`, display: "grid", placeItems: "center" }}>
-            <BrainCircuit size={14} color="#fff" />
+          <div style={{ width: 26, height: 26, borderRadius: 8, background: `linear-gradient(135deg,${ACCENT},${ACCENT2})`, display: "grid", placeItems: "center" }}>
+            <BrainCircuit size={13} color="#fff" />
           </div>
           <span style={{ fontWeight: 800, fontSize: 14, letterSpacing: "-0.3px" }}>AI<span style={{ color: "#a78bfa" }}>Coach</span>Lab</span>
         </div>
-        <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+        <div className="acl-nav-links">
           {[["Interview", "/interview"], ["Tracks", "/tracks"], ["Learn", "/learn"]].map(([label, href]) => (
             <a key={label} href={href} style={{ fontSize: 13, color: "rgba(180,190,220,0.55)", textDecoration: "none", padding: "6px 10px", borderRadius: 7 }}>{label}</a>
           ))}
           <motion.a href="/interview" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
-            style={{ marginLeft: 6, padding: "7px 18px", borderRadius: 8, background: `linear-gradient(135deg,${ACCENT},${ACCENT2})`, color: "#fff", fontSize: 13, fontWeight: 700, textDecoration: "none" }}>
+            style={{ marginLeft: 4, padding: "7px 16px", borderRadius: 8, background: `linear-gradient(135deg,${ACCENT},${ACCENT2})`, color: "#fff", fontSize: 13, fontWeight: 700, textDecoration: "none", whiteSpace: "nowrap" }}>
             Start free →
           </motion.a>
         </div>
       </nav>
 
       {/* ── SECTION 1: HERO ────────────────────────────────────── */}
-      <section style={{ position: "relative", zIndex: 1, padding: "80px 32px 36px", maxWidth: 1200, margin: "0 auto", boxSizing: "border-box" }}>
+      <section style={{ position: "relative", zIndex: 1, padding: "clamp(64px,10vw,80px) clamp(16px,4vw,32px) 36px", maxWidth: 1200, margin: "0 auto", boxSizing: "border-box", width: "100%" }}>
         <div className="acl-hero-grid">
 
           {/* Left */}
@@ -377,7 +384,7 @@ export default function AICoachLabPage({ showPricing = true }: { showPricing?: b
               </span>
             </motion.h1>
 
-            <motion.p {...fadeUp(0.14)} style={{ fontSize: 16, color: "rgba(180,190,220,0.5)", lineHeight: 1.65, margin: 0, maxWidth: 420 }}>
+            <motion.p {...fadeUp(0.14)} style={{ fontSize: "clamp(13px,2vw,16px)", color: "rgba(180,190,220,0.5)", lineHeight: 1.65, margin: 0, maxWidth: 420 }}>
               AI-powered mock interviews with real-time coaching. Practice every role, every day. Free to start.
             </motion.p>
 
@@ -421,19 +428,19 @@ export default function AICoachLabPage({ showPricing = true }: { showPricing?: b
                 style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 26px", borderRadius: 10, background: `linear-gradient(135deg,${ACCENT},${ACCENT2})`, color: "#fff", fontWeight: 700, fontSize: 15, textDecoration: "none", boxShadow: `0 0 20px rgba(99,102,241,0.25)` }}>
                 Try free interview <ArrowRight size={15} />
               </motion.a>
-              <span style={{ fontSize: 12, color: "rgba(180,190,220,0.3)" }}>✓ No signup · 3 sessions/day free</span>
+              <span className="acl-cta-note">✓ No signup · 3 sessions/day free</span>
             </motion.div>
           </motion.div>
 
-          {/* Right: chat mockup */}
-          <div style={{ display: "flex", justifyContent: "center" }}>
+          {/* Right: chat mockup — hidden on mobile */}
+          <div className="acl-mockup-col">
             <ChatMockup role={role} />
           </div>
         </div>
       </section>
 
       {/* ── SECTION 2: 3-COL FEATURES ──────────────────────────── */}
-      <div style={{ position: "relative", zIndex: 1, borderTop: "1px solid rgba(99,102,241,0.08)", padding: "24px 32px" }}>
+      <div style={{ position: "relative", zIndex: 1, borderTop: "1px solid rgba(99,102,241,0.08)", padding: "24px clamp(16px,4vw,32px)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div className="acl-feature-grid">
             {FEATURES.map((f, i) => (
@@ -454,7 +461,7 @@ export default function AICoachLabPage({ showPricing = true }: { showPricing?: b
 
       {/* ── SECTION 3: PRICING (2 compact cards, inline) ────────── */}
       {showPricing && (
-        <div style={{ position: "relative", zIndex: 1, borderTop: "1px solid rgba(99,102,241,0.08)", padding: "24px 32px 20px" }}>
+        <div style={{ position: "relative", zIndex: 1, borderTop: "1px solid rgba(99,102,241,0.08)", padding: "24px clamp(16px,4vw,32px) 20px" }}>
           <div style={{ maxWidth: 720, margin: "0 auto" }}>
             <div style={{ marginBottom: 20, textAlign: "center" }}>
               <h2 style={{ fontSize: "clamp(1.2rem,2.5vw,1.7rem)", fontWeight: 800, letterSpacing: "-0.03em", margin: "0 0 6px" }}>
@@ -499,7 +506,7 @@ export default function AICoachLabPage({ showPricing = true }: { showPricing?: b
       )}
 
       {/* ── FOOTER ─────────────────────────────────────────────── */}
-      <footer style={{ position: "relative", zIndex: 1, borderTop: "1px solid rgba(99,102,241,0.08)", padding: "14px 32px", display: "flex", justifyContent: "space-between", alignItems: "center", maxWidth: 1200, margin: "0 auto" }}>
+      <footer style={{ position: "relative", zIndex: 1, borderTop: "1px solid rgba(99,102,241,0.08)", padding: "14px clamp(16px,4vw,32px)", display: "flex", justifyContent: "space-between", alignItems: "center", maxWidth: 1200, margin: "0 auto" }}>
         <span style={{ fontSize: 13, fontWeight: 800 }}>AI<span style={{ color: "#a78bfa" }}>Coach</span>Lab</span>
         <span style={{ fontSize: 11, color: "rgba(180,190,220,0.25)" }}>© 2026 · Interview smarter, land faster.</span>
       </footer>
