@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import Script from "next/script";
+import FloatingChatWrapper from "@/components/FloatingChatWrapper";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-body", display: "swap" });
@@ -64,6 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div style={{ position: "relative", zIndex: 2 }}>
           {children}
         </div>
+        <FloatingChatWrapper />
         <Script defer data-site="aicoachlab.app" src="http://31.97.56.148:3098/t.js" strategy="afterInteractive" />
       </body>
     </html>
