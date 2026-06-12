@@ -10,6 +10,7 @@
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
     "@stripe/stripe-js": "^9.5.0",
+    "@vercel/edge-config": "^1.4.3",
     "animejs": "^4.4.1",
     "framer-motion": "^12.38.0",
     "groq-sdk": "^1.2.0",
