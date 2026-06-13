@@ -1,11 +1,16 @@
-import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
-import Script from "next/script";
-import FloatingChatWrapper from "@/components/FloatingChatWrapper";
-import "./globals.css";
+import type { Metadata } from "next"
+import { Inter, Space_Grotesk } from "next/font/google"
+import Script from "next/script"
+import FloatingChatWrapper from "@/components/FloatingChatWrapper"
+import FeedbackWidget from "@/components/FeedbackWidget"
+import BackToTop from "@/components/BackToTop"
+import CookieConsent from "../components/CookieConsent"
+import StickyFooterCTA from "../components/StickyFooterCTA"
+import "./globals.css"
+import { loadSiteTheme, buildThemeStyleTag, isWidgetHidden } from "@/lib/theme-loader"
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-body", display: "swap" });
-const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-display", display: "swap", weight: ["600", "700"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-body", display: "swap" })
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-display", display: "swap", weight: ["600", "700"] })
 
 export const metadata: Metadata = {
   title: "AICoachLab — Build Real AI Projects, Not Just Theory",
@@ -27,12 +32,21 @@ export const metadata: Metadata = {
     images: ["https://aicoachlab.app/og.png"],
   },
   robots: { index: true, follow: true },
-};
+}
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const theme = await loadSiteTheme("aicoachlab")
+
+  const themeCSS = buildThemeStyleTag(theme, {
+    background: '#04070f',
+    primary: '#6366f1',
+    secondary: '#818cf8',
+  })
+
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <head>
+        <meta name="google-adsense-account" content="ca-pub-4237294630161176" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify([
           {
             "@context": "https://schema.org",
@@ -40,10 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             "name": "AICoachLab",
             "url": "https://aicoachlab.app",
             "description": "Hands-on AI engineering coaching — build real RAG pipelines, MCP servers, and AI agents.",
-            "potentialAction": {
-              "@type": "SearchAction",
-              "target": "https://aicoachlab.app?q={search_term_string}"
-            }
+            "potentialAction": { "@type": "SearchAction", "target": "https://aicoachlab.app?q={search_term_string}" }
           },
           {
             "@context": "https://schema.org",
@@ -56,8 +67,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
           }
         ])}} />
+        <style dangerouslySetInnerHTML={{ __html: `
+          :root {
+            --theme-primary: #6366f1;
+            --theme-secondary: #818cf8;
+            --theme-base: #04070f;
+            --background: #04070f;
+            --surface-1: #090c18;
+            --surface-2: #0f1225;
+            --foreground: #f0f4ff;
+            --text-2: #a5b4fc;
+            --border-default: rgba(99,102,241,0.15);
+            --border-strong: rgba(99,102,241,0.3);
+          }
+          body { font-family: var(--font-body, system-ui) !important; color: #f0f4ff; background: #04070f; }
+          h1, h2, h3, .display { font-family: var(--font-display, system-ui) !important; letter-spacing: -0.03em; }
+          .glass { background: rgba(4,7,15,0.7) !important; border-color: rgba(99,102,241,0.12) !important; }
+          ${themeCSS}
+        ` }} />
       </head>
-      <body style={{ background: "#04070f", color: "#f0f4ff", fontFamily: "var(--font-body, system-ui)", margin: 0 }}>
+      <body style={{ background: "#04070f", color: "#f0f4ff", margin: 0 }}>
         <div className="aurora aurora-primary" aria-hidden />
         <div className="aurora aurora-secondary" aria-hidden />
         <div className="aurora aurora-third" aria-hidden />
@@ -65,9 +94,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div style={{ position: "relative", zIndex: 2 }}>
           {children}
         </div>
-        <FloatingChatWrapper />
+        {!isWidgetHidden(theme, 'chatbot') && <FloatingChatWrapper />}
+        {!isWidgetHidden(theme, 'backToTop') && <BackToTop accentColor="#6366f1" />}
+        {!isWidgetHidden(theme, 'cookieConsent') && <CookieConsent />}
+        {!isWidgetHidden(theme, 'stickyFooterCTA') && <StickyFooterCTA />}
         <Script defer data-site="aicoachlab.app" src="http://31.97.56.148:3098/t.js" strategy="afterInteractive" />
+        <FeedbackWidget siteName="AICoachLab" accentColor="#0ea5e9" position="left" />
       </body>
     </html>
-  );
+  )
 }
