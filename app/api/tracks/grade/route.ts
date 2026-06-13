@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getExercise } from '@/lib/tracks/exercises'
+import { AI_LIMITER } from '@/lib/rateLimit'
 
 export const runtime = 'nodejs'
 
@@ -35,6 +36,7 @@ async function callAI(messages: { role: string; content: string }[], maxTokens =
 }
 
 export async function POST(req: NextRequest) {
+  const limited = AI_LIMITER.check(req); if (limited) return limited
   try {
     const { trackId, slug, answer } = await req.json()
     const exercise = getExercise(trackId, slug)

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { AI_LIMITER } from '@/lib/rateLimit'
 
 export const runtime = 'nodejs'
 
@@ -59,6 +60,7 @@ async function tryGemini(messages: ChatMessage[]): Promise<string | null> {
 }
 
 export async function POST(req: NextRequest) {
+  const limited = AI_LIMITER.check(req); if (limited) return limited
   try {
     const { messages, systemPrompt } = await req.json()
     const chatMessages: ChatMessage[] = [

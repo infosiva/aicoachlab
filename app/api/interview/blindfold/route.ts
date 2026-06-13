@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { AI_LIMITER } from '@/lib/rateLimit'
 import Groq from 'groq-sdk'
 
 let _g: Groq | null = null
 function groq() { if (!_g) _g = new Groq({ apiKey: process.env.GROQ_API_KEY! }); return _g }
 
 export async function POST(req: NextRequest) {
+  const limited = AI_LIMITER.check(req); if (limited) return limited
   const { action, role, personaPrompt, answer, question, conversationHistory } = await req.json()
 
   if (action === 'question') {

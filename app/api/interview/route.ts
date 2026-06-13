@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { AI_LIMITER } from '@/lib/rateLimit'
 
 export const runtime = 'nodejs'
 
@@ -96,6 +97,7 @@ async function callAI(messages: { role: string; content: string }[], maxTokens =
 // POST /api/interview
 // action: "question" | "grade"
 export async function POST(req: NextRequest) {
+  const limited = AI_LIMITER.check(req); if (limited) return limited
   try {
     const body = await req.json()
     const { action, role = 'swe', questionIndex = 0, answer = '', history = [] } = body
