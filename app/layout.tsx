@@ -38,9 +38,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const theme = await loadSiteTheme("aicoachlab")
 
   const themeCSS = buildThemeStyleTag(theme, {
-    background: '#04070f',
-    primary: '#6366f1',
-    secondary: '#818cf8',
+    background: '#fff7ed',
+    primary: '#ea580c',
+    secondary: '#c2410c',
   })
 
   return (
@@ -69,24 +69,19 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         ])}} />
         <style dangerouslySetInnerHTML={{ __html: `
           :root {
-            --theme-primary: #6366f1;
-            --theme-secondary: #818cf8;
-            --theme-base: #04070f;
-            --background: #04070f;
-            --surface-1: #090c18;
-            --surface-2: #0f1225;
-            --foreground: #f0f4ff;
-            --text-2: #a5b4fc;
-            --border-default: rgba(99,102,241,0.15);
-            --border-strong: rgba(99,102,241,0.3);
+            --background: #fff7ed;
+            --surface-1: #ffffff;
+            --surface-2: #fff7ed;
+            --foreground: #0f172a;
+            --accent: #ea580c;
+            --accent-2: #c2410c;
+            --border: #fed7aa;
           }
-          body { font-family: var(--font-body, system-ui) !important; color: #f0f4ff; background: #04070f; }
+          body { font-family: var(--font-body, system-ui) !important; color: #0f172a; background: var(--background, #fff7ed); -webkit-font-smoothing: antialiased; }
           h1, h2, h3, .display { font-family: var(--font-display, system-ui) !important; letter-spacing: -0.03em; }
-          .glass { background: rgba(4,7,15,0.7) !important; border-color: rgba(99,102,241,0.12) !important; }
-          ${themeCSS}
         ` }} />
       </head>
-      <body style={{ background: "#04070f", color: "#f0f4ff", margin: 0 }}>
+      <body style={{ background: "var(--background, #fff7ed)", color: "#0f172a", margin: 0 }}>
         <div className="aurora aurora-primary" aria-hidden />
         <div className="aurora aurora-secondary" aria-hidden />
         <div className="aurora aurora-third" aria-hidden />
@@ -95,11 +90,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           {children}
         </div>
         {!isWidgetHidden(theme, 'chatbot') && <FloatingChatWrapper />}
-        {!isWidgetHidden(theme, 'backToTop') && <BackToTop accentColor="#6366f1" />}
+        {!isWidgetHidden(theme, 'backToTop') && <BackToTop accentColor="#ea580c" />}
         {!isWidgetHidden(theme, 'cookieConsent') && <CookieConsent />}
         {!isWidgetHidden(theme, 'stickyFooterCTA') && <StickyFooterCTA />}
         <Script defer data-site="aicoachlab.app" src="http://31.97.56.148:3098/t.js" strategy="afterInteractive" />
-        <FeedbackWidget siteName="AICoachLab" accentColor="#0ea5e9" position="left" />
+        <FeedbackWidget siteName="AICoachLab" accentColor="#ea580c" position="left" />
       </body>
     </html>
   )

@@ -317,7 +317,7 @@ export default function AICoachLabPage({ showPricing = true }: { showPricing?: b
       <div style={{ position: "fixed", bottom: -100, left: -60, width: 360, height: 360, borderRadius: "50%", background: "radial-gradient(circle, rgba(249,115,22,0.05) 0%, transparent 70%)", pointerEvents: "none", zIndex: 0 }} />
 
       {/* ── NAV ──────────────────────────────────────────────────────── */}
-      <nav style={{ position: "sticky", top: 0, zIndex: 50, background: "rgba(255,255,255,0.85)", backdropFilter: "blur(16px)", borderBottom: "1px solid #f1f5f9", padding: "0 clamp(16px,4vw,32px)" }}>
+      <nav style={{ position: "sticky", top: 0, zIndex: 50, background: "rgba(255,247,237,0.9)", backdropFilter: "blur(16px)", borderBottom: "1px solid #fed7aa", padding: "0 clamp(16px,4vw,32px)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", height: 56, gap: 32 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <div style={{ width: 30, height: 30, borderRadius: 8, background: `linear-gradient(135deg,${ACCENT},${ACCENT2})`, display: "grid", placeItems: "center", flexShrink: 0 }}>
@@ -350,7 +350,7 @@ export default function AICoachLabPage({ showPricing = true }: { showPricing?: b
                 <span style={{ fontSize: 12, fontWeight: 600, color: ACCENT }}>AI-Powered Mock Interviews</span>
               </motion.div>
 
-              <motion.h1 {...fadeUp(0.06)} style={{ fontSize: "clamp(2rem,5vw,3.2rem)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 1.1, margin: 0, color: "#0f172a" }}>
+              <motion.h1 initial={{ opacity: 1, y: 0 }} style={{ fontSize: "clamp(2rem,5vw,3.2rem)", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 1.1, margin: 0, color: "#0f172a" }}>
                 Land the job you{" "}
                 <span style={{ background: `linear-gradient(120deg,${ACCENT},${ACCENT2})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                   deserve.

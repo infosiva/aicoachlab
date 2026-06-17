@@ -1,35 +1,37 @@
 @import "tailwindcss";
 
 :root {
-  --bg:         #fff7ed;
-  --bg-2:       #ffffff;
-  --surface:    #ffffff;
-  --surface-2:  #fef3c7;
-  --border:     #fed7aa;
-  --border-2:   #fdba74;
-  --text:       #0f172a;
-  --text-2:     #475569;
-  --text-3:     #64748b;
+  --background:  #fff7ed;
+  --bg:          #fff7ed;
+  --bg-2:        #ffffff;
+  --surface:     #ffffff;
+  --surface-1:   #ffffff;
+  --surface-2:   #fff7ed;
+  --border:      #fed7aa;
+  --border-2:    #fdba74;
+  --text:        #0f172a;
+  --text-2:      #475569;
+  --text-3:      #64748b;
   /* accent = orange (career/coaching category) */
-  --accent:     #ea580c;
-  --accent-2:   #c2410c;
-  --accent-dim: rgba(234,88,12,0.10);
+  --accent:      #ea580c;
+  --accent-2:    #c2410c;
+  --accent-dim:  rgba(234,88,12,0.10);
   --accent-glow: rgba(234,88,12,0.25);
   /* legacy aliases (keep for component compatibility) */
-  --violet:     #ea580c;
-  --violet-2:   #c2410c;
-  --violet-dim: rgba(234,88,12,0.10);
+  --violet:      #ea580c;
+  --violet-2:    #c2410c;
+  --violet-dim:  rgba(234,88,12,0.10);
   --violet-glow: rgba(234,88,12,0.25);
-  --amber:      #f59e0b;
-  --amber-2:    #fbbf24;
-  --green:      #10b981;
-  --red:        #ef4444;
-  --ease:       cubic-bezier(0.23, 1, 0.32, 1);
+  --amber:       #f59e0b;
+  --amber-2:     #fbbf24;
+  --green:       #10b981;
+  --red:         #ef4444;
+  --ease:        cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 html, body { overflow-x: hidden; max-width: 100%; }
-body { -webkit-font-smoothing: antialiased; background: var(--bg); color: var(--text); }
+body { background: var(--background); color: #0f172a; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
 img, video { max-width: 100%; }
 * { -webkit-tap-highlight-color: transparent; }
 
