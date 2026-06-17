@@ -319,9 +319,14 @@ export default function AICoachLabPage({ showPricing = true }: { showPricing?: b
       {/* ── NAV ──────────────────────────────────────────────────────── */}
       <nav style={{ position: "sticky", top: 0, zIndex: 50, background: "rgba(255,255,255,0.85)", backdropFilter: "blur(16px)", borderBottom: "1px solid #f1f5f9", padding: "0 clamp(16px,4vw,32px)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", height: 56, gap: 32 }}>
-          <span style={{ fontWeight: 900, fontSize: 17, letterSpacing: "-0.03em", color: "#0f172a" }}>
-            AI<span style={{ color: ACCENT }}>Coach</span>Lab
-          </span>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <div style={{ width: 30, height: 30, borderRadius: 8, background: `linear-gradient(135deg,${ACCENT},${ACCENT2})`, display: "grid", placeItems: "center", flexShrink: 0 }}>
+              <BrainCircuit size={16} color="#fff" />
+            </div>
+            <span style={{ fontWeight: 900, fontSize: 17, letterSpacing: "-0.03em", color: "#0f172a" }}>
+              AI<span style={{ color: ACCENT }}>Coach</span>Lab
+            </span>
+          </div>
           <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 20 }}>
             <a href="#features" style={{ fontSize: 13, color: "#64748b", textDecoration: "none", fontWeight: 500 }}>Features</a>
             <a href="#pricing" style={{ fontSize: 13, color: "#64748b", textDecoration: "none", fontWeight: 500 }}>Pricing</a>
