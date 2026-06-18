@@ -4,6 +4,7 @@
 
 import { useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import LiveStatsBar from "@/components/LiveStatsBar";
 import { BrainCircuit, ArrowRight, Send, X, Bot, CheckCircle, Mic, MicOff } from "lucide-react";
 
 const ACCENT = "#f97316";
@@ -304,6 +305,44 @@ function Chatbot() {
   );
 }
 
+// ── Promo code inline ───────────────────────────────────────────────────────
+function PromoCodeInline({ accentColor }: { accentColor: string }) {
+  const [open, setOpen] = useState(false)
+  const [code, setCode] = useState('')
+  const [state, setState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [msg, setMsg] = useState('')
+
+  async function apply() {
+    if (!code.trim()) return
+    setState('loading')
+    try {
+      const res = await fetch('/api/promo', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code }) })
+      const data = await res.json()
+      if (data.valid) { setState('success'); setMsg(`Pro unlocked for ${data.daysUnlocked} days!`) }
+      else { setState('error'); setMsg(data.message || 'Invalid code') }
+    } catch { setState('error'); setMsg('Something went wrong') }
+  }
+
+  if (!open) return (
+    <button onClick={() => setOpen(true)} style={{ fontSize: 12, color: '#94a3b8', background: 'none', border: 'none', cursor: 'pointer', padding: 0, marginTop: 4 }}>
+      Have a promo code?
+    </button>
+  )
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 4 }}>
+      <div style={{ display: 'flex', gap: 6 }}>
+        <input value={code} onChange={e => setCode(e.target.value)} onKeyDown={e => e.key === 'Enter' && apply()}
+          placeholder="Enter code" style={{ flex: 1, maxWidth: 140, padding: '6px 10px', borderRadius: 8, border: '1px solid #e2e8f0', fontSize: 12, outline: 'none' }} />
+        <button onClick={apply} disabled={state === 'loading'}
+          style={{ padding: '6px 12px', borderRadius: 8, background: accentColor, color: '#fff', fontSize: 12, fontWeight: 700, border: 'none', cursor: 'pointer' }}>
+          {state === 'loading' ? '…' : 'Apply'}
+        </button>
+      </div>
+      {msg && <p style={{ fontSize: 12, margin: 0, color: state === 'success' ? '#10b981' : '#ef4444', fontWeight: 600 }}>{msg}</p>}
+    </div>
+  )
+}
+
 // ── Main page ───────────────────────────────────────────────────────────────
 export default function AICoachLabPage({ showPricing = true }: { showPricing?: boolean }) {
   const [activeRole, setActiveRole] = useState(0);
@@ -405,6 +444,7 @@ export default function AICoachLabPage({ showPricing = true }: { showPricing?: b
                 </motion.a>
                 <span className="acl-cta-note" style={{ fontSize: 12, color: "#94a3b8", fontWeight: 500 }}>✓ No signup · 3 sessions/day free</span>
               </motion.div>
+              <PromoCodeInline accentColor={ACCENT} />
             </motion.div>
 
             {/* Right: chat mockup */}
@@ -414,6 +454,8 @@ export default function AICoachLabPage({ showPricing = true }: { showPricing?: b
           </div>
         </div>
       </section>
+
+      <LiveStatsBar />
 
       {/* ── SECTION 2: 3-COL FEATURES ──────────────────────────────── */}
       <div id="features" style={{ position: "relative", zIndex: 1, borderTop: "1px solid #f1f5f9", padding: "24px clamp(16px,4vw,32px)" }}>
