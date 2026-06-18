@@ -457,6 +457,36 @@ export default function AICoachLabPage({ showPricing = true }: { showPricing?: b
 
       <LiveStatsBar />
 
+      {/* ── HOW IT WORKS ──────────────────────────────────────────── */}
+      <div id="how-it-works" style={{ position: "relative", zIndex: 1, borderTop: "1px solid #f1f5f9", padding: "32px clamp(16px,4vw,32px)" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: 28 }}>
+            <h2 style={{ fontSize: "clamp(1.2rem,2.5vw,1.7rem)", fontWeight: 800, letterSpacing: "-0.03em", margin: "0 0 6px", color: "#0f172a" }}>
+              Ready in 3 steps
+            </h2>
+            <p style={{ fontSize: 13, color: "#94a3b8", margin: 0 }}>From picking a role to real-time coaching in under a minute</p>
+          </div>
+          <div className="acl-feature-grid">
+            {[
+              { n: "01", icon: "🎯", title: "Pick your role", desc: "Software engineer, PM, designer — choose what you're interviewing for." },
+              { n: "02", icon: "🎙️", title: "Answer live", desc: "AI asks real interview questions. Speak or type your answer naturally." },
+              { n: "03", icon: "📈", title: "Get instant coaching", desc: "Real-time feedback on clarity, structure, and delivery — improve every round." },
+            ].map((s, i) => (
+              <motion.div key={s.n}
+                initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.4, ease }}
+                style={{ padding: "20px 22px", borderRadius: 14, background: "#fff", border: "1px solid #e2e8f0", boxShadow: "0 2px 8px rgba(0,0,0,0.04)", textAlign: "center" }}
+              >
+                <div style={{ fontSize: 24, marginBottom: 8 }}>{s.icon}</div>
+                <div style={{ fontSize: 11, fontWeight: 800, color: ACCENT, letterSpacing: "0.05em", marginBottom: 4 }}>{s.n}</div>
+                <h3 style={{ fontSize: 14, fontWeight: 800, color: "#0f172a", margin: "0 0 6px" }}>{s.title}</h3>
+                <p style={{ fontSize: 12, color: "#64748b", lineHeight: 1.55, margin: 0 }}>{s.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* ── SECTION 2: 3-COL FEATURES ──────────────────────────────── */}
       <div id="features" style={{ position: "relative", zIndex: 1, borderTop: "1px solid #f1f5f9", padding: "24px clamp(16px,4vw,32px)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
