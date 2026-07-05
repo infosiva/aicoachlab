@@ -165,8 +165,8 @@ function ChatMockup({ role }: { role: typeof ROLES[number] }) {
         </div>
 
         {/* AI feedback badge */}
-        <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "8px 12px", borderRadius: 10, background: "rgba(16,185,129,0.06)", border: "1px solid rgba(16,185,129,0.15)", fontSize: 11, color: "#475569" }}>
-          <span style={{ color: "#10b981", fontWeight: 700 }}>+12pts</span> Strong use of STAR structure. Add complexity analysis.
+        <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "8px 12px", borderRadius: 10, background: "rgba(16,185,129,0.15)", border: "1px solid rgba(16,185,129,0.30)", fontSize: 11, color: "#334155" }}>
+          <span style={{ color: "#059669", fontWeight: 700 }}>+12pts</span> Strong use of STAR structure. Add complexity analysis.
         </div>
       </div>
 
@@ -410,8 +410,8 @@ export default function AICoachLabPage({ showPricing = true }: { showPricing?: b
                       display: "inline-flex", alignItems: "center", gap: 5, padding: "6px 13px",
                       borderRadius: 999, fontSize: 12, fontWeight: 500, cursor: "pointer",
                       border: `1px solid ${i === activeRole ? r.color : "#e2e8f0"}`,
-                      background: i === activeRole ? `${r.color}12` : "#fff",
-                      color: i === activeRole ? r.color : "#64748b",
+                      background: i === activeRole ? `${r.color}22` : "#fff",
+                      color: i === activeRole ? "#0f172a" : "#64748b",
                       transition: "border-color 0.18s, background 0.18s, color 0.18s",
                       whiteSpace: "nowrap",
                     }}>
@@ -425,7 +425,7 @@ export default function AICoachLabPage({ showPricing = true }: { showPricing?: b
                 <motion.div key={activeRole}
                   initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 8 }}
                   transition={{ duration: 0.25, ease }}
-                  style={{ padding: "12px 14px", borderRadius: 10, background: `${role.color}08`, border: `1px solid ${role.color}22` }}
+                  style={{ padding: "12px 14px", borderRadius: 10, background: `${role.color}18`, border: `1px solid ${role.color}44` }}
                 >
                   <p style={{ fontSize: 11, fontWeight: 700, color: role.color, margin: "0 0 4px", letterSpacing: "0.04em", textTransform: "uppercase" }}>
                     Sample question
