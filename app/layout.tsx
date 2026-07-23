@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import { Inter, Space_Grotesk } from "next/font/google"
-import Script from "next/script"
 import FloatingChatWrapper from "@/components/FloatingChatWrapper"
 import FeedbackWidget from "@/components/FeedbackWidget"
 import BackToTop from "@/components/BackToTop"
@@ -93,7 +92,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {!isWidgetHidden(theme, 'backToTop') && <BackToTop accentColor="#ea580c" />}
         {!isWidgetHidden(theme, 'cookieConsent') && <CookieConsent />}
         {!isWidgetHidden(theme, 'stickyFooterCTA') && <StickyFooterCTA />}
-        <Script defer data-site="aicoachlab.app" src="http://31.97.56.148:3098/t.js" strategy="afterInteractive" />
         <FeedbackWidget siteName="AICoachLab" accentColor="#ea580c" position="left" />
       </body>
     </html>
