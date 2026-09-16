@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Script from 'next/script'
 import { Inter, Space_Grotesk } from "next/font/google"
 import FloatingChatWrapper from "@/components/FloatingChatWrapper"
 import FeedbackWidget from "@/components/FeedbackWidget"
@@ -46,6 +47,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <head>
         <meta name="google-adsense-account" content="ca-pub-4237294630161176" />
+        <Script
+                  async
+                  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4237294630161176"
+                  crossOrigin="anonymous"
+                  strategy="afterInteractive"
+                />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify([
           {
             "@context": "https://schema.org",
