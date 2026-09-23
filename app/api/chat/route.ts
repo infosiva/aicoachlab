@@ -16,7 +16,7 @@ async function tryGroq(messages: ChatMessage[]): Promise<string | null> {
     const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${GROQ_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'llama-3.1-8b-instant', messages, max_tokens: 300, temperature: 0.7 }),
+      body: JSON.stringify({ model: 'qwen/qwen3.8-27b', messages, max_tokens: 300, temperature: 0.7 }),
     })
     if (!res.ok) return null
     const data = await res.json()
