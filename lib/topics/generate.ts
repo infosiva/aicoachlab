@@ -73,7 +73,7 @@ async function generateWithGroq(userTopic: string): Promise<string | null> {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${GROQ_KEY}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
+        model: 'qwen/qwen3.8-27b',
         max_tokens: 8000,
         temperature: 0.3,
         response_format: { type: 'json_object' },

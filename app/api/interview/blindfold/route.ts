@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
 
   if (action === 'question') {
     const res = await groq().chat.completions.create({
-      model: 'llama-3.3-70b-versatile',
+      model: 'qwen/qwen3.8-27b',
       messages: [
         { role: 'system', content: `${personaPrompt}\n\nYou are interviewing for a ${role} role. Ask ONE opening interview question. Keep it under 40 words. No preamble — just the question.` },
         { role: 'user', content: 'Start the interview.' },
@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
       { role: 'user' as const, content: answer },
     ]
     const res = await groq().chat.completions.create({
-      model: 'llama-3.3-70b-versatile',
+      model: 'qwen/qwen3.8-27b',
       messages,
       max_tokens: 150,
       temperature: 0.85,
@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
 
   if (action === 'grade') {
     const res = await groq().chat.completions.create({
-      model: 'llama-3.3-70b-versatile',
+      model: 'qwen/qwen3.8-27b',
       messages: [
         { role: 'system', content: 'You are an expert interview coach. Evaluate the candidate\'s performance in JSON format.' },
         {

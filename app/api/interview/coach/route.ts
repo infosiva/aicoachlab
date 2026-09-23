@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
 
   if (action === 'interrupt') {
     const res = await groq().chat.completions.create({
-      model: 'llama-3.3-70b-versatile',
+      model: 'qwen/qwen3.8-27b',
       messages: [
         {
           role: 'system',
@@ -63,7 +63,7 @@ Examples:
 
   if (action === 'fullgrade') {
     const res = await groq().chat.completions.create({
-      model: 'llama-3.3-70b-versatile',
+      model: 'qwen/qwen3.8-27b',
       messages: [
         { role: 'system', content: 'You are an expert interview coach. Grade this interview session in JSON.' },
         {

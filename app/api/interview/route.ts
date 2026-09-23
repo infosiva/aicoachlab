@@ -71,7 +71,7 @@ async function callGroq(messages: { role: string; content: string }[], maxTokens
   const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${GROQ_KEY}` },
-    body: JSON.stringify({ model: 'llama-3.3-70b-versatile', max_tokens: maxTokens, messages }),
+    body: JSON.stringify({ model: 'qwen/qwen3.8-27b', max_tokens: maxTokens, messages }),
   })
   const d = await res.json()
   return d.choices?.[0]?.message?.content?.trim() ?? ''
