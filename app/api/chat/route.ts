@@ -48,7 +48,7 @@ async function tryGemini(messages: ChatMessage[]): Promise<string | null> {
     }))
     const body: Record<string, unknown> = { contents: convo }
     if (systemMsg) body.systemInstruction = { parts: [{ text: systemMsg.content }] }
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`, {
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${GEMINI_KEY}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
