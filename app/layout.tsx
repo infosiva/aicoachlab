@@ -100,6 +100,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {!isWidgetHidden(theme, 'cookieConsent') && <CookieConsent />}
         {!isWidgetHidden(theme, 'stickyFooterCTA') && <StickyFooterCTA />}
         <FeedbackWidget siteName="AICoachLab" accentColor="#ea580c" position="left" />
+        <Script defer data-domain="aicoachlab.app" src="https://plausible.io/js/script.js" strategy="afterInteractive" />
       </body>
     </html>
   )
