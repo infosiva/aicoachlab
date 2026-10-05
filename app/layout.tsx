@@ -9,6 +9,7 @@ import StickyFooterCTA from "../components/StickyFooterCTA"
 import "./globals.css"
 import { loadSiteTheme, buildThemeStyleTag, isWidgetHidden } from "@/lib/theme-loader"
 
+import { MotionProvider } from "@infosiva/shared-ui/modern";
 const inter = Inter({ subsets: ["latin"], variable: "--font-body", display: "swap" })
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-display", display: "swap", weight: ["600", "700"] })
 
@@ -93,7 +94,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <div className="aurora aurora-third" aria-hidden />
         <div className="grain" aria-hidden />
         <div style={{ position: "relative", zIndex: 2 }}>
-          {children}
+          <MotionProvider>{children}</MotionProvider>
         </div>
         {!isWidgetHidden(theme, 'chatbot') && <FloatingChatWrapper />}
         {!isWidgetHidden(theme, 'backToTop') && <BackToTop accentColor="#ea580c" />}

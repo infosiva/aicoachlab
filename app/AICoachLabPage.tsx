@@ -2,6 +2,7 @@
 // Light theme redesign — #f8fafc bg, #f97316 orange accent, white cards
 // Sections: Navbar | Hero (split ~70vh) | Role tabs | 3-col features | 2-card pricing | Footer
 
+import { MagneticButton } from '@infosiva/shared-ui/modern';
 import { useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import LiveStatsBar from "@/components/LiveStatsBar";
@@ -369,10 +370,9 @@ export default function AICoachLabPage({ showPricing = true }: { showPricing?: b
           <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 20 }}>
             <a href="#features" style={{ fontSize: 13, color: "#64748b", textDecoration: "none", fontWeight: 500 }}>Features</a>
             <a href="#pricing" style={{ fontSize: 13, color: "#64748b", textDecoration: "none", fontWeight: 500 }}>Pricing</a>
-            <motion.a href="/interview" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
-              style={{ padding: "7px 16px", borderRadius: 8, background: ACCENT, color: "#fff", fontSize: 13, fontWeight: 700, textDecoration: "none", boxShadow: "0 2px 8px rgba(249,115,22,0.3)" }}>
+            <a href="/interview" style={{ textDecoration: "none" }}><MagneticButton style={{ padding: "7px 16px", borderRadius: 8, background: ACCENT, color: "#fff", fontSize: 13, fontWeight: 700, border: 0, cursor: "pointer", boxShadow: "0 2px 8px rgba(249,115,22,0.3)" }}>
               Try free
-            </motion.a>
+            </MagneticButton></a>
           </div>
         </div>
       </nav>
