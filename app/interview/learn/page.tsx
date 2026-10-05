@@ -67,33 +67,29 @@ export default function ConceptCinemaPage() {
   const currentStep = script?.steps[stepIndex] ?? null
 
   return (
-    <div style={{ minHeight: '100dvh', background: '#040408', color: '#f0f4ff',
+    <div style={{ minHeight: '100dvh', background: '#fff7ed', color: '#0f172a',
       fontFamily: 'var(--font-body, system-ui)', position: 'relative', overflow: 'hidden' }}>
 
       {/* Atmosphere */}
       <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
         <div style={{ position: 'absolute', top: '-15%', left: '30%',
           width: 600, height: 500, borderRadius: '50%',
-          background: 'radial-gradient(ellipse, rgba(249,115,22,0.15) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse, rgba(236,19,214,0.12) 0%, transparent 70%)',
           filter: 'blur(80px)' }} />
         <div style={{ position: 'absolute', bottom: '-10%', right: '20%',
           width: 400, height: 400, borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(234,88,12,0.1) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(234,88,12,0.08) 0%, transparent 70%)',
           filter: 'blur(80px)' }} />
-        <div style={{ position: 'absolute', inset: 0,
-          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px)',
-          backgroundSize: '28px 28px',
-          maskImage: 'radial-gradient(ellipse 80% 50% at 50% 10%, black, transparent)' }} />
       </div>
 
       {/* Header */}
       <div style={{ position: 'relative', zIndex: 10, padding: '16px 20px',
-        borderBottom: '1px solid rgba(255,255,255,0.06)',
+        borderBottom: '1px solid rgba(236,19,214,0.12)',
         display: 'flex', alignItems: 'center', gap: 12,
-        backdropFilter: 'blur(16px)', background: 'rgba(4,4,8,0.7)' }}>
+        backdropFilter: 'blur(16px)', background: 'rgba(255,247,237,0.85)' }}>
         <motion.button onClick={() => router.push('/interview')}
           whileHover={{ x: -3 }} whileTap={{ scale: 0.94 }}
-          style={{ background: 'transparent', border: 'none', color: 'rgba(255,255,255,0.35)', cursor: 'pointer', fontSize: 13 }}>
+          style={{ background: 'transparent', border: 'none', color: '#64748b', cursor: 'pointer', fontSize: 13 }}>
           ← Back
         </motion.button>
         <div style={{ flex: 1, textAlign: 'center', fontSize: 15, fontWeight: 800, letterSpacing: '-0.02em' }}>
@@ -102,9 +98,9 @@ export default function ConceptCinemaPage() {
         <AnimatePresence>
           {playing && (
             <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }}
-              style={{ fontSize: 11, color: '#f97316', fontWeight: 700,
-                background: 'rgba(249,115,22,0.12)', padding: '3px 10px', borderRadius: 99,
-                border: '1px solid rgba(249,115,22,0.25)' }}>
+              style={{ fontSize: 11, color: '#ec13d6', fontWeight: 700,
+                background: 'rgba(236,19,214,0.12)', padding: '3px 10px', borderRadius: 99,
+                border: '1px solid rgba(236,19,214,0.25)' }}>
               ● Narrating
             </motion.div>
           )}
@@ -124,21 +120,21 @@ export default function ConceptCinemaPage() {
               onChange={e => setInput(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && explain(input)}
               placeholder="Type any CS or interview concept…"
-              style={{ width: '100%', background: 'rgba(255,255,255,0.04)',
-                border: '1px solid rgba(255,255,255,0.1)',
-                borderRadius: 14, padding: '14px 18px', color: '#f0f4ff', fontSize: 15, outline: 'none',
-                boxSizing: 'border-box', transition: 'border-color 0.2s' }}
-              onFocus={e => (e.target.style.borderColor = 'rgba(249,115,22,0.4)')}
-              onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.1)')}
+              style={{ width: '100%', background: '#fff',
+                border: '1px solid rgba(236,19,214,0.25)',
+                borderRadius: 14, padding: '14px 18px', color: '#0f172a', fontSize: 15, outline: 'none',
+                boxSizing: 'border-box', transition: 'border-color 0.2s', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}
+              onFocus={e => (e.target.style.borderColor = 'rgba(236,19,214,0.5)')}
+              onBlur={e => (e.target.style.borderColor = 'rgba(236,19,214,0.25)')}
             />
           </div>
           <motion.button onClick={() => explain(input)} disabled={loading}
-            whileHover={{ scale: 1.04, boxShadow: '0 0 28px rgba(249,115,22,0.4)' }}
+            whileHover={{ scale: 1.04, boxShadow: '0 0 28px rgba(236,19,214,0.4)' }}
             whileTap={{ scale: 0.95 }}
             style={{ padding: '14px 22px', borderRadius: 14, border: 'none', cursor: 'pointer',
-              background: loading ? 'rgba(249,115,22,0.25)' : 'linear-gradient(135deg, #f97316, #ea580c)',
+              background: loading ? 'rgba(236,19,214,0.25)' : 'linear-gradient(135deg, #ec13d6, #a30d94)',
               color: '#fff', fontSize: 14, fontWeight: 700, whiteSpace: 'nowrap',
-              boxShadow: loading ? 'none' : '0 0 20px rgba(249,115,22,0.3)',
+              boxShadow: loading ? 'none' : '0 0 20px rgba(236,19,214,0.3)',
               transition: 'all 0.3s', flexShrink: 0 }}>
             {loading ? '⏳' : '▶ Explain'}
           </motion.button>
@@ -154,11 +150,11 @@ export default function ConceptCinemaPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.05 * i }}
                 onClick={() => { setInput(s.label); explain(s.label) }}
-                whileHover={{ scale: 1.05, borderColor: 'rgba(249,115,22,0.4)' }}
+                whileHover={{ scale: 1.05, borderColor: 'rgba(236,19,214,0.4)' }}
                 whileTap={{ scale: 0.95 }}
                 style={{ padding: '7px 13px', borderRadius: 99,
-                  border: '1px solid rgba(249,115,22,0.2)',
-                  background: 'rgba(249,115,22,0.07)', color: 'rgba(255,255,255,0.55)',
+                  border: '1px solid rgba(236,19,214,0.2)',
+                  background: 'rgba(236,19,214,0.08)', color: '#9a3412',
                   fontSize: 12, cursor: 'pointer', fontWeight: 500,
                   display: 'flex', alignItems: 'center', gap: 5 }}>
                 <span>{s.emoji}</span> {s.label}
@@ -176,20 +172,20 @@ export default function ConceptCinemaPage() {
                 animate={{ rotate: 360 }}
                 transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
                 style={{ fontSize: 56, display: 'inline-block', marginBottom: 20,
-                  filter: 'drop-shadow(0 0 20px rgba(249,115,22,0.6))' }}>
+                  filter: 'drop-shadow(0 0 20px rgba(236,19,214,0.6))' }}>
                 🎬
               </motion.div>
               <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1.5, repeat: Infinity }}
-                style={{ color: 'rgba(255,255,255,0.4)', fontSize: 14, letterSpacing: '0.06em' }}>
+                style={{ color: '#64748b', fontSize: 14, letterSpacing: '0.06em' }}>
                 Generating visual explanation…
               </motion.div>
               <div style={{ display: 'flex', gap: 8, justifyContent: 'center', marginTop: 20 }}>
                 {['Parsing concept', 'Building nodes', 'Writing narration', 'Scripting animation'].map((s, i) => (
                   <motion.div key={s}
                     initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.4 }}
-                    style={{ fontSize: 10, color: 'rgba(249,115,22,0.6)', padding: '3px 10px',
-                      background: 'rgba(249,115,22,0.08)', borderRadius: 99,
-                      border: '1px solid rgba(249,115,22,0.15)' }}>
+                    style={{ fontSize: 10, color: 'rgba(236,19,214,0.6)', padding: '3px 10px',
+                      background: 'rgba(236,19,214,0.08)', borderRadius: 99,
+                      border: '1px solid rgba(236,19,214,0.15)' }}>
                     {s}
                   </motion.div>
                 ))}
@@ -207,19 +203,19 @@ export default function ConceptCinemaPage() {
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                 marginBottom: 20, flexWrap: 'wrap', gap: 10 }}>
                 <h2 style={{ fontSize: 'clamp(1.2rem, 3vw, 1.6rem)', fontWeight: 800, margin: 0,
-                  letterSpacing: '-0.03em', background: 'linear-gradient(135deg, #f0f4ff, #f97316)',
+                  letterSpacing: '-0.03em', background: 'linear-gradient(135deg, #0f172a, #ec13d6)',
                   WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                   {script.title}
                 </h2>
-                <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)',
-                  background: 'rgba(255,255,255,0.05)', padding: '4px 12px', borderRadius: 99 }}>
+                <div style={{ fontSize: 12, color: '#94a3b8',
+                  background: '#fff', border: '1px solid #e2e8f0', padding: '4px 12px', borderRadius: 99 }}>
                   {stepIndex + 1} / {script.steps.length}
                 </div>
               </div>
 
               {/* Canvas with glow border */}
               <div style={{ borderRadius: 18, overflow: 'hidden',
-                boxShadow: '0 0 60px rgba(249,115,22,0.12), 0 0 0 1px rgba(249,115,22,0.2)',
+                boxShadow: '0 0 60px rgba(236,19,214,0.12), 0 0 0 1px rgba(236,19,214,0.2)',
                 marginBottom: 20 }}>
                 <ConceptCanvas step={currentStep} stepIndex={stepIndex} />
               </div>
@@ -230,20 +226,20 @@ export default function ConceptCinemaPage() {
                   initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -12 }}
                   transition={{ duration: 0.3 }}
                   style={{ margin: '0 0 20px', padding: '18px 22px',
-                    background: 'rgba(249,115,22,0.06)', border: '1px solid rgba(249,115,22,0.18)',
+                    background: 'rgba(236,19,214,0.06)', border: '1px solid rgba(236,19,214,0.18)',
                     borderRadius: 16, display: 'flex', gap: 14, alignItems: 'flex-start' }}>
                   <motion.button
                     onClick={() => narrate(currentStep?.narration ?? '')}
                     whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
-                    style={{ background: 'rgba(249,115,22,0.15)', border: '1px solid rgba(249,115,22,0.3)',
+                    style={{ background: 'rgba(236,19,214,0.15)', border: '1px solid rgba(236,19,214,0.3)',
                       borderRadius: '50%', width: 36, height: 36, fontSize: 14, cursor: 'pointer',
                       flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     🔊
                   </motion.button>
                   <div>
-                    <div style={{ fontSize: 10, color: '#f97316', fontWeight: 700, letterSpacing: '0.1em',
+                    <div style={{ fontSize: 10, color: '#ec13d6', fontWeight: 700, letterSpacing: '0.1em',
                       textTransform: 'uppercase', marginBottom: 8 }}>{currentStep?.label}</div>
-                    <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.75)', lineHeight: 1.7, margin: 0 }}>
+                    <p style={{ fontSize: 14, color: '#334155', lineHeight: 1.7, margin: 0 }}>
                       {currentStep?.narration}
                     </p>
                   </div>
@@ -256,14 +252,15 @@ export default function ConceptCinemaPage() {
                 {script.steps.map((s, i) => (
                   <motion.button key={i} onClick={() => goToStep(i)}
                     whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
-                    style={{ padding: '8px 14px', borderRadius: 99, border: 'none', cursor: 'pointer',
+                    style={{ padding: '8px 14px', borderRadius: 99, cursor: 'pointer',
                       background: i === stepIndex
-                        ? 'linear-gradient(135deg, #f97316, #ea580c)'
-                        : 'rgba(255,255,255,0.06)',
-                      color: i === stepIndex ? '#fff' : 'rgba(255,255,255,0.45)',
+                        ? 'linear-gradient(135deg, #ec13d6, #a30d94)'
+                        : '#fff',
+                      color: i === stepIndex ? '#fff' : '#64748b',
+                      border: i === stepIndex ? 'none' : '1px solid #e2e8f0',
                       fontSize: 12, fontWeight: i === stepIndex ? 700 : 400,
                       whiteSpace: 'nowrap', flexShrink: 0,
-                      boxShadow: i === stepIndex ? '0 0 16px rgba(249,115,22,0.4)' : 'none' }}>
+                      boxShadow: i === stepIndex ? '0 0 16px rgba(236,19,214,0.4)' : 'none' }}>
                     {i + 1}. {s.label}
                   </motion.button>
                 ))}
@@ -274,27 +271,27 @@ export default function ConceptCinemaPage() {
                 <motion.button onClick={() => goToStep(Math.max(0, stepIndex - 1))} disabled={stepIndex === 0}
                   whileHover={{ scale: stepIndex === 0 ? 1 : 1.02 }} whileTap={{ scale: 0.97 }}
                   style={{ flex: 1, padding: '13px', borderRadius: 12,
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    background: 'rgba(255,255,255,0.03)',
-                    color: stepIndex === 0 ? 'rgba(255,255,255,0.2)' : '#f0f4ff',
+                    border: '1px solid #e2e8f0',
+                    background: '#fff',
+                    color: stepIndex === 0 ? '#cbd5e1' : '#0f172a',
                     cursor: stepIndex === 0 ? 'not-allowed' : 'pointer', fontSize: 14, fontWeight: 600 }}>
                   ← Prev
                 </motion.button>
                 {stepIndex < script.steps.length - 1 ? (
                   <motion.button onClick={() => goToStep(stepIndex + 1)}
-                    whileHover={{ scale: 1.03, boxShadow: '0 0 24px rgba(249,115,22,0.4)' }}
+                    whileHover={{ scale: 1.03, boxShadow: '0 0 24px rgba(236,19,214,0.4)' }}
                     whileTap={{ scale: 0.96 }}
                     style={{ flex: 2, padding: '13px', borderRadius: 12, border: 'none', cursor: 'pointer',
-                      background: 'linear-gradient(135deg, #f97316, #ea580c)',
+                      background: 'linear-gradient(135deg, #ec13d6, #a30d94)',
                       color: '#fff', fontSize: 14, fontWeight: 700,
-                      boxShadow: '0 0 16px rgba(249,115,22,0.3)' }}>
+                      boxShadow: '0 0 16px rgba(236,19,214,0.3)' }}>
                     Next →
                   </motion.button>
                 ) : (
                   <motion.button onClick={() => { setScript(null); setInput('') }}
                     whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.96 }}
                     style={{ flex: 2, padding: '13px', borderRadius: 12, border: 'none', cursor: 'pointer',
-                      background: 'linear-gradient(135deg, #f97316, #ea580c)',
+                      background: 'linear-gradient(135deg, #ec13d6, #a30d94)',
                       color: '#fff', fontSize: 14, fontWeight: 700 }}>
                     Learn another →
                   </motion.button>

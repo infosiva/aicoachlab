@@ -144,17 +144,17 @@ export default function LiveCoachPage() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: '#030a06', color: '#f0f4ff', fontFamily: 'var(--font-body, system-ui)' }}>
+    <div style={{ minHeight: '100vh', background: '#fff7ed', color: '#0f172a', fontFamily: 'var(--font-body, system-ui)' }}>
       <CoachOverlay tip={coachTip} visible={showTip} />
 
-      <div style={{ padding: '20px 24px', borderBottom: '1px solid rgba(255,255,255,0.07)',
+      <div style={{ padding: '20px 24px', borderBottom: '1px solid rgba(236,19,214,0.12)',
         display: 'flex', alignItems: 'center', gap: 16 }}>
         <button onClick={() => router.push('/interview')}
-          style={{ background: 'transparent', border: 'none', color: 'rgba(255,255,255,0.4)', cursor: 'pointer', fontSize: 13 }}>
+          style={{ background: 'transparent', border: 'none', color: '#64748b', cursor: 'pointer', fontSize: 13 }}>
           ← Back
         </button>
-        <div style={{ flex: 1, textAlign: 'center', fontWeight: 800, fontSize: 16 }}>🎯 Live Coach</div>
-        {phase === 'question' && <div style={{ fontSize: 12, color: '#10b981' }}>● Coach active</div>}
+        <div style={{ flex: 1, textAlign: 'center', fontWeight: 800, fontSize: 16, color: '#0f172a' }}>🎯 Live Coach</div>
+        {phase === 'question' && <div style={{ fontSize: 12, color: '#a30d94' }}>● Coach active</div>}
       </div>
 
       {/* Setup */}
@@ -162,17 +162,17 @@ export default function LiveCoachPage() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           style={{ maxWidth: 520, margin: '0 auto', padding: '48px 24px', textAlign: 'center' }}>
           <div style={{ fontSize: 64, marginBottom: 20 }}>🎯</div>
-          <h1 style={{ fontSize: 26, fontWeight: 900, margin: '0 0 12px', letterSpacing: '-0.03em' }}>Real-time coaching</h1>
-          <p style={{ color: 'rgba(167,243,208,0.55)', fontSize: 15, margin: '0 0 36px', lineHeight: 1.6 }}>
+          <h1 style={{ fontSize: 26, fontWeight: 900, margin: '0 0 12px', letterSpacing: '-0.03em', color: '#0f172a' }}>Real-time coaching</h1>
+          <p style={{ color: '#64748b', fontSize: 15, margin: '0 0 36px', lineHeight: 1.6 }}>
             Answer questions by speaking. A coach whispers tips as you go — filler words, STAR tracking, pacing.
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, marginBottom: 32 }}>
             {ROLES.map(r => (
               <button key={r.id} onClick={() => setRole(r.id)}
                 style={{ padding: '12px 10px', borderRadius: 12,
-                  border: `2px solid ${role === r.id ? '#10b981' : 'rgba(255,255,255,0.08)'}`,
-                  background: role === r.id ? 'rgba(16,185,129,0.12)' : 'rgba(255,255,255,0.03)',
-                  color: '#f0f4ff', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
+                  border: `2px solid ${role === r.id ? '#ec13d6' : '#e2e8f0'}`,
+                  background: role === r.id ? 'rgba(236,19,214,0.1)' : '#fff',
+                  color: '#0f172a', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
                 {r.label}
               </button>
             ))}
@@ -180,7 +180,7 @@ export default function LiveCoachPage() {
           <motion.button onClick={() => loadQuestion(0)} disabled={loading}
             whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
             style={{ width: '100%', padding: '16px', borderRadius: 14, border: 'none', cursor: 'pointer',
-              background: 'linear-gradient(135deg, #10b981, #059669)', color: '#fff', fontSize: 16, fontWeight: 800 }}>
+              background: 'linear-gradient(135deg, #ec13d6, #a30d94)', color: '#fff', fontSize: 16, fontWeight: 800 }}>
             {loading ? 'Preparing…' : 'Start coaching →'}
           </motion.button>
         </motion.div>
@@ -192,16 +192,16 @@ export default function LiveCoachPage() {
           <div style={{ display: 'flex', gap: 8, marginBottom: 32 }}>
             {Array.from({ length: MAX_QUESTIONS }).map((_, i) => (
               <div key={i} style={{ height: 4, flex: 1, borderRadius: 99,
-                background: i <= questionIndex ? '#10b981' : 'rgba(255,255,255,0.1)' }} />
+                background: i <= questionIndex ? '#ec13d6' : 'rgba(236,19,214,0.15)' }} />
             ))}
           </div>
 
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)',
+            style={{ background: '#fff', border: '1px solid #e2e8f0', boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
               borderRadius: 16, padding: '24px 28px', marginBottom: 28 }}>
-            <div style={{ fontSize: 11, color: '#10b981', fontWeight: 700, letterSpacing: '0.1em',
+            <div style={{ fontSize: 11, color: '#a30d94', fontWeight: 700, letterSpacing: '0.1em',
               textTransform: 'uppercase', marginBottom: 12 }}>Question {questionIndex + 1}</div>
-            <p style={{ fontSize: 18, fontWeight: 600, lineHeight: 1.55, margin: 0 }}>{question}</p>
+            <p style={{ fontSize: 18, fontWeight: 600, lineHeight: 1.55, margin: 0, color: '#0f172a' }}>{question}</p>
           </motion.div>
 
           {/* STAR tracker */}
@@ -209,15 +209,15 @@ export default function LiveCoachPage() {
             {([
               { label: 'S', full: 'Situation', done: star.situation, color: '#8b5cf6' },
               { label: 'T', full: 'Task', done: star.task, color: '#3b82f6' },
-              { label: 'A', full: 'Action', done: star.action, color: '#10b981' },
-              { label: 'R', full: 'Result', done: star.result, color: '#f97316' },
+              { label: 'A', full: 'Action', done: star.action, color: '#059669' },
+              { label: 'R', full: 'Result', done: star.result, color: '#ec13d6' },
             ] as const).map(s => (
               <div key={s.label} style={{ padding: '10px 12px', borderRadius: 10, textAlign: 'center',
-                background: s.done ? `${s.color}22` : 'rgba(255,255,255,0.03)',
-                border: `1px solid ${s.done ? s.color + '44' : 'rgba(255,255,255,0.07)'}`,
+                background: s.done ? `${s.color}18` : '#fff',
+                border: `1px solid ${s.done ? s.color + '44' : '#e2e8f0'}`,
                 transition: 'all 0.4s' }}>
-                <div style={{ fontSize: 16, fontWeight: 900, color: s.done ? s.color : 'rgba(255,255,255,0.2)' }}>{s.label}</div>
-                <div style={{ fontSize: 9, color: s.done ? s.color : 'rgba(255,255,255,0.2)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{s.full}</div>
+                <div style={{ fontSize: 16, fontWeight: 900, color: s.done ? s.color : '#cbd5e1' }}>{s.label}</div>
+                <div style={{ fontSize: 9, color: s.done ? s.color : '#cbd5e1', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{s.full}</div>
               </div>
             ))}
           </div>
@@ -225,22 +225,22 @@ export default function LiveCoachPage() {
           {fillers.count > 0 && (
             <div style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)',
               borderRadius: 10, padding: '8px 14px', marginBottom: 20, fontSize: 12,
-              color: 'rgba(255,255,255,0.6)', display: 'flex', gap: 8, alignItems: 'center' }}>
+              color: '#7f1d1d', display: 'flex', gap: 8, alignItems: 'center' }}>
               <span style={{ color: '#ef4444', fontWeight: 700 }}>⚠ {fillers.count} filler words</span>
               <span>({fillers.rate}% rate) — pause instead</span>
             </div>
           )}
 
           {currentTranscript && (
-            <div style={{ background: 'rgba(255,255,255,0.03)', borderRadius: 12, padding: '14px 16px',
-              marginBottom: 24, fontSize: 14, color: 'rgba(255,255,255,0.6)', lineHeight: 1.6,
-              minHeight: 60, border: '1px solid rgba(255,255,255,0.07)' }}
+            <div style={{ background: '#fff', borderRadius: 12, padding: '14px 16px',
+              marginBottom: 24, fontSize: 14, color: '#334155', lineHeight: 1.6,
+              minHeight: 60, border: '1px solid #e2e8f0' }}
               dangerouslySetInnerHTML={{ __html: analyseFillers(currentTranscript).highlighted }} />
           )}
 
           <div style={{ textAlign: 'center', marginBottom: 24 }}>
             <VoiceInput onTranscript={handleFinalTranscript} onInterimTranscript={handleInterim}
-              accentColor="#10b981" placeholder="Tap mic to answer" />
+              accentColor="#ec13d6" placeholder="Tap mic to answer" />
           </div>
 
           {currentTranscript.length > 20 && (
@@ -248,7 +248,7 @@ export default function LiveCoachPage() {
               initial={{ opacity: 0 }} animate={{ opacity: 1 }}
               whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
               style={{ width: '100%', padding: '14px', borderRadius: 12, border: 'none', cursor: 'pointer',
-                background: loading ? 'rgba(16,185,129,0.3)' : 'linear-gradient(135deg, #10b981, #059669)',
+                background: loading ? 'rgba(236,19,214,0.3)' : 'linear-gradient(135deg, #ec13d6, #a30d94)',
                 color: '#fff', fontSize: 15, fontWeight: 700 }}>
               {loading ? 'Grading…' : questionIndex + 1 >= MAX_QUESTIONS ? 'Finish session →' : 'Next question →'}
             </motion.button>
@@ -262,22 +262,22 @@ export default function LiveCoachPage() {
           style={{ maxWidth: 600, margin: '0 auto', padding: '48px 24px' }}>
           <div style={{ textAlign: 'center', marginBottom: 36 }}>
             <div style={{ fontSize: 64, marginBottom: 12 }}>📊</div>
-            <h2 style={{ fontSize: 28, fontWeight: 900, margin: '0 0 8px', letterSpacing: '-0.03em' }}>Session Complete</h2>
+            <h2 style={{ fontSize: 28, fontWeight: 900, margin: '0 0 8px', letterSpacing: '-0.03em', color: '#0f172a' }}>Session Complete</h2>
             <div style={{ fontSize: 48, fontWeight: 900,
-              color: (finalGrade.overall ?? 70) >= 70 ? '#10b981' : '#f59e0b' }}>
+              color: (finalGrade.overall ?? 70) >= 70 ? '#16a34a' : '#f59e0b' }}>
               {finalGrade.overall ?? 72}
             </div>
-            <p style={{ color: 'rgba(167,243,208,0.55)', fontSize: 14, margin: '8px 0 0' }}>{finalGrade.summary}</p>
+            <p style={{ color: '#64748b', fontSize: 14, margin: '8px 0 0' }}>{finalGrade.summary}</p>
           </div>
 
           {finalGrade.scores && (
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 24 }}>
               {Object.entries(finalGrade.scores).map(([k, v]) => (
-                <div key={k} style={{ background: 'rgba(255,255,255,0.04)',
-                  border: '1px solid rgba(255,255,255,0.08)', borderRadius: 12, padding: '14px 16px' }}>
-                  <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', textTransform: 'capitalize',
+                <div key={k} style={{ background: '#fff',
+                  border: '1px solid #e2e8f0', borderRadius: 12, padding: '14px 16px' }}>
+                  <div style={{ fontSize: 11, color: '#94a3b8', textTransform: 'capitalize',
                     letterSpacing: '0.06em', marginBottom: 6 }}>{k}</div>
-                  <div style={{ fontSize: 22, fontWeight: 800, color: '#10b981' }}>{v as number}/10</div>
+                  <div style={{ fontSize: 22, fontWeight: 800, color: '#16a34a' }}>{v as number}/10</div>
                 </div>
               ))}
             </div>
@@ -285,10 +285,10 @@ export default function LiveCoachPage() {
 
           <AnimatePresence>
             {finalGrade.strengths?.slice(0, 2).map((s: string, i: number) => (
-              <div key={i} style={{ background: 'rgba(16,185,129,0.08)',
-                border: '1px solid rgba(16,185,129,0.2)', borderRadius: 12, padding: '12px 14px',
-                fontSize: 13, color: 'rgba(255,255,255,0.7)', lineHeight: 1.4, marginBottom: 8 }}>
-                <span style={{ color: '#10b981', fontWeight: 700 }}>✓ </span>{s}
+              <div key={i} style={{ background: 'rgba(22,163,74,0.08)',
+                border: '1px solid rgba(22,163,74,0.2)', borderRadius: 12, padding: '12px 14px',
+                fontSize: 13, color: '#334155', lineHeight: 1.4, marginBottom: 8 }}>
+                <span style={{ color: '#16a34a', fontWeight: 700 }}>✓ </span>{s}
               </div>
             ))}
           </AnimatePresence>
@@ -296,7 +296,7 @@ export default function LiveCoachPage() {
           <motion.button onClick={() => { setPhase('setup'); setRounds([]); setQuestionIndex(0); setFinalGrade(null) }}
             whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
             style={{ width: '100%', padding: '14px', borderRadius: 12, border: 'none', cursor: 'pointer',
-              background: 'linear-gradient(135deg, #10b981, #059669)', color: '#fff', fontSize: 15, fontWeight: 700,
+              background: 'linear-gradient(135deg, #ec13d6, #a30d94)', color: '#fff', fontSize: 15, fontWeight: 700,
               marginTop: 24 }}>
             Practice again →
           </motion.button>

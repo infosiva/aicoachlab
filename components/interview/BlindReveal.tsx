@@ -63,9 +63,9 @@ export default function BlindReveal({ isHuman, personaName, personaTitle, score,
               letterSpacing: '0.08em', marginBottom: 6 }}>💪 Strength</div>
             <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', lineHeight: 1.4 }}>{topStrength}</div>
           </div>
-          <div style={{ background: 'rgba(249,115,22,0.08)', border: '1px solid rgba(249,115,22,0.2)',
+          <div style={{ background: 'rgba(236,19,214,0.08)', border: '1px solid rgba(236,19,214,0.2)',
             borderRadius: 12, padding: '12px 14px', textAlign: 'left' }}>
-            <div style={{ fontSize: 10, color: '#f97316', fontWeight: 700, textTransform: 'uppercase',
+            <div style={{ fontSize: 10, color: '#ec13d6', fontWeight: 700, textTransform: 'uppercase',
               letterSpacing: '0.08em', marginBottom: 6 }}>🎯 Improve</div>
             <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', lineHeight: 1.4 }}>{topImprovement}</div>
           </div>

@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
 Each step has: label (short title), narration (1-2 sentences spoken aloud), nodes (array of {id, label, x, y, color}), edges (array of {from, to, label}).
 Return 4-6 steps that build progressively. Keep narration conversational, not textbook.
 Node x,y are 0-1 fractions of canvas width/height. Use spread-out positions.
-Colors: use hex codes like #8b5cf6, #10b981, #f97316, #3b82f6, #ef4444, #f59e0b.
+Colors: use hex codes like #8b5cf6, #10b981, #ec13d6, #3b82f6, #ef4444, #f59e0b.
 Return ONLY valid JSON: { "title": "string", "steps": [ { "label": "string", "narration": "string", "nodes": [{"id":"string","label":"string","x":0.0,"y":0.0,"color":"#hex"}], "edges": [{"from":"string","to":"string","label":"string"}] } ] }`,
       },
       { role: 'user', content: `Explain: ${concept}` },

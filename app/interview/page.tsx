@@ -81,14 +81,14 @@ export default function InterviewHub() {
       <div aria-hidden style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
         <div style={{ position: 'absolute', top: '-15%', left: '50%', transform: 'translateX(-50%)',
           width: 900, height: 700, borderRadius: '50%',
-          background: `radial-gradient(ellipse, rgba(124,58,237,0.18) 0%, transparent 65%)`,
+          background: `radial-gradient(ellipse, rgba(236,19,214,0.14) 0%, transparent 65%)`,
           filter: 'blur(60px)' }} />
         <div style={{ position: 'absolute', bottom: '-10%', right: '-5%',
           width: 500, height: 500, borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(14,165,233,0.12) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(236,19,214,0.10) 0%, transparent 70%)',
           filter: 'blur(80px)' }} />
         <div style={{ position: 'absolute', inset: 0,
-          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)',
+          backgroundImage: 'radial-gradient(circle, rgba(15,23,42,0.04) 1px, transparent 1px)',
           backgroundSize: '32px 32px',
           maskImage: 'radial-gradient(ellipse 80% 60% at 50% 20%, black 10%, transparent 80%)' }} />
       </div>
@@ -96,14 +96,14 @@ export default function InterviewHub() {
       {/* ── Nav ── */}
       <nav style={{ position: 'sticky', top: 0, zIndex: 50, padding: '12px 24px',
         borderBottom: '1px solid var(--border)', backdropFilter: 'blur(16px)',
-        background: 'rgba(7,8,15,0.85)',
+        background: 'rgba(255,247,237,0.85)',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <motion.button onClick={() => router.push('/')}
           whileHover={{ x: -3 }} whileTap={{ scale: 0.94 }}
           style={{ background: 'none', border: 'none', cursor: 'pointer',
             display: 'flex', alignItems: 'center', gap: 8, padding: 0 }}>
-          <div style={{ width: 26, height: 26, borderRadius: 7, background: 'linear-gradient(135deg,#7c3aed,#6d28d9)', display: 'grid', placeItems: 'center', fontSize: 12, color: '#fff', fontWeight: 800 }}>A</div>
-          <span style={{ fontSize: 14, fontWeight: 700, color: '#f0f4ff', letterSpacing: '-0.2px' }}>AI<span style={{ color: 'var(--violet-2)' }}>Coach</span>Lab</span>
+          <div style={{ width: 26, height: 26, borderRadius: 7, background: 'linear-gradient(135deg,#ec13d6,#a30d94)', display: 'grid', placeItems: 'center', fontSize: 12, color: '#fff', fontWeight: 800 }}>A</div>
+          <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.2px' }}>AI<span style={{ color: 'var(--violet-2)' }}>Coach</span>Lab</span>
         </motion.button>
         <div style={{ display: 'flex', gap: 20, alignItems: 'center' }}>
           <a href="/tracks" style={{ fontSize: 13, color: 'var(--text-2)', textDecoration: 'none' }}>Practice tracks</a>
@@ -120,7 +120,7 @@ export default function InterviewHub() {
           style={{ textAlign: 'center', marginBottom: 48 }}>
           <motion.div variants={fadeUp} style={{ display: 'inline-flex', alignItems: 'center', gap: 8,
             padding: '5px 16px', background: 'var(--violet-dim)',
-            border: '1px solid rgba(124,58,237,0.3)', borderRadius: 99,
+            border: '1px solid rgba(236,19,214,0.3)', borderRadius: 99,
             fontSize: 11, fontWeight: 700, color: 'var(--violet-2)',
             letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 20 }}>
             <Mic size={11} /> Voice-first · No account needed
@@ -128,10 +128,10 @@ export default function InterviewHub() {
 
           <motion.h1 variants={fadeUp}
             style={{ fontSize: 'clamp(2.2rem, 5vw, 3.8rem)', fontWeight: 900,
-              letterSpacing: '-0.04em', lineHeight: 1.05, margin: '0 0 16px' }}>
+              letterSpacing: '-0.04em', lineHeight: 1.05, margin: '0 0 16px', color: 'var(--text)' }}>
             Your interview room.
             <br />
-            <span style={{ background: 'linear-gradient(135deg, #a78bfa 0%, #38bdf8 55%, #10b981 100%)',
+            <span style={{ background: 'linear-gradient(135deg, #ec13d6 0%, #a30d94 55%, #10b981 100%)',
               WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
               Practice like it's real.
             </span>
@@ -249,7 +249,7 @@ export default function InterviewHub() {
             })}
 
             {/* Summary strip */}
-            <div style={{ padding: '14px 16px', borderRadius: 12, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+            <div style={{ padding: '14px 16px', borderRadius: 12, background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: '0 2px 8px rgba(0,0,0,0.04)', display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1 }}>
                 <span style={{ fontSize: 18 }}>{activeRole.icon}</span>
                 <div>
@@ -257,7 +257,7 @@ export default function InterviewHub() {
                   <div style={{ fontSize: 13, fontWeight: 700, color: activeRole.color }}>{activeRole.label}</div>
                 </div>
               </div>
-              <div style={{ width: 1, height: 36, background: 'rgba(255,255,255,0.08)' }} />
+              <div style={{ width: 1, height: 36, background: 'var(--border)' }} />
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1 }}>
                 <span style={{ fontSize: 18 }}>{activeMode.id === 'blindfold' ? '🕶️' : activeMode.id === 'live' ? '⚡' : '💬'}</span>
                 <div>
@@ -302,10 +302,10 @@ export default function InterviewHub() {
             {/* Interviewer side */}
             <div style={{ textAlign: 'center' }}>
               <div style={{ width: 72, height: 72, borderRadius: '50%', margin: '0 auto 12px',
-                background: 'linear-gradient(135deg, rgba(124,58,237,0.4), rgba(99,102,241,0.2))',
-                border: '2px solid rgba(124,58,237,0.45)',
+                background: 'linear-gradient(135deg, rgba(236,19,214,0.35), rgba(234,88,12,0.15))',
+                border: '2px solid rgba(236,19,214,0.4)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: 28, boxShadow: '0 0 40px rgba(124,58,237,0.3)' }}>
+                fontSize: 28, boxShadow: '0 0 40px rgba(236,19,214,0.25)' }}>
                 🤖
               </div>
               <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 3 }}>AI Interviewer</div>

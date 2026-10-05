@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { BrainCircuit, CheckCircle, ExternalLink, ArrowLeft, Award } from 'lucide-react'
 
+const ACCENT = '#ec13d6'
+const ACCENT2 = '#a30d94'
+const BG = '#fff7ed'
 const ease: [number, number, number, number] = [0.23, 1, 0.32, 1]
 
 interface WeekItem {
@@ -15,14 +18,14 @@ interface WeekItem {
 }
 
 const curriculum: WeekItem[] = [
-  { week: 'Week 1', title: 'AI/ML Mental Models', tag: 'Foundations', color: '#818cf8', desc: 'What AI actually is, how models learn, key vocabulary. No code needed.', colab: '' },
-  { week: 'Week 2', title: 'Data — Collect, Clean, Label', tag: 'Data', color: '#34d399', desc: 'Pandas basics, dataset quality, labeling strategies. First Colab notebook.', colab: 'https://colab.research.google.com/github/google/eng-edu/raw/main/ml/cc/exercises/pandas_dataframe_ultraquick_tutorial.ipynb' },
-  { week: 'Week 3', title: 'Your First Model', tag: 'scikit-learn', color: '#60a5fa', desc: 'Train a classifier in 20 lines. Understand accuracy, precision, recall.', colab: 'https://colab.research.google.com/github/google/eng-edu/raw/main/ml/cc/exercises/intro_to_ml_fairness.ipynb' },
-  { week: 'Week 4', title: 'Neural Networks from Scratch', tag: 'PyTorch', color: '#f472b6', desc: 'Build a neural net, understand backprop, train on MNIST.', colab: '' },
-  { week: 'Week 5', title: 'Fine-tuning LLMs', tag: 'HuggingFace + LoRA', color: '#fb923c', desc: 'Fine-tune Llama/Mistral on custom data with LoRA/QLoRA on free GPU.', colab: '' },
-  { week: 'Week 6', title: 'Deploy a Model', tag: 'Replicate + Modal', color: '#4ade80', desc: 'Serve your model via API. Cost-effective inference strategies.', colab: '' },
-  { week: 'Week 7', title: 'Agents & Tool Use', tag: 'Claude API', color: '#a78bfa', desc: 'Build an AI agent with tools, memory, and structured output.', colab: '' },
-  { week: 'Week 8', title: 'Ship a Real Product', tag: 'Full Stack', color: '#f59e0b', desc: 'Combine everything into a deployable AI-powered app.', colab: '' },
+  { week: 'Week 1', title: 'AI/ML Mental Models', tag: 'Foundations', color: '#6366f1', desc: 'What AI actually is, how models learn, key vocabulary. No code needed.', colab: '' },
+  { week: 'Week 2', title: 'Data — Collect, Clean, Label', tag: 'Data', color: '#059669', desc: 'Pandas basics, dataset quality, labeling strategies. First Colab notebook.', colab: 'https://colab.research.google.com/github/google/eng-edu/raw/main/ml/cc/exercises/pandas_dataframe_ultraquick_tutorial.ipynb' },
+  { week: 'Week 3', title: 'Your First Model', tag: 'scikit-learn', color: '#2563eb', desc: 'Train a classifier in 20 lines. Understand accuracy, precision, recall.', colab: 'https://colab.research.google.com/github/google/eng-edu/raw/main/ml/cc/exercises/intro_to_ml_fairness.ipynb' },
+  { week: 'Week 4', title: 'Neural Networks from Scratch', tag: 'PyTorch', color: '#db2777', desc: 'Build a neural net, understand backprop, train on MNIST.', colab: '' },
+  { week: 'Week 5', title: 'Fine-tuning LLMs', tag: 'HuggingFace + LoRA', color: ACCENT2, desc: 'Fine-tune Llama/Mistral on custom data with LoRA/QLoRA on free GPU.', colab: '' },
+  { week: 'Week 6', title: 'Deploy a Model', tag: 'Replicate + Modal', color: '#16a34a', desc: 'Serve your model via API. Cost-effective inference strategies.', colab: '' },
+  { week: 'Week 7', title: 'Agents & Tool Use', tag: 'Claude API', color: '#7c3aed', desc: 'Build an AI agent with tools, memory, and structured output.', colab: '' },
+  { week: 'Week 8', title: 'Ship a Real Product', tag: 'Full Stack', color: '#d97706', desc: 'Combine everything into a deployable AI-powered app.', colab: '' },
 ]
 
 const STORAGE_KEY = (n: number) => `aimodeling_week_${n}`
@@ -68,10 +71,10 @@ export default function AIModelingPage() {
 
   return (
     <div style={{
-      background: '#0a0a0f',
+      background: BG,
       minHeight: '100vh',
       fontFamily: 'var(--font-body, system-ui)',
-      color: '#f0f4ff',
+      color: '#0f172a',
       overflowX: 'hidden',
     }}>
       {/* hidden certificate div for print */}
@@ -84,37 +87,13 @@ export default function AIModelingPage() {
         </div>
       </div>
 
-      {/* ambient glow */}
-      <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0, overflow: 'hidden' }}>
-        <motion.div
-          animate={{ scale: [1, 1.12, 1], opacity: [0.3, 0.45, 0.3] }}
-          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
-          style={{
-            position: 'absolute', top: '-15%', left: '-5%',
-            width: 600, height: 600, borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(167,139,250,0.3) 0%, transparent 70%)',
-            filter: 'blur(90px)',
-          }}
-        />
-        <motion.div
-          animate={{ scale: [1, 1.08, 1], opacity: [0.2, 0.35, 0.2] }}
-          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut', delay: 3 }}
-          style={{
-            position: 'absolute', bottom: '5%', right: '-5%',
-            width: 500, height: 500, borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(129,140,248,0.2) 0%, transparent 70%)',
-            filter: 'blur(80px)',
-          }}
-        />
-      </div>
-
       <div style={{ position: 'relative', zIndex: 1, maxWidth: 760, margin: '0 auto', padding: '0 24px 80px' }}>
 
         {/* back nav */}
         <div style={{ paddingTop: 28, paddingBottom: 4 }}>
           <a
             href="/"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: '#8892a4', fontSize: 14, textDecoration: 'none' }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: '#64748b', fontSize: 14, textDecoration: 'none' }}
           >
             <ArrowLeft size={16} /> Home
           </a>
@@ -130,35 +109,35 @@ export default function AIModelingPage() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
             <span style={{
               fontSize: 11, fontWeight: 700, letterSpacing: 1.4,
-              color: '#a78bfa', background: 'rgba(167,139,250,0.1)',
-              border: '1px solid rgba(167,139,250,0.3)', borderRadius: 5,
+              color: ACCENT2, background: 'rgba(236,19,214,0.1)',
+              border: '1px solid rgba(236,19,214,0.3)', borderRadius: 5,
               padding: '3px 10px',
             }}>LEARNING TRACK</span>
             <span style={{
               fontSize: 11, padding: '3px 10px', borderRadius: 999,
-              background: 'rgba(167,139,250,0.07)', border: '1px solid rgba(167,139,250,0.2)',
-              color: 'rgba(167,139,250,0.8)',
+              background: 'rgba(236,19,214,0.07)', border: '1px solid rgba(236,19,214,0.2)',
+              color: ACCENT2,
             }}>8 weeks · hands-on · no fluff</span>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 14 }}>
             <div style={{
               width: 56, height: 56, borderRadius: 14,
-              background: 'rgba(167,139,250,0.12)', border: '1px solid rgba(167,139,250,0.3)',
+              background: 'rgba(236,19,214,0.12)', border: '1px solid rgba(236,19,214,0.3)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
-              <BrainCircuit size={28} color="#a78bfa" />
+              <BrainCircuit size={28} color={ACCENT2} />
             </div>
             <div>
               <h1 style={{
                 fontSize: 'clamp(1.8rem,4vw,2.6rem)', fontWeight: 800,
                 letterSpacing: '-0.03em', margin: 0,
-                background: 'linear-gradient(120deg,#a78bfa,#818cf8)',
+                background: `linear-gradient(120deg,${ACCENT},${ACCENT2})`,
                 WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
               }}>
                 Zero to Hero: AI Modeling
               </h1>
-              <p style={{ margin: '6px 0 0', fontSize: 15, color: 'rgba(180,190,220,0.6)', lineHeight: 1.5 }}>
+              <p style={{ margin: '6px 0 0', fontSize: 15, color: '#64748b', lineHeight: 1.5 }}>
                 From first principles to shipping a real AI product — no fluff, all hands-on.
               </p>
             </div>
@@ -167,25 +146,26 @@ export default function AIModelingPage() {
           {/* progress bar */}
           {mounted && (
             <div style={{
-              background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(167,139,250,0.15)',
+              background: '#fff', border: '1px solid #fed7aa',
               borderRadius: 12, padding: '16px 20px', marginTop: 8,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
-                <span style={{ fontSize: 13, color: '#8892a4' }}>
+                <span style={{ fontSize: 13, color: '#64748b' }}>
                   {completedCount} of 8 weeks complete
                 </span>
-                <span style={{ fontSize: 13, fontWeight: 700, color: allDone ? '#a78bfa' : '#f0f4ff' }}>
+                <span style={{ fontSize: 13, fontWeight: 700, color: allDone ? ACCENT2 : '#0f172a' }}>
                   {pct}%
                 </span>
               </div>
-              <div style={{ height: 6, background: 'rgba(255,255,255,0.06)', borderRadius: 99, overflow: 'hidden' }}>
+              <div style={{ height: 6, background: '#f1f5f9', borderRadius: 99, overflow: 'hidden' }}>
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: `${pct}%` }}
                   transition={{ duration: 0.9, ease, delay: 0.3 }}
                   style={{
                     height: '100%', borderRadius: 99,
-                    background: 'linear-gradient(90deg,#818cf8,#a78bfa)',
+                    background: `linear-gradient(90deg,${ACCENT},${ACCENT2})`,
                   }}
                 />
               </div>
@@ -205,8 +185,9 @@ export default function AIModelingPage() {
                 transition={{ duration: 0.45, ease, delay: 0.1 + idx * 0.06 }}
                 whileHover={{ x: 3 }}
                 style={{
-                  background: done ? `${item.color}0d` : 'rgba(255,255,255,0.025)',
-                  border: done ? `1px solid ${item.color}40` : '1px solid rgba(255,255,255,0.07)',
+                  background: done ? `${item.color}0d` : '#fff',
+                  border: done ? `1px solid ${item.color}40` : '1px solid #e2e8f0',
+                  boxShadow: done ? 'none' : '0 2px 8px rgba(0,0,0,0.04)',
                   borderRadius: 14,
                   padding: '20px 22px',
                   display: 'flex',
@@ -219,15 +200,15 @@ export default function AIModelingPage() {
                 <div style={{
                   flexShrink: 0,
                   width: 44, height: 44, borderRadius: 11,
-                  background: done ? `${item.color}22` : 'rgba(167,139,250,0.08)',
-                  border: `1px solid ${done ? item.color + '50' : 'rgba(167,139,250,0.2)'}`,
+                  background: done ? `${item.color}22` : 'rgba(236,19,214,0.08)',
+                  border: `1px solid ${done ? item.color + '50' : 'rgba(236,19,214,0.2)'}`,
                   display: 'flex', flexDirection: 'column',
                   alignItems: 'center', justifyContent: 'center',
                 }}>
                   {done ? (
                     <CheckCircle size={20} color={item.color} />
                   ) : (
-                    <span style={{ fontSize: 11, fontWeight: 700, color: '#a78bfa', lineHeight: 1.2, textAlign: 'center' }}>
+                    <span style={{ fontSize: 11, fontWeight: 700, color: ACCENT2, lineHeight: 1.2, textAlign: 'center' }}>
                       W{idx + 1}
                     </span>
                   )}
@@ -237,7 +218,7 @@ export default function AIModelingPage() {
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 6 }}>
                     <span style={{
-                      fontSize: 11, color: 'rgba(180,190,220,0.4)',
+                      fontSize: 11, color: '#94a3b8',
                       fontWeight: 500, flexShrink: 0,
                     }}>{item.week}</span>
                     <span style={{
@@ -246,13 +227,13 @@ export default function AIModelingPage() {
                     }}>{item.tag}</span>
                   </div>
                   <div style={{
-                    fontSize: 16, fontWeight: 600, color: done ? 'rgba(240,244,255,0.55)' : '#f0f4ff',
+                    fontSize: 16, fontWeight: 600, color: done ? '#94a3b8' : '#0f172a',
                     textDecoration: done ? 'line-through' : 'none',
                     marginBottom: 4,
                   }}>
                     {item.title}
                   </div>
-                  <div style={{ fontSize: 13, color: 'rgba(180,190,220,0.5)', lineHeight: 1.55 }}>
+                  <div style={{ fontSize: 13, color: '#64748b', lineHeight: 1.55 }}>
                     {item.desc}
                   </div>
 
@@ -281,12 +262,12 @@ export default function AIModelingPage() {
                         display: 'inline-flex', alignItems: 'center', gap: 5,
                         fontSize: 12, fontWeight: 600, cursor: 'pointer',
                         padding: '5px 12px', borderRadius: 8,
-                        background: done ? 'rgba(16,185,129,0.1)' : 'rgba(255,255,255,0.04)',
-                        border: done ? '1px solid rgba(16,185,129,0.3)' : '1px solid rgba(255,255,255,0.1)',
-                        color: done ? '#10b981' : 'rgba(180,190,220,0.55)',
+                        background: done ? 'rgba(16,185,129,0.1)' : '#f8fafc',
+                        border: done ? '1px solid rgba(16,185,129,0.3)' : '1px solid #e2e8f0',
+                        color: done ? '#10b981' : '#64748b',
                       }}
                     >
-                      <CheckCircle size={12} color={done ? '#10b981' : 'rgba(180,190,220,0.3)'} />
+                      <CheckCircle size={12} color={done ? '#10b981' : '#cbd5e1'} />
                       {done ? 'Completed' : 'Mark complete'}
                     </button>
                   </div>
@@ -304,28 +285,29 @@ export default function AIModelingPage() {
             transition={{ duration: 0.5, ease, delay: 0.6 }}
             style={{
               marginTop: 40, padding: '28px 24px', borderRadius: 16, textAlign: 'center',
-              background: allDone ? 'rgba(167,139,250,0.08)' : 'rgba(255,255,255,0.02)',
-              border: allDone ? '1px solid rgba(167,139,250,0.35)' : '1px solid rgba(255,255,255,0.06)',
+              background: allDone ? 'rgba(236,19,214,0.08)' : '#fff',
+              border: allDone ? `1px solid rgba(236,19,214,0.35)` : '1px solid #e2e8f0',
+              boxShadow: allDone ? 'none' : '0 2px 8px rgba(0,0,0,0.04)',
               transition: 'background 0.3s, border 0.3s',
             }}
           >
-            <Award size={32} color={allDone ? '#a78bfa' : 'rgba(180,190,220,0.2)'} style={{ marginBottom: 12 }} />
-            <p style={{ margin: '0 0 8px', fontSize: 16, fontWeight: 700, color: allDone ? '#f0f4ff' : 'rgba(180,190,220,0.35)' }}>
+            <Award size={32} color={allDone ? ACCENT2 : '#cbd5e1'} style={{ marginBottom: 12 }} />
+            <p style={{ margin: '0 0 8px', fontSize: 16, fontWeight: 700, color: allDone ? '#0f172a' : '#94a3b8' }}>
               {allDone ? 'You did it! Claim your certificate.' : `Complete all 8 weeks to unlock your certificate (${completedCount}/8 done)`}
             </p>
-            <p style={{ margin: '0 0 20px', fontSize: 13, color: allDone ? 'rgba(167,139,250,0.7)' : 'rgba(180,190,220,0.25)' }}>
+            <p style={{ margin: '0 0 20px', fontSize: 13, color: allDone ? ACCENT2 : '#94a3b8' }}>
               {allDone ? 'Download a certificate of completion for your portfolio.' : 'Mark each week complete as you finish it.'}
             </p>
             <motion.button
               onClick={allDone ? handleCertificate : undefined}
-              whileHover={allDone ? { scale: 1.04, boxShadow: '0 0 28px rgba(167,139,250,0.4)' } : {}}
+              whileHover={allDone ? { scale: 1.04, boxShadow: '0 0 28px rgba(236,19,214,0.35)' } : {}}
               whileTap={allDone ? { scale: 0.97 } : {}}
               disabled={!allDone}
               style={{
                 padding: '10px 28px', borderRadius: 10, fontWeight: 700, fontSize: 14,
                 cursor: allDone ? 'pointer' : 'not-allowed',
-                background: allDone ? 'linear-gradient(135deg,#a78bfa,#818cf8)' : 'rgba(255,255,255,0.05)',
-                color: allDone ? '#fff' : 'rgba(180,190,220,0.3)',
+                background: allDone ? `linear-gradient(135deg,${ACCENT},${ACCENT2})` : '#f1f5f9',
+                color: allDone ? '#fff' : '#94a3b8',
                 border: 'none',
                 transition: 'background 0.3s',
               }}

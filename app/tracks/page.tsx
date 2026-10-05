@@ -5,6 +5,9 @@ import { motion } from 'framer-motion'
 import { ArrowLeft, ChevronRight, CheckCircle } from 'lucide-react'
 import { TRACKS, DIFFICULTY_ORDER, type Track } from '@/lib/tracks/exercises'
 
+const ACCENT = '#ec13d6'
+const ACCENT2 = '#a30d94'
+const BG = '#fff7ed'
 const ease: [number, number, number, number] = [0.23, 1, 0.32, 1]
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -40,8 +43,9 @@ function TrackCard({ track, progress }: { track: Track; progress: Record<string,
       variants={fadeUp}
       onClick={() => router.push(`/tracks/${track.id}`)}
       style={{
-        background: 'rgba(255,255,255,0.03)',
-        border: `1px solid rgba(255,255,255,0.08)`,
+        background: '#fff',
+        border: `1px solid #e2e8f0`,
+        boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
         borderRadius: 16,
         padding: '28px 28px 24px',
         cursor: 'pointer',
@@ -72,13 +76,13 @@ function TrackCard({ track, progress }: { track: Track; progress: Record<string,
             {track.icon}
           </div>
           <div>
-            <div style={{ fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 700, color: '#f0f4ff' }}>
+            <div style={{ fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 700, color: '#0f172a' }}>
               {track.label}
             </div>
-            <div style={{ fontSize: 13, color: '#8892a4', marginTop: 2 }}>{track.description}</div>
+            <div style={{ fontSize: 13, color: '#64748b', marginTop: 2 }}>{track.description}</div>
           </div>
         </div>
-        <ChevronRight size={18} color="#4a5568" />
+        <ChevronRight size={18} color="#cbd5e1" />
       </div>
 
       {/* difficulty breakdown */}
@@ -99,12 +103,12 @@ function TrackCard({ track, progress }: { track: Track; progress: Record<string,
       {/* progress bar */}
       <div style={{ marginTop: 4 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-          <span style={{ fontSize: 12, color: '#8892a4' }}>{completed}/{total} exercises</span>
-          <span style={{ fontSize: 12, color: pct === 100 ? track.color : '#8892a4', fontWeight: 600 }}>
+          <span style={{ fontSize: 12, color: '#64748b' }}>{completed}/{total} exercises</span>
+          <span style={{ fontSize: 12, color: pct === 100 ? track.color : '#64748b', fontWeight: 600 }}>
             {pct === 100 ? '✓ Complete' : `${pct}%`}
           </span>
         </div>
-        <div style={{ height: 4, background: 'rgba(255,255,255,0.06)', borderRadius: 99, overflow: 'hidden' }}>
+        <div style={{ height: 4, background: '#f1f5f9', borderRadius: 99, overflow: 'hidden' }}>
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: `${pct}%` }}
@@ -129,35 +133,21 @@ export default function TracksPage() {
 
   return (
     <div style={{
-      minHeight: '100dvh', background: '#040408', color: '#f0f4ff',
+      minHeight: '100dvh', background: BG, color: '#0f172a',
       fontFamily: 'var(--font-body, system-ui)', padding: '0 0 80px',
     }}>
-      {/* atmosphere */}
-      <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
-        <div style={{
-          position: 'absolute', top: '-10%', left: '20%', width: 500, height: 400,
-          borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(124,58,237,0.12) 0%, transparent 70%)',
-          filter: 'blur(80px)',
-        }} />
-        <div style={{
-          position: 'absolute', bottom: '-10%', right: '15%', width: 400, height: 400,
-          borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(14,165,233,0.1) 0%, transparent 70%)',
-          filter: 'blur(80px)',
-        }} />
-      </div>
-
       {/* top nav bar */}
-      <nav style={{ position: 'sticky', top: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 24px', background: 'rgba(4,4,8,0.85)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+      <nav style={{ position: 'sticky', top: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 24px', background: 'rgba(255,247,237,0.85)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(236,19,214,0.12)' }}>
         <button onClick={() => router.push('/')} style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
-          <div style={{ width: 26, height: 26, borderRadius: 7, background: 'linear-gradient(135deg,#7c3aed,#6d28d9)', display: 'grid', placeItems: 'center' }}>
+          <div style={{ width: 26, height: 26, borderRadius: 7, background: `linear-gradient(135deg,${ACCENT},${ACCENT2})`, display: 'grid', placeItems: 'center' }}>
             <span style={{ fontSize: 12, color: '#fff', fontWeight: 800 }}>A</span>
           </div>
-          <span style={{ fontSize: 14, fontWeight: 700, color: '#f0f4ff', letterSpacing: '-0.2px' }}>AI<span style={{ color: '#a78bfa' }}>Coach</span>Lab</span>
+          <span style={{ fontSize: 14, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.2px' }}>AI<span style={{ color: ACCENT }}>Coach</span>Lab</span>
         </button>
         <div style={{ display: 'flex', gap: 20, alignItems: 'center' }}>
-          <a href="/interview" style={{ fontSize: 13, color: 'rgba(180,190,220,0.6)', textDecoration: 'none' }}>Interview</a>
-          <a href="/learn" style={{ fontSize: 13, color: 'rgba(180,190,220,0.6)', textDecoration: 'none' }}>Learn</a>
-          <a href="/interview" style={{ fontSize: 12, fontWeight: 700, color: '#a78bfa', textDecoration: 'none', padding: '6px 14px', borderRadius: 8, border: '1px solid rgba(124,58,237,0.35)' }}>Mock interview →</a>
+          <a href="/interview" style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>Interview</a>
+          <a href="/learn" style={{ fontSize: 13, color: '#64748b', textDecoration: 'none' }}>Learn</a>
+          <a href="/interview" style={{ fontSize: 12, fontWeight: 700, color: ACCENT, textDecoration: 'none', padding: '6px 14px', borderRadius: 8, border: `1px solid rgba(236,19,214,0.35)` }}>Mock interview →</a>
         </div>
       </nav>
 
@@ -173,8 +163,8 @@ export default function TracksPage() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
             <div style={{
               fontSize: 11, fontWeight: 700, letterSpacing: 1.5,
-              color: '#7c3aed', background: 'rgba(124,58,237,0.12)',
-              border: '1px solid rgba(124,58,237,0.25)', borderRadius: 6,
+              color: ACCENT2, background: 'rgba(236,19,214,0.12)',
+              border: `1px solid rgba(236,19,214,0.25)`, borderRadius: 6,
               padding: '4px 10px',
             }}>
               PRACTICE TRACKS
@@ -188,12 +178,12 @@ export default function TracksPage() {
           </div>
           <h1 style={{
             fontFamily: 'var(--font-display)', fontSize: 'clamp(28px, 5vw, 42px)',
-            fontWeight: 800, margin: 0, lineHeight: 1.15, color: '#f0f4ff',
+            fontWeight: 800, margin: 0, lineHeight: 1.15, color: '#0f172a',
           }}>
             Master interview skills<br />
-            <span style={{ color: '#7c3aed' }}>one exercise at a time</span>
+            <span style={{ color: ACCENT2 }}>one exercise at a time</span>
           </h1>
-          <p style={{ color: '#8892a4', fontSize: 16, marginTop: 14, lineHeight: 1.6, maxWidth: 540 }}>
+          <p style={{ color: '#64748b', fontSize: 16, marginTop: 14, lineHeight: 1.6, maxWidth: 540 }}>
             Structured tracks like Exercism — pick a topic, work through graded exercises, get AI feedback, see model answers after each submission.
           </p>
         </motion.div>
@@ -212,11 +202,11 @@ export default function TracksPage() {
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}
           style={{
-            marginTop: 60, padding: '32px 28px', background: 'rgba(255,255,255,0.02)',
-            border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16,
+            marginTop: 60, padding: '32px 28px', background: '#fff',
+            border: '1px solid #e2e8f0', borderRadius: 16, boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
           }}
         >
-          <div style={{ fontSize: 13, fontWeight: 700, color: '#8892a4', letterSpacing: 1, marginBottom: 20 }}>HOW IT WORKS</div>
+          <div style={{ fontSize: 13, fontWeight: 700, color: '#94a3b8', letterSpacing: 1, marginBottom: 20 }}>HOW IT WORKS</div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 20 }}>
             {[
               { step: '01', title: 'Pick a track', desc: 'Choose the interview type you want to master' },
@@ -227,9 +217,9 @@ export default function TracksPage() {
               { step: '06', title: 'Track progress', desc: 'Your scores saved locally per exercise' },
             ].map(({ step, title, desc }) => (
               <div key={step}>
-                <div style={{ fontSize: 11, color: '#7c3aed', fontWeight: 700, marginBottom: 4 }}>{step}</div>
-                <div style={{ fontSize: 14, fontWeight: 600, color: '#c8d0e0', marginBottom: 4 }}>{title}</div>
-                <div style={{ fontSize: 12, color: '#5a6470', lineHeight: 1.5 }}>{desc}</div>
+                <div style={{ fontSize: 11, color: ACCENT2, fontWeight: 700, marginBottom: 4 }}>{step}</div>
+                <div style={{ fontSize: 14, fontWeight: 600, color: '#0f172a', marginBottom: 4 }}>{title}</div>
+                <div style={{ fontSize: 12, color: '#64748b', lineHeight: 1.5 }}>{desc}</div>
               </div>
             ))}
           </div>
