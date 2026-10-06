@@ -2,6 +2,12 @@ import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
+    ...['', '/ai-coding-agent-ecosystem'].map(slug => ({
+      url: `https://aicoachlab.app/guides${slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    })),
     {
       url: 'https://aicoachlab.app',
       lastModified: new Date(),
