@@ -127,3 +127,9 @@ Build order: ship preset roles first (1+2), then this. Same engine, input = extr
 - Press feedback scale(.97) on buttons/rows; hover gated (hover:hover)(pointer:fine).
 **AI pillars:** exempt, static content, no model/RAG call; ai-core not used. Pillars 10-13 n/a.
 **Not in scope:** ai-core Ask box, monitoring events, paste-a-JD, marketing.
+
+## Roles feature (2026-10-07) — COMPLETE, live
+- 18 roles in lib/roles (12 added), /roles list + /roles/[slug] playbooks, /terms page added (cookie banner linked to a 404).
+- Verified live: 18/18 role pages 200; e2e-verify 10/10; visual-qa 20 pass/0 fail on /, /roles, playbook; Lighthouse mobile a11y 98 (heading-order fixed in 999bda8), BP/SEO 100.
+- Commits: 4da8f3a roles, d0e623c terms, 999bda8 heading order.
+- Open: cookie banner covers ~20% of mobile viewport until dismissed; /terms wording is generic, owner to review.
