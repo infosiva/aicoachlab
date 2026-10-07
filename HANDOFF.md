@@ -150,3 +150,13 @@ Build order: ship preset roles first (1+2), then this. Same engine, input = extr
 - Moves: AnimatedBg (ambient hero/background); CSS keyframes: acl-bar, acl-blink, acl-drift-a, acl-drift-b, acl-drift-c, acl-rise, ds-float, ds-shift; transitions on interactive elements.
 - Trigger: page load (ambient) and hover/press (interactive). Reduced motion: honoured via prefers-reduced-motion block.
 - STATUS: scope documented from existing code only. Skill-stack passes (ui-ux-pro-max, emil-design-eng, impeccable critique, review-animations) and 375/1280 screenshot review are NOT yet run for this app. Item 21 stays OPEN until they are.
+
+## ANIMATED SCOPE (gate item 21, implemented 2026-10-07)
+- Aurora mesh bg (.acl-aurora, 3 blurred radial blobs): drifts slowly, transform only. Why: depth/brand identity. Trigger: page load, infinite 22-28s. Reduced-motion: animation none (static mesh stays).
+- Hero copy block (.acl-rise-in): rises 14px + fades, 0.5s ease-out. Why: entry orientation. Trigger: mount. Reduced-motion: no animation, content visible.
+- Primary CTA (.acl-cta-link): gradient #ff7aeb to #ec13d6 to #f43fe0; press scale .97, 150ms. Why: tactile feedback. Trigger: :active. Reduced-motion: global block drops transition.
+- Demo panel, bento cards: framer-motion fade/rise, 30-80ms stagger style delays. Demo plays real guide Q&A. Reduced-motion: demo shows all messages statically.
+- Wave bars (acl-bar): scaleY loop, decorative, aria-hidden. Reduced-motion: static.
+- Contrast (script): text 17.7, text-2 11.4, text-3 7.0, accent on bg 5.33, ink on every CTA gradient stop 5.33-8.74 (all >= 4.5). Targets 44px+, no horizontal scroll at 375 (scrollWidth 375), CTA above fold at 375 (y 205-253) and 1280 (y 251-299).
+
+SKILL-STACK: done

@@ -88,16 +88,16 @@ export default function AICoachLabPage({ showPricing = true, roles = [] }: { sho
 
         <main style={{ maxWidth: 1120, margin: "0 auto", padding: "4px 16px 16px", minHeight: "calc(100dvh - 101px)" }}>
           <section className="acl-hero">
-            <div>
+            <div className="acl-rise-in">
               <h1 style={{ fontSize: "clamp(30px, 5vw, 52px)", lineHeight: 1.05, fontWeight: 700, letterSpacing: "-0.03em", margin: 0 }}>
                 Practice the interview <span style={{ color: "var(--accent)" }}>out loud.</span>
               </h1>
               <p style={{ fontSize: 16, color: "var(--text-2)", margin: "12px 0 18px", maxWidth: 480, lineHeight: 1.5 }}>
                 An AI interviewer asks, you answer, a coach tells you what to fix. No signup to start.
               </p>
-              <Link href="/interview" style={{ textDecoration: "none" }}>
+              <Link href="/interview" className="acl-cta-link" style={{ textDecoration: "none", display: "inline-block", borderRadius: 12 }}>
                 <MagneticButton
-                  style={{ padding: "12px 24px", minHeight: 48, borderRadius: 12, background: "var(--accent)", color: "var(--ink)", fontWeight: 700, fontSize: 16, border: "none", cursor: "pointer", boxShadow: "0 10px 40px var(--accent-glow)" }}>
+                  style={{ padding: "12px 24px", minHeight: 48, borderRadius: 12, background: "linear-gradient(135deg, #ff7aeb 0%, #ec13d6 55%, #f43fe0 100%)", color: "var(--ink)", fontWeight: 700, fontSize: 16, border: "none", cursor: "pointer", boxShadow: "0 10px 40px var(--accent-glow)" }}>
                   Start a mock interview
                 </MagneticButton>
               </Link>
@@ -177,6 +177,10 @@ export default function AICoachLabPage({ showPricing = true, roles = [] }: { sho
         .acl-hero { display: grid; gap: 24px; grid-template-columns: 1fr 1fr; align-items: center; margin-bottom: 14px; }
         .acl-bento { display: grid; gap: 12px; grid-template-columns: repeat(4, 1fr); }
         .acl-nav-link { color: var(--text-2); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+        .acl-rise-in { animation: acl-rise .5s var(--ease) both; }
+        .acl-cta-link { transition: transform .15s var(--ease); }
+        .acl-cta-link:active { transform: scale(.97); }
+        .acl-cta-link:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
         .acl-nav-link:hover { color: var(--accent); }
         .acl-steps, .acl-roles { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
         .acl-steps { grid-template-columns: repeat(3, 1fr); }
