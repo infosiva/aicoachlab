@@ -71,7 +71,7 @@ function Wave() {
 
 const linkStyle: React.CSSProperties = { color: "var(--accent)", fontSize: 14, fontWeight: 600, display: "inline-block", minHeight: 44, lineHeight: "44px", marginTop: 2 };
 
-export default function AICoachLabPage({ showPricing = true }: { showPricing?: boolean }) {
+export default function AICoachLabPage({ showPricing = true, roles = [] }: { showPricing?: boolean; roles?: { slug: string; title: string }[] }) {
   return (
     <>
       <div className="acl-aurora" aria-hidden="true"><i /><i /><i /></div>
@@ -86,7 +86,7 @@ export default function AICoachLabPage({ showPricing = true }: { showPricing?: b
           </nav>
         </header>
 
-        <main style={{ maxWidth: 1120, margin: "0 auto", padding: "4px 16px 16px" }}>
+        <main style={{ maxWidth: 1120, margin: "0 auto", padding: "4px 16px 16px", minHeight: "calc(100dvh - 101px)" }}>
           <section className="acl-hero">
             <div>
               <h1 style={{ fontSize: "clamp(30px, 5vw, 52px)", lineHeight: 1.05, fontWeight: 700, letterSpacing: "-0.03em", margin: 0 }}>
@@ -102,7 +102,7 @@ export default function AICoachLabPage({ showPricing = true }: { showPricing?: b
                 </MagneticButton>
               </Link>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 14 }} aria-label="Pick your role">
-                {ROLES.map((r) => (
+                {roles.map((r) => (
                   <Link key={r} href="/interview" style={{ padding: "4px 10px", minHeight: 44, display: "inline-flex", alignItems: "center", borderRadius: 999, border: "1px solid var(--border)", background: "var(--surface-2)", color: "var(--text)", fontSize: 12.5, textDecoration: "none" }}>{r}</Link>
                 ))}
               </div>
@@ -136,6 +136,36 @@ export default function AICoachLabPage({ showPricing = true }: { showPricing?: b
               </motion.div>
             )}
           </section>
+
+          <section aria-labelledby="how-it-works" style={{ marginTop: 28 }}>
+            <h2 id="how-it-works" style={{ fontSize: 20, margin: "0 0 12px" }}>How a session works</h2>
+            <ol className="acl-steps">
+              {[
+                ["Pick a role", "Choose the job you are interviewing for, or start from a topic."],
+                ["Answer out loud", "The interviewer asks one question at a time. Type or speak your answer."],
+                ["Get coached", "A coach shows what a strong answer covers and what yours missed."],
+              ].map(([t, d], i) => (
+                <li key={t} style={{ ...card, padding: 14 }}>
+                  <span style={{ color: "var(--accent)", fontWeight: 700, fontSize: 13 }}>Step {i + 1}</span>
+                  <h3 style={{ fontSize: 16, margin: "2px 0 4px" }}>{t}</h3>
+                  <p style={{ color: "var(--text-2)", fontSize: 13, margin: 0 }}>{d}</p>
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          <section aria-labelledby="role-playbooks" style={{ marginTop: 28 }}>
+            <h2 id="role-playbooks" style={{ fontSize: 20, margin: "0 0 4px" }}>{roles.length} IT role playbooks</h2>
+            <p style={{ color: "var(--text-2)", fontSize: 14, margin: "0 0 12px" }}>One real project per role, walked step by step through its stack.</p>
+            <ul className="acl-roles">
+              {roles.map((r) => (
+                <li key={r.slug}>
+                  <Link href={`/roles/${r.slug}`} className="acl-role-chip">{r.title}</Link>
+                </li>
+              ))}
+            </ul>
+            <Link href="/roles" style={linkStyle}>Browse all roles</Link>
+          </section>
         </main>
 
         <footer style={{ borderTop: "1px solid var(--border)", padding: "10px 16px", textAlign: "center", fontSize: 13, color: "var(--text-3)" }}>
@@ -148,6 +178,14 @@ export default function AICoachLabPage({ showPricing = true }: { showPricing?: b
         .acl-bento { display: grid; gap: 12px; grid-template-columns: repeat(4, 1fr); }
         .acl-nav-link { color: var(--text-2); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
         .acl-nav-link:hover { color: var(--accent); }
+        .acl-steps, .acl-roles { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+        .acl-steps { grid-template-columns: repeat(3, 1fr); }
+        .acl-roles { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); margin-bottom: 12px; }
+        .acl-role-chip { display: flex; align-items: center; min-height: 44px; padding: 8px 14px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface, rgba(255,255,255,.03)); color: var(--text); font-size: 14px; text-decoration: none; transition: border-color .15s, transform .15s; }
+        .acl-role-chip:hover { border-color: var(--accent); }
+        .acl-role-chip:active { transform: scale(.97); }
+        @media (prefers-reduced-motion: reduce) { .acl-role-chip { transition: none; } }
+        @media (max-width: 900px) { .acl-steps { grid-template-columns: 1fr; } }
         @media (max-width: 900px) { .acl-hero { grid-template-columns: 1fr; gap: 14px; } .acl-bento { grid-template-columns: 1fr 1fr; } }
         @media (max-width: 520px) { .acl-bento p { display: none; } }
       `}</style>
