@@ -113,7 +113,7 @@ export default function AICoachLabPage({ showPricing = true, roles = [] }: { sho
             </motion.div>
           </section>
 
-          <section aria-label="What you get" className="acl-bento">
+          <section aria-label="What you get" className="acl-bento" style={{ gridTemplateColumns: showPricing ? undefined : "repeat(3, 1fr)" }}>
             <motion.div style={card} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.08 }}>
               <h2 style={{ fontSize: 16, margin: "0 0 4px" }}>Answer by voice</h2>
               <Wave />
@@ -180,12 +180,13 @@ export default function AICoachLabPage({ showPricing = true, roles = [] }: { sho
         .acl-nav-link:hover { color: var(--accent); }
         .acl-steps, .acl-roles { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
         .acl-steps { grid-template-columns: repeat(3, 1fr); }
-        .acl-roles { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); margin-bottom: 12px; }
+        .acl-roles { grid-template-columns: repeat(auto-fill, minmax(min(100%, 170px), 1fr)); margin-bottom: 12px; }
         .acl-role-chip { display: flex; align-items: center; min-height: 44px; padding: 8px 14px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface, rgba(255,255,255,.03)); color: var(--text); font-size: 14px; text-decoration: none; transition: border-color .15s, transform .15s; }
         .acl-role-chip:hover { border-color: var(--accent); }
         .acl-role-chip:active { transform: scale(.97); }
         @media (prefers-reduced-motion: reduce) { .acl-role-chip { transition: none; } }
-        @media (max-width: 900px) { .acl-steps { grid-template-columns: 1fr; } }
+        @media (max-width: 900px) { .acl-steps { grid-template-columns: 1fr; } .acl-bento { grid-template-columns: 1fr 1fr !important; } }
+        @media (max-width: 520px) { .acl-roles { grid-template-columns: 1fr 1fr; } .acl-role-chip { font-size: 13px; padding: 8px 10px; } }
         @media (max-width: 900px) { .acl-hero { grid-template-columns: 1fr; gap: 14px; } .acl-bento { grid-template-columns: 1fr 1fr; } }
         @media (max-width: 520px) { .acl-bento p { display: none; } }
       `}</style>
