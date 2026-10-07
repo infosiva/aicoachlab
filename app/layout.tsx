@@ -7,6 +7,7 @@ import BackToTop from "@/components/BackToTop"
 import CookieConsent from "../components/CookieConsent"
 import "./globals.css"
 import { loadSiteTheme, buildThemeStyleTag, buildGa4Snippet, isWidgetHidden } from "@/lib/theme-loader"
+import { AnimatedBg } from "@/components/AnimatedBg"
 import { MotionProvider } from "@infosiva/shared-ui/modern"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-body", display: "swap" })
@@ -69,6 +70,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {themeCSS && <style dangerouslySetInnerHTML={{ __html: themeCSS }} />}
       </head>
       <body>
+        <AnimatedBg theme={theme} fallback="none" />
         <MotionProvider>{children}</MotionProvider>
         {!isWidgetHidden(theme, "chatbot") && <FloatingChatWrapper />}
         {!isWidgetHidden(theme, "backToTop") && <BackToTop accentColor="#ec13d6" />}
