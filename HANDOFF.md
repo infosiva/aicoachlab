@@ -133,3 +133,5 @@ Build order: ship preset roles first (1+2), then this. Same engine, input = extr
 - Verified live: 18/18 role pages 200; e2e-verify 10/10; visual-qa 20 pass/0 fail on /, /roles, playbook; Lighthouse mobile a11y 98 (heading-order fixed in 999bda8), BP/SEO 100.
 - Commits: 4da8f3a roles, d0e623c terms, 999bda8 heading order.
 - Open: cookie banner covers ~20% of mobile viewport until dismissed; /terms wording is generic, owner to review.
+
+- Landing (2026-10-07): added How-it-works + 18 role playbook grid, sticky footer (7769b03, 22efeb5). Open: demo card empty until animation fills (mobile), cookie banner height, home page not re-run through full design stack/Lighthouse.
