@@ -99,7 +99,7 @@ export function buildThemeStyleTag(theme: SiteTheme | null, defaults?: {
   const bodyFont    = theme?.font?.body;
 
   const rules: string[] = [];
-  if (vars.length > 0) rules.push(`:root { ${vars.join(" ")} }`);
+  if (vars.length > 0) rules.push(`:root:root { ${vars.join(" ")} }`);
   if (headingFont) rules.push(`h1,h2,h3,.display { font-family: '${headingFont}', sans-serif !important; }`);
   if (bodyFont)    rules.push(`body { font-family: '${bodyFont}', system-ui, sans-serif !important; }`);
 
