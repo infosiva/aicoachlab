@@ -81,6 +81,7 @@ export default function AICoachLabPage({ showPricing = true }: { showPricing?: b
           <nav style={{ display: "flex", alignItems: "center", gap: 20, fontSize: 14 }}>
             <Link href="/tracks" className="acl-nav-link">Tracks</Link>
             <Link href="/learn" className="acl-nav-link">Learn</Link>
+            <Link href="/roles" className="acl-nav-link">Roles</Link>
             {showPricing && <a href="#pricing" className="acl-nav-link">Pricing</a>}
           </nav>
         </header>

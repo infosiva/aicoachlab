@@ -1,9 +1,16 @@
 import { MetadataRoute } from 'next'
+import { ROLES } from '@/lib/roles'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...['', '/ai-coding-agent-ecosystem'].map(slug => ({
       url: `https://aicoachlab.app/guides${slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    })),
+    ...['', ...ROLES.map(r => `/${r.slug}`)].map(slug => ({
+      url: `https://aicoachlab.app/roles${slug}`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.8,
