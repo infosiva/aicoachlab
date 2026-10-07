@@ -91,7 +91,7 @@ Done: reference doc 01, guides data, `lib/guides/index.ts`, `/guides` + `/guides
 - [ ] Read Next docs in node_modules; audit which gate items aicoachlab already passes
 - [x] `lib/roles/*.ts` + `RolePlaybook` component (AI Engineer, FDE) + /roles pages + sitemap + landing nav link; tsc+build clean, 375/1280 no overflow, mobile steps = horizontal scroller (2026-10-07). UNCOMMITTED.
 - [ ] pages, sitemap, JSON-LD, nav link; 375/1280 screenshots
-- [ ] roles 3-6
+- [x] roles 3-6 (data-engineer, ml-mlops-engineer, cybersecurity-engineer, devops-platform-engineer): built, tsc + build green, VERIFIED demand rows only
 - [ ] gate items above
 ## Resume from here if interrupted
 Research done and logged. Next: Next.js docs read + gate audit of aicoachlab.
