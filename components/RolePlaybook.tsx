@@ -46,7 +46,7 @@ export default function RolePlaybook({ role }: { role: Role }) {
           <p className="rp-p">{step.happens}</p>
           {item && (
             <>
-              <h3 className="rp-name">{item.name}</h3>
+              <h2 className="rp-name">{item.name}</h2>
               <p className="rp-what">{item.what}</p>
               <p className="rp-k">Why this pick</p>
               <p className="rp-p">{item.why}</p>
