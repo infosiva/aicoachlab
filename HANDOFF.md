@@ -117,3 +117,13 @@ Build order: ship preset roles first (1+2), then this. Same engine, input = extr
 - [ ] 13 resume tailoring with source-line citations, no invented claims
 - [ ] 14 SSRF-safe URL fetch + tests (private IPs, redirects, size)
 - [ ] 15 per-user delete + privacy copy; gate items for this flow
+
+## Roles redesign v2 — ANIMATED SCOPE, lock, AI pillars (2026-10-07)
+**Design lock:** bg #0c0714, accent #ec13d6, T9 layout kept. Index = search + ruled list + live preview pane (no card grid, no centered hero). Role page = breadcrumb + scenario + playbook (clickable flow, detail pane). Home link: nav brand + breadcrumb.
+**ANIMATED SCOPE (transform/opacity only, ease-out .23,1,.32,1):**
+- Index rows: entry stagger 30-80ms | why: orient, first view | trigger: mount | reduced-motion: opacity only.
+- Preview pane swap: fade/slide 8px | why: state change legible | trigger: hover/focus row | reduced: fade.
+- Playbook flow: auto-advances every 3.6s, progress bar, detail re-keys | why: explains workflow order | trigger: mount, pause button, click step stops autoplay | reduced: no autoplay, manual only.
+- Press feedback scale(.97) on buttons/rows; hover gated (hover:hover)(pointer:fine).
+**AI pillars:** exempt, static content, no model/RAG call; ai-core not used. Pillars 10-13 n/a.
+**Not in scope:** ai-core Ask box, monitoring events, paste-a-JD, marketing.

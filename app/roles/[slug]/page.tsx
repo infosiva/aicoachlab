@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ROLES, getRole } from '@/lib/roles'
 import RolePlaybook from '@/components/RolePlaybook'
+import RolesNav from '@/components/RolesNav'
+import '@/components/roles.css'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -34,16 +36,24 @@ export default async function RolePage({ params }: Props) {
   }
 
   return (
-    <main style={{ minHeight: '100dvh', background: '#0c0714', color: '#f0f4ff', padding: '24px 16px 96px' }}>
+    <main className="r-root">
+      <div className="r-aurora" aria-hidden />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
-      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-        <Link href="/roles" style={{ color: '#a9b0c0', fontSize: 14 }}>← All roles</Link>
-        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(24px,5vw,34px)', margin: '8px 0 4px' }}>{r.title}</h1>
-        <p style={{ color: '#d5dae6', margin: 0 }}><strong>{r.scenario.title}.</strong> {r.scenario.story}</p>
-        <details style={{ margin: '10px 0 16px', color: '#8892a4', fontSize: 12 }}>
-          <summary style={{ cursor: 'pointer', minHeight: 44, display: 'flex', alignItems: 'center' }}>Why this role (sources) · tools as of {r.asOf}</summary>
-          <ul style={{ margin: 0, paddingLeft: 18 }}>
-            {r.demand.map(d => <li key={d.url}>{d.claim} <a href={d.url} rel="noopener noreferrer" target="_blank" style={{ color: '#ec13d6' }}>{d.source}</a></li>)}
+      <RolesNav current="roles" />
+      <div className="rg-wrap">
+        <nav className="rg-crumb" aria-label="Breadcrumb">
+          <ol>
+            <li><Link href="/">Home</Link></li>
+            <li><Link href="/roles">Roles</Link></li>
+            <li aria-current="page">{r.title}</li>
+          </ol>
+        </nav>
+        <h1 className="rg-h1">{r.title}</h1>
+        <p className="rg-scn"><strong>{r.scenario.title}.</strong> {r.scenario.story}</p>
+        <details className="rg-src">
+          <summary>Sources, tools as of {r.asOf}</summary>
+          <ul>
+            {r.demand.map(d => <li key={d.url}>{d.claim} <a href={d.url} rel="noopener noreferrer" target="_blank">{d.source}</a></li>)}
           </ul>
         </details>
         <RolePlaybook role={r} />
