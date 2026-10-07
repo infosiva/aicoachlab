@@ -102,7 +102,7 @@ export default function AICoachLabPage({ showPricing = true, roles = [] }: { sho
                 </MagneticButton>
               </Link>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 14 }} aria-label="Pick your role">
-                {roles.map((r) => (
+                {ROLES.map((r) => (
                   <Link key={r} href="/interview" style={{ padding: "4px 10px", minHeight: 44, display: "inline-flex", alignItems: "center", borderRadius: 999, border: "1px solid var(--border)", background: "var(--surface-2)", color: "var(--text)", fontSize: 12.5, textDecoration: "none" }}>{r}</Link>
                 ))}
               </div>
