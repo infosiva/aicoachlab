@@ -96,7 +96,7 @@ export default function InterviewHub() {
       {/* ── Nav ── */}
       <nav style={{ position: 'sticky', top: 0, zIndex: 50, padding: '12px 24px',
         borderBottom: '1px solid var(--border)', backdropFilter: 'blur(16px)',
-        background: 'rgba(255,247,237,0.85)',
+        background: 'rgba(10,6,20,0.85)',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <motion.button onClick={() => router.push('/')}
           whileHover={{ x: -3 }} whileTap={{ scale: 0.94 }}

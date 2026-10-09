@@ -556,7 +556,7 @@ export default function BlindFoldPage() {
         {/* Header */}
         <div style={{ position: 'relative', zIndex: 10, padding: '14px 20px',
           borderBottom: '1px solid rgba(236,19,214,0.12)', backdropFilter: 'blur(20px)',
-          background: 'rgba(255,247,237,0.85)',
+          background: 'rgba(10,6,20,0.85)',
           display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
           <motion.button onClick={() => { stopVoice(); setPhase('setup') }}
             whileHover={{ x: -3 }} whileTap={{ scale: 0.94 }}
@@ -647,7 +647,7 @@ export default function BlindFoldPage() {
         {/* Voice input — pinned bottom */}
         <div style={{ position: 'relative', zIndex: 10, flexShrink: 0,
           padding: '16px 20px 28px', borderTop: '1px solid rgba(236,19,214,0.12)',
-          backdropFilter: 'blur(20px)', background: 'rgba(255,247,237,0.9)' }}>
+          backdropFilter: 'blur(20px)', background: 'rgba(10,6,20,0.9)' }}>
           <div style={{ maxWidth: 680, margin: '0 auto' }}>
             <AnimatePresence>
               {!loading && (

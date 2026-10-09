@@ -137,7 +137,7 @@ export default function TracksPage() {
       fontFamily: 'var(--font-body, system-ui)', padding: '0 0 80px',
     }}>
       {/* top nav bar */}
-      <nav style={{ position: 'sticky', top: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 24px', background: 'rgba(255,247,237,0.85)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(236,19,214,0.12)' }}>
+      <nav style={{ position: 'sticky', top: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 24px', background: 'rgba(10,6,20,0.85)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(236,19,214,0.12)' }}>
         <button onClick={() => router.push('/')} style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
           <div style={{ width: 26, height: 26, borderRadius: 7, background: `linear-gradient(135deg,${ACCENT},${ACCENT2})`, display: 'grid', placeItems: 'center' }}>
             <span style={{ fontSize: 12, color: '#fff', fontWeight: 800 }}>A</span>

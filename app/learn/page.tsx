@@ -68,7 +68,7 @@ export default function LearnPage() {
   return (
     <div style={{ minHeight: '100vh', background: BG, fontFamily: "'Inter', sans-serif", color: '#0f172a' }}>
       {/* nav */}
-      <nav style={{ position: 'sticky', top: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 24px', background: 'rgba(255,247,237,0.85)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(236,19,214,0.12)' }}>
+      <nav style={{ position: 'sticky', top: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 24px', background: 'rgba(10,6,20,0.85)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(236,19,214,0.12)' }}>
         <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
           <div style={{ width: 26, height: 26, borderRadius: 7, background: `linear-gradient(135deg,${ACCENT},${ACCENT2})`, display: 'grid', placeItems: 'center', fontSize: 12, color: '#fff', fontWeight: 800 }}>A</div>
           <span style={{ fontSize: 14, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.2px' }}>AI<span style={{ color: ACCENT }}>Coach</span>Lab</span>

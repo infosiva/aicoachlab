@@ -86,7 +86,7 @@ export default function ConceptCinemaPage() {
       <div style={{ position: 'relative', zIndex: 10, padding: '16px 20px',
         borderBottom: '1px solid rgba(236,19,214,0.12)',
         display: 'flex', alignItems: 'center', gap: 12,
-        backdropFilter: 'blur(16px)', background: 'rgba(255,247,237,0.85)' }}>
+        backdropFilter: 'blur(16px)', background: 'rgba(10,6,20,0.85)' }}>
         <motion.button onClick={() => router.push('/interview')}
           whileHover={{ x: -3 }} whileTap={{ scale: 0.94 }}
           style={{ background: 'transparent', border: 'none', color: '#64748b', cursor: 'pointer', fontSize: 13 }}>
