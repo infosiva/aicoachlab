@@ -6,7 +6,7 @@ import FeedbackWidget from "@/components/FeedbackWidget"
 import BackToTop from "@/components/BackToTop"
 import CookieConsent from "../components/CookieConsent"
 import "./globals.css"
-import { loadSiteTheme, buildThemeStyleTag, buildGa4Snippet, isWidgetHidden } from "@/lib/theme-loader"
+import { loadSiteTheme, buildThemeStyleTag, buildGa4Snippet, resolveGa4Id, isWidgetHidden } from "@/lib/theme-loader"
 import { AnimatedBg } from "@/components/AnimatedBg"
 import { MotionProvider } from "@infosiva/shared-ui/modern"
 
@@ -35,7 +35,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const theme = await loadSiteTheme("aicoachlab")
   const themeCSS = buildThemeStyleTag(theme, { background: "#0c0714", primary: "#ec13d6", secondary: "#a30d94" })
   const ga4 = buildGa4Snippet(theme)
-  const ga4Id = theme?.analytics?.ga4Id
+  const ga4Id = resolveGa4Id(theme)
 
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
